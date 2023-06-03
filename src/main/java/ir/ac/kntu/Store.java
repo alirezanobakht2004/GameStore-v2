@@ -53,7 +53,7 @@ public class Store {
         System.out
                 .println("\n" + "rating of game: " + "\033[1;93m" + Admin.getGamesArr().get(i).getCommunity().getRating() + "\033[0m");
         System.out.println("\n" + Admin.getGamesArr().get(i).getCommunity().getComments() + "\n");
-        if (Sign.getUsersArr().get(indexOfUser).getGamesOfUser().indexOf(Admin.getGamesArr().get(i)) == -1) {
+        if (!Sign.getUsersArr().get(indexOfUser).getGamesOfUser().contains(Admin.getGamesArr().get(i))) {
             System.out.println("1." + "\033[1;92m" + "Buy the game" + "\033[0m");
             System.out.println("2.Back");
             Scanner input = new Scanner(System.in);

@@ -2,7 +2,7 @@ package ir.ac.kntu;
 
 import java.util.Scanner;
 
-public class Game {
+public class Game extends Item{
 
     private String title;
 
@@ -12,13 +12,9 @@ public class Game {
 
     private int price;
 
-    private float rating;
 
-    private int ratingNumber = 0;
 
-    private String comments="Comments:";
 
-    private String community="Community of users:";
 
     public Game(String title, String genre, String info, int price) {
         this.title = title;
@@ -31,9 +27,9 @@ public class Game {
 
     }
 
-    public float getRating() {
+    /*public float getRating() {
         return rating;
-    }
+    }*/
 
     public int getPrice() {
         return price;
@@ -51,33 +47,29 @@ public class Game {
         return genre;
     }
 
-    public void setCommunity(String community) {
-        this.community = community;
-    }
+     public Community getCommunity() {
+          return super.getCommunity();
+      }
 
-    public String getCommunity() {
-        return community;
-    }
-
-    public String getComments() {
+    /*public String getComments() {
         return comments;
     }
 
     public void setComments(String comments) {
         this.comments = comments;
-    }
+    }*/
 
-    public int getRatingNumber() {
+    /*public int getRatingNumber() {
         return ratingNumber;
     }
 
     public void setRatingNumber(int ratingNumber) {
         this.ratingNumber = ratingNumber;
-    }
+    }*/
 
-    public void setRating(float rating) {
+   /* public void setRating(float rating) {
         this.rating = rating;
-    }
+    }*/
 
     public void gameModify(int i) {
         Scanner input = new Scanner(System.in);

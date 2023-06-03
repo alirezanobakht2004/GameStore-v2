@@ -51,8 +51,8 @@ public class Store {
         System.out.println("\n" + "genre of game: " + "\033[1;93m" + Admin.getGamesArr().get(i).getGenre() + "\033[0m");
         System.out.println("\n" + "price of game: " + "\033[1;93m" + Admin.getGamesArr().get(i).getPrice() + "\033[0m");
         System.out
-                .println("\n" + "rating of game: " + "\033[1;93m" + Admin.getGamesArr().get(i).getRating() + "\033[0m");
-        System.out.println("\n" + Admin.getGamesArr().get(i).getComments() + "\n");
+                .println("\n" + "rating of game: " + "\033[1;93m" + Admin.getGamesArr().get(i).getCommunity().getRating() + "\033[0m");
+        System.out.println("\n" + Admin.getGamesArr().get(i).getCommunity().getComments() + "\n");
         if (Sign.getUsersArr().get(indexOfUser).getGamesOfUser().indexOf(Admin.getGamesArr().get(i)) == -1) {
             System.out.println("1." + "\033[1;92m" + "Buy the game" + "\033[0m");
             System.out.println("2.Back");

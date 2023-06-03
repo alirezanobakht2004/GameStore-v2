@@ -31,34 +31,34 @@ public class Game extends Item{
             case 1 -> {
                 System.out.println("Enter new title:");
                 Scanner inputOne = new Scanner(System.in);
-                Admin.getGamesArr().get(i).setTitle(inputOne.nextLine());
+                gameManagement.getGamesArr().get(i).setTitle(inputOne.nextLine());
                 System.out.println("your game title changed!");
                 gameModify(i);
             }
             case 2 -> {
                 System.out.println("Enter new genre:");
                 Scanner inputTwo = new Scanner(System.in);
-                Admin.getGamesArr().get(i).genre = inputTwo.nextLine();
+                gameManagement.getGamesArr().get(i).genre = inputTwo.nextLine();
                 System.out.println("your game genre changed!");
                 gameModify(i);
             }
             case 3 -> {
                 System.out.println("Enter new info:");
                 Scanner inputThree = new Scanner(System.in);
-                Admin.getGamesArr().get(i).setInfo(inputThree.nextLine());
+                gameManagement.getGamesArr().get(i).setInfo(inputThree.nextLine());
                 System.out.println("your game info changed!");
                 gameModify(i);
             }
             case 4 -> {
                 System.out.println("Enter new price:");
                 Scanner inputFour = new Scanner(System.in);
-                Admin.getGamesArr().get(i).setPrice(inputFour.nextInt());
+                gameManagement.getGamesArr().get(i).setPrice(inputFour.nextInt());
                 System.out.println("your game price changed!");
                 gameModify(i);
             }
             case 5 -> {
-                Admin admin = new Admin();
-                admin.gameManage();
+                AdminMenu adminMenu = new AdminMenu();
+                adminMenu.gameManage();
             }
             default -> {
             }

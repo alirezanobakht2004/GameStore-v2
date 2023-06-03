@@ -1,16 +1,10 @@
 package ir.ac.kntu;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Sign {
 
-    private static List<User> usersArr = new ArrayList<User>();
 
-    public static List<User> getUsersArr() {
-        return usersArr;
-    }
 
     public void sign() {
         System.out.println("\u001B[33m" + "Select Your Role" + "\u001B[0m");
@@ -47,8 +41,8 @@ public class Sign {
             sign();
         }
         if (usernamerOfAdmin.equals("A") && passwordOfAdmin.equals("1")) {
-            Admin admin = new Admin();
-            admin.startMenu();
+            AdminMenu adminMenu = new AdminMenu();
+            adminMenu.startMenu();
         } else {
             System.out.println("incorrect username or password");
             adminStart();
@@ -98,26 +92,26 @@ public class Sign {
         }
         User user = new User(username, password, phoneNumber, email);
         int count = 0;
-        for (int i = 0; i < usersArr.size(); i++) {
-            if (usersArr.get(i).getUsername().equals(user.getUsername())) {
+        for (int i = 0; i < UserManagement.getUsersArr().size(); i++) {
+            if (UserManagement.getUsersArr().get(i).getUsername().equals(user.getUsername())) {
                 System.out.println("already taken username!");
                 count++;
             }
         }
-        for (int i = 0; i < usersArr.size(); i++) {
-            if (usersArr.get(i).getEmail().equals(user.getEmail())) {
+        for (int i = 0; i < UserManagement.getUsersArr().size(); i++) {
+            if (UserManagement.getUsersArr().get(i).getEmail().equals(user.getEmail())) {
                 System.out.println("already taken email!");
                 count++;
             }
         }
-        for (int i = 0; i < usersArr.size(); i++) {
-            if (usersArr.get(i).getPhoneNumber().equals(user.getPhoneNumber())) {
+        for (int i = 0; i < UserManagement.getUsersArr().size(); i++) {
+            if (UserManagement.getUsersArr().get(i).getPhoneNumber().equals(user.getPhoneNumber())) {
                 System.out.println("already taken phone number!");
                 count++;
             }
         }
         if (count == 0) {
-            usersArr.add(user);
+            UserManagement.getUsersArr().add(user);
             System.out.println("\nYou signed up!\n");
         }
         sign();
@@ -144,9 +138,9 @@ public class Sign {
             sign();
         }
         int count = 0;
-        for (int i = 0; i < usersArr.size(); i++) {
-            if (usersArr.get(i).getUsername().equals(username)) {
-                if (usersArr.get(i).getPassword().equals(password)) {
+        for (int i = 0; i < UserManagement.getUsersArr().size(); i++) {
+            if (UserManagement.getUsersArr().get(i).getUsername().equals(username)) {
+                if (UserManagement.getUsersArr().get(i).getPassword().equals(password)) {
                     System.out.println("Your welcome!");
                     User usern = new User();
                     usern.userMenu(i);

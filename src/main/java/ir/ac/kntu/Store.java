@@ -34,9 +34,9 @@ public class Store {
     }
 
     public void showGames() {
-        for (int i = 0; i < Admin.getGamesArr().size(); i++) {
+        for (int i = 0; i < AdminMenu.getGamesArr().size(); i++) {
             System.out
-                    .println("\n" + "Title of game: " + "\033[1;93m" + Admin.getGamesArr().get(i).getTitle() + "\033[0m"
+                    .println("\n" + "Title of game: " + "\033[1;93m" + AdminMenu.getGamesArr().get(i).getTitle() + "\033[0m"
                             + " Index of game is: " + i + "\n");
         }
 
@@ -46,26 +46,26 @@ public class Store {
     }
 
     public void showGame(int i) {
-        System.out.println("\n" + "Title of game: " + "\033[1;93m" + Admin.getGamesArr().get(i).getTitle() + "\033[0m");
-        System.out.println("\n" + "Info of game: " + "\033[1;93m" + Admin.getGamesArr().get(i).getInfo() + "\033[0m");
-        System.out.println("\n" + "genre of game: " + "\033[1;93m" + Admin.getGamesArr().get(i).getGenre() + "\033[0m");
-        System.out.println("\n" + "price of game: " + "\033[1;93m" + Admin.getGamesArr().get(i).getPrice() + "\033[0m");
+        System.out.println("\n" + "Title of game: " + "\033[1;93m" + AdminMenu.getGamesArr().get(i).getTitle() + "\033[0m");
+        System.out.println("\n" + "Info of game: " + "\033[1;93m" + AdminMenu.getGamesArr().get(i).getInfo() + "\033[0m");
+        System.out.println("\n" + "genre of game: " + "\033[1;93m" + AdminMenu.getGamesArr().get(i).getGenre() + "\033[0m");
+        System.out.println("\n" + "price of game: " + "\033[1;93m" + AdminMenu.getGamesArr().get(i).getPrice() + "\033[0m");
         System.out
-                .println("\n" + "rating of game: " + "\033[1;93m" + Admin.getGamesArr().get(i).getCommunity().getRating() + "\033[0m");
-        System.out.println("\n" + Admin.getGamesArr().get(i).getCommunity().getComments() + "\n");
-        if (!Sign.getUsersArr().get(indexOfUser).getGamesOfUser().contains(Admin.getGamesArr().get(i))) {
+                .println("\n" + "rating of game: " + "\033[1;93m" + AdminMenu.getGamesArr().get(i).getCommunity().getRating() + "\033[0m");
+        System.out.println("\n" + AdminMenu.getGamesArr().get(i).getCommunity().getComments() + "\n");
+        if (!Sign.getUsersArr().get(indexOfUser).getGamesOfUser().contains(AdminMenu.getGamesArr().get(i))) {
             System.out.println("1." + "\033[1;92m" + "Buy the game" + "\033[0m");
             System.out.println("2.Back");
             Scanner input = new Scanner(System.in);
             int in = input.nextInt();
             switch (in) {
                 case 1:
-                    if (Sign.getUsersArr().get(indexOfUser).getWallet() >= Admin.getGamesArr().get(i).getPrice()) {
-                        Sign.getUsersArr().get(indexOfUser).getGamesOfUser().add(Admin.getGamesArr().get(i));
-                        Admin.getGamesArr().get(i).getCommunity().getUserList().add(Sign.getUsersArr().get(indexOfUser));
+                    if (Sign.getUsersArr().get(indexOfUser).getWallet() >= AdminMenu.getGamesArr().get(i).getPrice()) {
+                        Sign.getUsersArr().get(indexOfUser).getGamesOfUser().add(AdminMenu.getGamesArr().get(i));
+                        AdminMenu.getGamesArr().get(i).getCommunity().getUserList().add(Sign.getUsersArr().get(indexOfUser));
                         Sign.getUsersArr().get(indexOfUser).setWallet(
                                 Sign.getUsersArr().get(indexOfUser).getWallet()
-                                        - Admin.getGamesArr().get(i).getPrice());
+                                        - AdminMenu.getGamesArr().get(i).getPrice());
                         System.out.println("\n" + "You bought the game successfully!" + "\n");
                     } else {
                         System.out.println("\033[1;91m" + "Not enough money in wallet" + "\033[0m");
@@ -91,11 +91,11 @@ public class Store {
             start(indexOfUser);
         }
         int count = 0;
-        for (int i = 0; i < Admin.getGamesArr().size(); i++) {
-            if (Admin.getGamesArr().get(i).getTitle().startsWith(name)) {
-                System.out.println("name of game: " + Admin.getGamesArr().get(i).getTitle() +
-                        " genre: " + Admin.getGamesArr().get(i).getGenre() +
-                        " info: " + Admin.getGamesArr().get(i).getInfo() + " index of game is: " +
+        for (int i = 0; i < AdminMenu.getGamesArr().size(); i++) {
+            if (AdminMenu.getGamesArr().get(i).getTitle().startsWith(name)) {
+                System.out.println("name of game: " + AdminMenu.getGamesArr().get(i).getTitle() +
+                        " genre: " + AdminMenu.getGamesArr().get(i).getGenre() +
+                        " info: " + AdminMenu.getGamesArr().get(i).getInfo() + " index of game is: " +
                         "\033[1;93m" + String.valueOf(i) + "\033[0m");
                 count++;
             }
@@ -120,11 +120,11 @@ public class Store {
         System.out.println("Enter higher level:");
         int count = 0;
         int high = input.nextInt();
-        for (int i = 0; i < Admin.getGamesArr().size(); i++) {
-            if (Admin.getGamesArr().get(i).getPrice() <= high && Admin.getGamesArr().get(i).getPrice() >= low) {
-                System.out.println("name of game: " + Admin.getGamesArr().get(i).getTitle() +
-                        " genre: " + Admin.getGamesArr().get(i).getGenre() +
-                        " info: " + Admin.getGamesArr().get(i).getInfo() + " index of game is: " +
+        for (int i = 0; i < AdminMenu.getGamesArr().size(); i++) {
+            if (AdminMenu.getGamesArr().get(i).getPrice() <= high && AdminMenu.getGamesArr().get(i).getPrice() >= low) {
+                System.out.println("name of game: " + AdminMenu.getGamesArr().get(i).getTitle() +
+                        " genre: " + AdminMenu.getGamesArr().get(i).getGenre() +
+                        " info: " + AdminMenu.getGamesArr().get(i).getInfo() + " index of game is: " +
                         "\033[1;93m" + String.valueOf(i) + "\033[0m");
                 count++;
             }

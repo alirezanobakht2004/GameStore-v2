@@ -4,72 +4,19 @@ import java.util.Scanner;
 
 public class Game extends Item{
 
-    private String title;
-
     private String genre;
-
-    private String info;
-
-    private int price;
-
-
-
-
-
-    public Game(String title, String genre, String info, int price) {
-        this.title = title;
-        this.genre = genre;
-        this.info = info;
-        this.price = price;
+    public Game(){
+        super();
     }
-
-    public Game() {
-
-    }
-
-    /*public float getRating() {
-        return rating;
-    }*/
-
-    public int getPrice() {
-        return price;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getInfo() {
-        return info;
+    public Game(String title,String genre,String info,int price){
+        super(title,info,price);
+        this.genre=genre;
     }
 
     public String getGenre() {
         return genre;
     }
 
-     public Community getCommunity() {
-          return super.getCommunity();
-      }
-
-    /*public String getComments() {
-        return comments;
-    }
-
-    public void setComments(String comments) {
-        this.comments = comments;
-    }*/
-
-    /*public int getRatingNumber() {
-        return ratingNumber;
-    }
-
-    public void setRatingNumber(int ratingNumber) {
-        this.ratingNumber = ratingNumber;
-    }*/
-
-   /* public void setRating(float rating) {
-        this.rating = rating;
-    }*/
 
     public void gameModify(int i) {
         Scanner input = new Scanner(System.in);
@@ -84,7 +31,7 @@ public class Game extends Item{
             case 1 -> {
                 System.out.println("Enter new title:");
                 Scanner inputOne = new Scanner(System.in);
-                Admin.getGamesArr().get(i).title = inputOne.nextLine();
+                Admin.getGamesArr().get(i).setTitle(inputOne.nextLine());
                 System.out.println("your game title changed!");
                 gameModify(i);
             }
@@ -98,14 +45,14 @@ public class Game extends Item{
             case 3 -> {
                 System.out.println("Enter new info:");
                 Scanner inputThree = new Scanner(System.in);
-                Admin.getGamesArr().get(i).info = inputThree.nextLine();
+                Admin.getGamesArr().get(i).setInfo(inputThree.nextLine());
                 System.out.println("your game info changed!");
                 gameModify(i);
             }
             case 4 -> {
                 System.out.println("Enter new price:");
                 Scanner inputFour = new Scanner(System.in);
-                Admin.getGamesArr().get(i).price = inputFour.nextInt();
+                Admin.getGamesArr().get(i).setPrice(inputFour.nextInt());
                 System.out.println("your game price changed!");
                 gameModify(i);
             }

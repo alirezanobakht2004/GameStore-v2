@@ -6,14 +6,18 @@ import java.util.Scanner;
 
 public class Community {
 
+
     private List<User> userList = new ArrayList<User>();
 
-    private String comments;
+    private String comments="comments:";
 
-    private float Rating;
+    private float Rating=0;
 
     private int ratingNumber = 0;
 
+    public List<User> getUserList() {
+        return userList;
+    }
 
     public String getComments() {
         return comments;
@@ -38,6 +42,7 @@ public class Community {
     public void setRating(float rating) {
         Rating = rating;
     }
+
 
     public void start(int indexOfUser) {
         System.out.println("\033[1;95m" + "Community Menu" + "\033[0m");

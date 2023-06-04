@@ -312,8 +312,8 @@ public class Sign {
             if (UserManagement.getUsersArr().get(i).getUsername().equals(username)) {
                 if (UserManagement.getUsersArr().get(i).getPassword().equals(password)) {
                     System.out.println("Your welcome!");
-                    User usern = new User();
-                    usern.userMenu(i);
+                    UserManagement.getUsersArr().get(i).setStartTime(System.nanoTime());
+                    UserManagement.getUsersArr().get(i).getUserMenu().userMenu(i);
                     count++;
                 }
             }

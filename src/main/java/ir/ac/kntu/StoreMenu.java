@@ -25,8 +25,7 @@ public class StoreMenu {
                 filterPrice();
                 break;
             case 4:
-                User x = new User();
-                x.userMenu(indexOfUser);
+                UserManagement.getUsersArr().get(indexOfUser).getUserMenu().userMenu(indexOfUser);
                 break;
             default:
                 break;

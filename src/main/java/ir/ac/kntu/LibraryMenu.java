@@ -16,8 +16,7 @@ public class LibraryMenu {
                 showGames();
                 break;
             case 2:
-                User x = new User();
-                x.userMenu(indexOfUser);
+                UserManagement.getUsersArr().get(indexOfUser).getUserMenu().userMenu(indexOfUser);
                 break;
             default:
                 break;

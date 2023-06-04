@@ -34,6 +34,7 @@ public class UserMenu {
                 user.setStartTime(0);
                 System.out.println();
                 user.setTime(user.getTime()+TimeUnit.SECONDS.convert(duration, TimeUnit.NANOSECONDS));
+                user.setLevel((int) user.getTime()/60);
                 Sign back = new Sign();
                 back.sign();
             default:

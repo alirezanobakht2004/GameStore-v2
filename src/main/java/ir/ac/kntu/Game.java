@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class Game extends Item{
 
+
     private String genre;
 
     private static List<Developer> developersOfGame = new ArrayList<Developer>();
@@ -21,6 +22,9 @@ public class Game extends Item{
         return genre;
     }
 
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
 
     public void gameModify(int i) {
         Scanner input = new Scanner(System.in);

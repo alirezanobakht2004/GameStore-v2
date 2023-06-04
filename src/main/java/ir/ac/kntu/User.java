@@ -103,7 +103,7 @@ public class User {
         int in = input.nextInt();
         switch (in) {
             case 1:
-                Sign.getUsersArr().get(i).profile(i);
+                UserManagement.getUsersArr().get(i).profile(i);
                 break;
             case 2:
                 library(i);
@@ -225,12 +225,12 @@ public class User {
     }
 
     public void store(int i) {
-        Store x = new Store();
+        StoreMenu x = new StoreMenu();
         x.start(i);
     }
 
     public void library(int i) {
-        Library x = new Library();
+        LibraryMenu x = new LibraryMenu();
         x.start(i);
     }
 

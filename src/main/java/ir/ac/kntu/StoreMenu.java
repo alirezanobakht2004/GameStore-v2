@@ -2,7 +2,7 @@ package ir.ac.kntu;
 
 import java.util.Scanner;
 
-public class Store {
+public class StoreMenu {
 
     int indexOfUser;
 

@@ -1,13 +1,21 @@
 package ir.ac.kntu;
 
-public class Developer {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Developer{
     private String developerName;
     private String password;
-    private DeveloperMenu developerMenu;
+    private DeveloperMenu developerMenu ;
+
+    private List<Game> developerGames = new ArrayList<Game>();
+    public Developer() {
+    }
 
     public Developer(String developerName, String password) {
         this.developerName = developerName;
         this.password = password;
+        developerMenu = new DeveloperMenu();
     }
 
     public String getDeveloperName() {
@@ -32,5 +40,9 @@ public class Developer {
 
     public void setDeveloperMenu(DeveloperMenu developerMenu) {
         this.developerMenu = developerMenu;
+    }
+
+    public List<Game> getDeveloperGames() {
+        return developerGames;
     }
 }

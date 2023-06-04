@@ -89,11 +89,11 @@ public class Sign {
             sign();
         }
         int count = 0;
-        for (int i = 0; i < UserManagement.getUsersArr().size(); i++) {
+        for (int i = 0; i < DeveloperManagement.getDevelopersArr().size(); i++) {
             if (DeveloperManagement.getDevelopersArr().get(i).getDeveloperName().equals(devName)) {
-                if (UserManagement.getUsersArr().get(i).getPassword().equals(password)) {
+                if (DeveloperManagement.getDevelopersArr().get(i).getPassword().equals(password)) {
                     System.out.println("Your welcome!");
-                    DeveloperManagement.getDevelopersArr().get(i).getDeveloperMenu().start();
+                    DeveloperManagement.getDevelopersArr().get(i).getDeveloperMenu().start(i);
                     count++;
                 }
             }

@@ -2,7 +2,7 @@ package ir.ac.kntu;
 
 import java.util.Scanner;
 
-public class Library {
+public class LibraryMenu {
     int indexOfUser;
 
     public void start(int t) {

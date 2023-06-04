@@ -256,16 +256,25 @@ public class AccessoriesSellerMenu {
         int des = input.nextInt();
         switch (des) {
             case 1:
-                AccessoriesManagement.getAccessoriesArr().get(i).setTitle(input.nextLine());
+                System.out.println("Enter new title:");
+                Scanner inputOne = new Scanner(System.in);
+                String title=inputOne.nextLine();
+                AccessoriesManagement.getAccessoriesArr().get(i).setTitle(title);
                 break;
             case 2:
-                AccessoriesManagement.getAccessoriesArr().get(i).setInfo(input.nextLine());
+                Scanner inputTwo = new Scanner(System.in);
+                String titl=inputTwo.nextLine();
+                AccessoriesManagement.getAccessoriesArr().get(i).setInfo(titl);
                 break;
             case 3:
-                AccessoriesManagement.getAccessoriesArr().get(i).setPrice(input.nextLine());
+                Scanner inputThree = new Scanner(System.in);
+                String tit=inputThree.nextLine();
+                AccessoriesManagement.getAccessoriesArr().get(i).setPrice(tit);
                 break;
             case 4:
-                AccessoriesManagement.getAccessoriesArr().get(i).setNumberOfAccessory(input.nextLine());
+                Scanner inputFour = new Scanner(System.in);
+                String ti=inputFour.nextLine();
+                AccessoriesManagement.getAccessoriesArr().get(i).setNumberOfAccessory(ti);
                 break;
             case 5:
                 if (AccessoriesManagement.getAccessoriesArr().get(i).getSystemConnection().equals("Wired")) {
@@ -275,7 +284,9 @@ public class AccessoriesSellerMenu {
                 }
                 break;
             case 6:
-                AccessoriesManagement.getAccessoriesArr().get(i).setSystemKind(input.nextLine());
+                Scanner inputFive = new Scanner(System.in);
+                String t=inputFive.nextLine();
+                AccessoriesManagement.getAccessoriesArr().get(i).setSystemKind(t);
                 break;
             case 7:
                 searchAccessories();
@@ -287,7 +298,7 @@ public class AccessoriesSellerMenu {
 
     public void gameMonitorModify(int i) {
         Scanner input = new Scanner(System.in);
-        System.out.println("\033[0;91m" + "gameController modify menu" + "\033[0m");
+        System.out.println("\033[0;91m" + "gameMonitor modify menu" + "\033[0m");
         System.out.println("1.Modify Title");
         System.out.println("2.Modify Info");
         System.out.println("3.Modify Price");

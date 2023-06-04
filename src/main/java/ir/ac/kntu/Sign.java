@@ -9,7 +9,7 @@ public class Sign {
         System.out.println("Enter 1 if you are Admin");
         System.out.println("Enter 2 if you are User");
         System.out.println("Enter 3 if you are Developer");
-        System.out.println("Enter 4 if you are AccessoriesSellerMenu");
+        System.out.println("Enter 4 if you are AccessoriesSeller");
         System.out.println("Enter 5 for leaving");
         Scanner input = new Scanner(System.in);
         int in = input.nextInt();

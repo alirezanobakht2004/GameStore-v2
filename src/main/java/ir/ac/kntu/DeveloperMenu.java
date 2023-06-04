@@ -62,8 +62,6 @@ public class DeveloperMenu {
             default:
                 break;
         }
-
-
     }
 
     public void showInfo() {
@@ -143,7 +141,7 @@ public class DeveloperMenu {
         System.out.println("Enter info:");
         String info = input.nextLine();
         System.out.println("Enter price:");
-        int price = input.nextInt();
+        String price = input.nextLine();
         Game game = new Game(title, genre, info, price);
         game.getDevelopersOfGame().add(developer);
         GameManagement.getGamesArr().add(game);
@@ -174,7 +172,8 @@ public class DeveloperMenu {
                 int index1 = input.nextInt();
                 GameManagement.getGamesArr().remove(index1);
                 developer.getDeveloperGames().remove(index1);
-                System.out.println("\nYour game has been succsessfully deleted!\n");
+                System.out.println("\nYour game has been successfully deleted!\n");
+                break;
             case 3:
                 games();
             default:
@@ -217,7 +216,7 @@ public class DeveloperMenu {
             case 4 -> {
                 System.out.println("Enter new price:");
                 Scanner inputFour = new Scanner(System.in);
-                GameManagement.getGamesArr().get(i).setPrice(inputFour.nextInt());
+                GameManagement.getGamesArr().get(i).setPrice(inputFour.nextLine());
                 System.out.println("your game price changed!");
                 gameModify(i);
             }

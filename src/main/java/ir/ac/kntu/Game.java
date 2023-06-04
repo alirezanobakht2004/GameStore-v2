@@ -12,7 +12,7 @@ public class Game extends Item{
     public Game(){
         super();
     }
-    public Game(String title,String genre,String info,int price){
+    public Game(String title,String genre,String info,String price){
         super(title,info,price);
         this.genre=genre;
     }
@@ -61,7 +61,7 @@ public class Game extends Item{
             case 4 -> {
                 System.out.println("Enter new price:");
                 Scanner inputFour = new Scanner(System.in);
-                GameManagement.getGamesArr().get(i).setPrice(inputFour.nextInt());
+                GameManagement.getGamesArr().get(i).setPrice(inputFour.nextLine());
                 System.out.println("your game price changed!");
                 gameModify(i);
             }

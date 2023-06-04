@@ -60,12 +60,12 @@ public class StoreMenu {
             int in = input.nextInt();
             switch (in) {
                 case 1:
-                    if (UserManagement.getUsersArr().get(indexOfUser).getWallet() >= GameManagement.getGamesArr().get(i).getPrice()) {
+                    if (UserManagement.getUsersArr().get(indexOfUser).getWallet() >=Integer.parseInt(GameManagement.getGamesArr().get(i).getPrice()) ) {
                         UserManagement.getUsersArr().get(indexOfUser).getGamesOfUser().add(GameManagement.getGamesArr().get(i));
                         GameManagement.getGamesArr().get(i).getCommunity().getUserList().add(UserManagement.getUsersArr().get(indexOfUser));
                         UserManagement.getUsersArr().get(indexOfUser).setWallet(
                                 UserManagement.getUsersArr().get(indexOfUser).getWallet()
-                                        - GameManagement.getGamesArr().get(i).getPrice());
+                                        - Integer.parseInt(GameManagement.getGamesArr().get(i).getPrice()));
                         System.out.println("\n" + "You bought the game successfully!" + "\n");
                     } else {
                         System.out.println("\033[1;91m" + "Not enough money in wallet" + "\033[0m");
@@ -121,7 +121,7 @@ public class StoreMenu {
         int count = 0;
         int high = input.nextInt();
         for (int i = 0; i < GameManagement.getGamesArr().size(); i++) {
-            if (GameManagement.getGamesArr().get(i).getPrice() <= high && GameManagement.getGamesArr().get(i).getPrice() >= low) {
+            if (Integer.parseInt(GameManagement.getGamesArr().get(i).getPrice()) <= high && Integer.parseInt(GameManagement.getGamesArr().get(i).getPrice()) >= low) {
                 System.out.println("name of game: " + GameManagement.getGamesArr().get(i).getTitle() +
                         " genre: " + GameManagement.getGamesArr().get(i).getGenre() +
                         " info: " + GameManagement.getGamesArr().get(i).getInfo() + " index of game is: " +

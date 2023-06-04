@@ -83,7 +83,7 @@ public class AdminMenu {
         System.out.println("Enter info:");
         String info = input.nextLine();
         System.out.println("Enter price:");
-        int price = input.nextInt();
+        String price = input.nextLine();
         Game game = new Game(title, genre, info, price);
         GameManagement.getGamesArr().add(game);
         System.out.println("\nYour game has been succsessfully created!\n");

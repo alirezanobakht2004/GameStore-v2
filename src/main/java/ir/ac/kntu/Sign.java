@@ -9,7 +9,8 @@ public class Sign {
         System.out.println("Enter 1 if you are Admin");
         System.out.println("Enter 2 if you are User");
         System.out.println("Enter 3 if you are Developer");
-        System.out.println("Enter 4 for leaving");
+        System.out.println("Enter 4 if you are AccessoriesSellerMenu");
+        System.out.println("Enter 5 for leaving");
         Scanner input = new Scanner(System.in);
         int in = input.nextInt();
         if (in == 1) {
@@ -22,13 +23,93 @@ public class Sign {
             developerStart();
         }
         if (in == 4) {
+            accessoriesSellerStart();
+        }
+        if (in == 5) {
             System.exit(0);
         }
     }
 
+    public void accessoriesSellerStart(){
+        System.out.println("\033[1;94m" + "AccessoriesSeller entry menu" + "\033[0m");
+        System.out.println("\033[1;92m" + "Sign up or Sign in" + "\033[0m");
+        System.out.println("Enter 1 for sign up");
+        System.out.println("Enter 2 for sign in");
+        System.out.println("Enter 3 for back");
+        Scanner input = new Scanner(System.in);
+        int in = input.nextInt();
+        if (in == 1) {
+            accSignUp();
+        }
+        if (in == 2) {
+            accSignIn();
+        }
+        if (in == 3) {
+            sign();
+        }
+    }
+
+    public void accSignUp() {
+        System.out.println("\033[1;95m" + "sign up menu" + "\u001B[0m");
+        System.out.println("\n" + "You can type ### and enter to comeback\n");
+        System.out.println("Enter username:");
+        Scanner input = new Scanner(System.in);
+        String accName = input.nextLine();
+        if (accName.equals("###")) {
+            sign();
+        }
+        System.out.println("Enter password:");
+        String password = input.nextLine();
+        if (password.equals("###")) {
+            sign();
+        }
+        int count = 0;
+        for (int i = 0; i < AccessoriesSellerManagement.getAccessoriesSellerArr().size(); i++) {
+            if (AccessoriesSellerManagement.getAccessoriesSellerArr().get(i).getAccessoriesSellerName().equals(accName)) {
+                System.out.println("already taken DeveloperName!");
+                count++;
+            }
+        }
+        if (count == 0) {
+            AccessoriesSeller acc = new AccessoriesSeller(accName, password);
+            AccessoriesSellerManagement.getAccessoriesSellerArr().add(acc);
+            System.out.println("\nYou signed up!\n");
+        }
+        sign();
+    }
+
+    public void accSignIn() {
+        System.out.println("\033[1;95m" + "sign in menu" + "\033[0m");
+        Scanner input = new Scanner(System.in);
+        System.out.println("\n" + "You can type ### and enter to comeback\n");
+        System.out.println("Enter DeveloperName:");
+        String accName = input.nextLine();
+        if (accName.equals("###")) {
+            sign();
+        }
+        System.out.println("Enter password:");
+        String password = input.nextLine();
+        if (password.equals("###")) {
+            sign();
+        }
+        int count = 0;
+        for (int i = 0; i < AccessoriesSellerManagement.getAccessoriesSellerArr().size(); i++) {
+            if (AccessoriesSellerManagement.getAccessoriesSellerArr().get(i).getAccessoriesSellerName().equals(accName)) {
+                if (AccessoriesSellerManagement.getAccessoriesSellerArr().get(i).getPassword().equals(password)) {
+                    System.out.println("Your welcome!");
+                    AccessoriesSellerManagement.getAccessoriesSellerArr().get(i).getAccessoriesSellerMenu().start(i);
+                    count++;
+                }
+            }
+        }
+        if (count == 0) {
+            System.out.println("Invalid Enties");
+            sign();
+        }
+    }
     public void developerStart() {
         System.out.println("\033[1;94m" + "Developer entry menu" + "\033[0m");
-        System.out.println("\033[0;36m" + "Sign up or Sign in" + "\033[0m");
+        System.out.println("\033[1;92m" + "Sign up or Sign in" + "\033[0m");
         System.out.println("Enter 1 for sign up");
         System.out.println("Enter 2 for sign in");
         System.out.println("Enter 3 for back");
@@ -103,6 +184,7 @@ public class Sign {
             devSignIn();
         }
     }
+
     public void adminStart() {
         System.out.println("\033[1;94m" + "Admin entry menu" + "\033[0m");
         String usernamerOfAdmin;

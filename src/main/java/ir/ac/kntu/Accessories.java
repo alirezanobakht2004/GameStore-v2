@@ -1,14 +1,14 @@
 package ir.ac.kntu;
 
-public class accessories extends Item{
+public class Accessories extends Item{
 
     private int numberOfAccessory;
 
-    public accessories(){
+    public Accessories(){
         super();
     }
 
-    public accessories(String title, String info, int price, int numberOfAccessory) {
+    public Accessories(String title, String info, int price, int numberOfAccessory) {
         super(title, info, price);
         this.numberOfAccessory = numberOfAccessory;
     }

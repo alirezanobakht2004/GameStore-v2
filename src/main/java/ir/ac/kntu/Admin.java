@@ -3,6 +3,12 @@ package ir.ac.kntu;
 public class Admin {
     private String adminName;
     private String password;
+    private AdminMenu adminMenu;
+
+    public AdminMenu getAdminMenu() {
+        return adminMenu;
+    }
+
     public String getAdminName() {
         return adminName;
     }

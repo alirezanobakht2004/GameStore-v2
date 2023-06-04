@@ -1,10 +1,14 @@
 package ir.ac.kntu;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Game extends Item{
 
     private String genre;
+
+    private static List<Developer> developersOfGame = new ArrayList<Developer>();
     public Game(){
         super();
     }
@@ -31,28 +35,28 @@ public class Game extends Item{
             case 1 -> {
                 System.out.println("Enter new title:");
                 Scanner inputOne = new Scanner(System.in);
-                gameManagement.getGamesArr().get(i).setTitle(inputOne.nextLine());
+                GameManagement.getGamesArr().get(i).setTitle(inputOne.nextLine());
                 System.out.println("your game title changed!");
                 gameModify(i);
             }
             case 2 -> {
                 System.out.println("Enter new genre:");
                 Scanner inputTwo = new Scanner(System.in);
-                gameManagement.getGamesArr().get(i).genre = inputTwo.nextLine();
+                GameManagement.getGamesArr().get(i).genre = inputTwo.nextLine();
                 System.out.println("your game genre changed!");
                 gameModify(i);
             }
             case 3 -> {
                 System.out.println("Enter new info:");
                 Scanner inputThree = new Scanner(System.in);
-                gameManagement.getGamesArr().get(i).setInfo(inputThree.nextLine());
+                GameManagement.getGamesArr().get(i).setInfo(inputThree.nextLine());
                 System.out.println("your game info changed!");
                 gameModify(i);
             }
             case 4 -> {
                 System.out.println("Enter new price:");
                 Scanner inputFour = new Scanner(System.in);
-                gameManagement.getGamesArr().get(i).setPrice(inputFour.nextInt());
+                GameManagement.getGamesArr().get(i).setPrice(inputFour.nextInt());
                 System.out.println("your game price changed!");
                 gameModify(i);
             }

@@ -1,15 +1,15 @@
 package ir.ac.kntu;
 
-public class gamingController extends accessories{
+public class GamingController extends Accessories {
     private String systemKind;
 
     private String systemConnection;
 
-    public gamingController(){
+    public GamingController(){
         super();
     }
 
-    public gamingController(String systemKind,String systemConnection,int numberOfAccessory,String title, String info, int price){
+    public GamingController(String systemKind, String systemConnection, int numberOfAccessory, String title, String info, int price){
         super(title,info,price,numberOfAccessory);
         this.systemKind=systemKind;
         this.systemConnection=systemConnection;

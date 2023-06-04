@@ -85,7 +85,7 @@ public class AdminMenu {
         System.out.println("Enter price:");
         int price = input.nextInt();
         Game game = new Game(title, genre, info, price);
-        gameManagement.getGamesArr().add(game);
+        GameManagement.getGamesArr().add(game);
         System.out.println("\nYour game has been succsessfully created!\n");
         gameManage();
     }
@@ -96,11 +96,11 @@ public class AdminMenu {
         System.out.println("Enter name of game:");
         String name = input.nextLine();
         int count = 0;
-        for (int i = 0; i < gameManagement.getGamesArr().size(); i++) {
-            if (gameManagement.getGamesArr().get(i).getTitle().startsWith(name)) {
-                System.out.println("name of game: " + gameManagement.getGamesArr().get(i).getTitle() +
-                        " genre " + gameManagement.getGamesArr().get(i).getGenre() +
-                        " info: " + gameManagement.getGamesArr().get(i).getInfo() + " index of game is: " +
+        for (int i = 0; i < GameManagement.getGamesArr().size(); i++) {
+            if (GameManagement.getGamesArr().get(i).getTitle().startsWith(name)) {
+                System.out.println("name of game: " + GameManagement.getGamesArr().get(i).getTitle() +
+                        " genre " + GameManagement.getGamesArr().get(i).getGenre() +
+                        " info: " + GameManagement.getGamesArr().get(i).getInfo() + " index of game is: " +
                         "\033[1;93m" + String.valueOf(i) + "\033[0m");
                 count++;
             }
@@ -125,7 +125,7 @@ public class AdminMenu {
                 case 2:
                     System.out.println("enter the index of the game you want to delete:");
                     int index1 = input.nextInt();
-                    gameManagement.getGamesArr().remove(index1);
+                    GameManagement.getGamesArr().remove(index1);
                     System.out.println("\nYour game has been succsessfully deleted!\n");
                 case 3:
                     gameManage();

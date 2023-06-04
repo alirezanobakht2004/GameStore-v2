@@ -1,6 +1,6 @@
 package ir.ac.kntu;
 
-public class gamingMonitor extends accessories{
+public class GamingMonitor extends Accessories {
 
     private int fps;
 
@@ -8,10 +8,10 @@ public class gamingMonitor extends accessories{
 
     private int answerTime;
 
-    public gamingMonitor() {
+    public GamingMonitor() {
     }
 
-    public gamingMonitor(String title, String info, int price, int numberOfAccessory, int fps, int size, int answerTime) {
+    public GamingMonitor(String title, String info, int price, int numberOfAccessory, int fps, int size, int answerTime) {
         super(title, info, price, numberOfAccessory);
         this.fps = fps;
         this.size = size;

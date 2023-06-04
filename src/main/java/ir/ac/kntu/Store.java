@@ -34,9 +34,9 @@ public class Store {
     }
 
     public void showGames() {
-        for (int i = 0; i < AdminMenu.getGamesArr().size(); i++) {
+        for (int i = 0; i < GameManagement.getGamesArr().size(); i++) {
             System.out
-                    .println("\n" + "Title of game: " + "\033[1;93m" + AdminMenu.getGamesArr().get(i).getTitle() + "\033[0m"
+                    .println("\n" + "Title of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getTitle() + "\033[0m"
                             + " Index of game is: " + i + "\n");
         }
 
@@ -46,26 +46,26 @@ public class Store {
     }
 
     public void showGame(int i) {
-        System.out.println("\n" + "Title of game: " + "\033[1;93m" + AdminMenu.getGamesArr().get(i).getTitle() + "\033[0m");
-        System.out.println("\n" + "Info of game: " + "\033[1;93m" + AdminMenu.getGamesArr().get(i).getInfo() + "\033[0m");
-        System.out.println("\n" + "genre of game: " + "\033[1;93m" + AdminMenu.getGamesArr().get(i).getGenre() + "\033[0m");
-        System.out.println("\n" + "price of game: " + "\033[1;93m" + AdminMenu.getGamesArr().get(i).getPrice() + "\033[0m");
+        System.out.println("\n" + "Title of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getTitle() + "\033[0m");
+        System.out.println("\n" + "Info of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getInfo() + "\033[0m");
+        System.out.println("\n" + "genre of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getGenre() + "\033[0m");
+        System.out.println("\n" + "price of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getPrice() + "\033[0m");
         System.out
-                .println("\n" + "rating of game: " + "\033[1;93m" + AdminMenu.getGamesArr().get(i).getCommunity().getRating() + "\033[0m");
-        System.out.println("\n" + AdminMenu.getGamesArr().get(i).getCommunity().getComments() + "\n");
-        if (!Sign.getUsersArr().get(indexOfUser).getGamesOfUser().contains(AdminMenu.getGamesArr().get(i))) {
+                .println("\n" + "rating of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getCommunity().getRating() + "\033[0m");
+        System.out.println("\n" + GameManagement.getGamesArr().get(i).getCommunity().getComments() + "\n");
+        if (!UserManagement.getUsersArr().get(indexOfUser).getGamesOfUser().contains(GameManagement.getGamesArr().get(i))) {
             System.out.println("1." + "\033[1;92m" + "Buy the game" + "\033[0m");
             System.out.println("2.Back");
             Scanner input = new Scanner(System.in);
             int in = input.nextInt();
             switch (in) {
                 case 1:
-                    if (Sign.getUsersArr().get(indexOfUser).getWallet() >= AdminMenu.getGamesArr().get(i).getPrice()) {
-                        Sign.getUsersArr().get(indexOfUser).getGamesOfUser().add(AdminMenu.getGamesArr().get(i));
-                        AdminMenu.getGamesArr().get(i).getCommunity().getUserList().add(Sign.getUsersArr().get(indexOfUser));
-                        Sign.getUsersArr().get(indexOfUser).setWallet(
-                                Sign.getUsersArr().get(indexOfUser).getWallet()
-                                        - AdminMenu.getGamesArr().get(i).getPrice());
+                    if (UserManagement.getUsersArr().get(indexOfUser).getWallet() >= GameManagement.getGamesArr().get(i).getPrice()) {
+                        UserManagement.getUsersArr().get(indexOfUser).getGamesOfUser().add(GameManagement.getGamesArr().get(i));
+                        GameManagement.getGamesArr().get(i).getCommunity().getUserList().add(UserManagement.getUsersArr().get(indexOfUser));
+                        UserManagement.getUsersArr().get(indexOfUser).setWallet(
+                                UserManagement.getUsersArr().get(indexOfUser).getWallet()
+                                        - GameManagement.getGamesArr().get(i).getPrice());
                         System.out.println("\n" + "You bought the game successfully!" + "\n");
                     } else {
                         System.out.println("\033[1;91m" + "Not enough money in wallet" + "\033[0m");
@@ -91,11 +91,11 @@ public class Store {
             start(indexOfUser);
         }
         int count = 0;
-        for (int i = 0; i < AdminMenu.getGamesArr().size(); i++) {
-            if (AdminMenu.getGamesArr().get(i).getTitle().startsWith(name)) {
-                System.out.println("name of game: " + AdminMenu.getGamesArr().get(i).getTitle() +
-                        " genre: " + AdminMenu.getGamesArr().get(i).getGenre() +
-                        " info: " + AdminMenu.getGamesArr().get(i).getInfo() + " index of game is: " +
+        for (int i = 0; i < GameManagement.getGamesArr().size(); i++) {
+            if (GameManagement.getGamesArr().get(i).getTitle().startsWith(name)) {
+                System.out.println("name of game: " + GameManagement.getGamesArr().get(i).getTitle() +
+                        " genre: " + GameManagement.getGamesArr().get(i).getGenre() +
+                        " info: " + GameManagement.getGamesArr().get(i).getInfo() + " index of game is: " +
                         "\033[1;93m" + String.valueOf(i) + "\033[0m");
                 count++;
             }
@@ -120,11 +120,11 @@ public class Store {
         System.out.println("Enter higher level:");
         int count = 0;
         int high = input.nextInt();
-        for (int i = 0; i < AdminMenu.getGamesArr().size(); i++) {
-            if (AdminMenu.getGamesArr().get(i).getPrice() <= high && AdminMenu.getGamesArr().get(i).getPrice() >= low) {
-                System.out.println("name of game: " + AdminMenu.getGamesArr().get(i).getTitle() +
-                        " genre: " + AdminMenu.getGamesArr().get(i).getGenre() +
-                        " info: " + AdminMenu.getGamesArr().get(i).getInfo() + " index of game is: " +
+        for (int i = 0; i < GameManagement.getGamesArr().size(); i++) {
+            if (GameManagement.getGamesArr().get(i).getPrice() <= high && GameManagement.getGamesArr().get(i).getPrice() >= low) {
+                System.out.println("name of game: " + GameManagement.getGamesArr().get(i).getTitle() +
+                        " genre: " + GameManagement.getGamesArr().get(i).getGenre() +
+                        " info: " + GameManagement.getGamesArr().get(i).getInfo() + " index of game is: " +
                         "\033[1;93m" + String.valueOf(i) + "\033[0m");
                 count++;
             }

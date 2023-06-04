@@ -4,13 +4,12 @@ import java.util.Scanner;
 
 public class Sign {
 
-
-
     public void sign() {
         System.out.println("\u001B[33m" + "Select Your Role" + "\u001B[0m");
         System.out.println("Enter 1 if you are Admin");
         System.out.println("Enter 2 if you are User");
-        System.out.println("Enter 3 for leaving");
+        System.out.println("Enter 3 if you are Developer");
+        System.out.println("Enter 4 for leaving");
         Scanner input = new Scanner(System.in);
         int in = input.nextInt();
         if (in == 1) {
@@ -20,14 +19,96 @@ public class Sign {
             userStart();
         }
         if (in == 3) {
+            developerStart();
+        }
+        if (in == 4) {
             System.exit(0);
         }
     }
 
+    public void developerStart() {
+        System.out.println("\033[1;94m" + "Developer entry menu" + "\033[0m");
+        System.out.println("\033[0;36m" + "Sign up or Sign in" + "\033[0m");
+        System.out.println("Enter 1 for sign up");
+        System.out.println("Enter 2 for sign in");
+        System.out.println("Enter 3 for back");
+        Scanner input = new Scanner(System.in);
+        int in = input.nextInt();
+        if (in == 1) {
+            devSignUp();
+        }
+        if (in == 2) {
+            devSignIn();
+        }
+        if (in == 3) {
+            sign();
+        }
+    }
+
+    public void devSignUp() {
+        System.out.println("\033[1;95m" + "sign up menu" + "\u001B[0m");
+        System.out.println("\n" + "You can type ### and enter to comeback\n");
+        System.out.println("Enter username:");
+        Scanner input = new Scanner(System.in);
+        String devName = input.nextLine();
+        if (devName.equals("###")) {
+            sign();
+        }
+        System.out.println("Enter password:");
+        String password = input.nextLine();
+        if (password.equals("###")) {
+            sign();
+        }
+        int count = 0;
+        for (int i = 0; i < DeveloperManagement.getDevelopersArr().size(); i++) {
+            if (DeveloperManagement.getDevelopersArr().get(i).getDeveloperName().equals(devName)) {
+                System.out.println("already taken DeveloperName!");
+                count++;
+            }
+        }
+        if (count == 0) {
+            Developer dev = new Developer(devName, password);
+            DeveloperManagement.getDevelopersArr().add(dev);
+            System.out.println("\nYou signed up!\n");
+        }
+        sign();
+    }
+
+    public void devSignIn() {
+        System.out.println("\033[0;31m" + "sign in menu" + "\033[0m");
+        Scanner input = new Scanner(System.in);
+        System.out.println("\n" + "You can type ### and enter to comeback\n");
+        System.out.println("Enter DeveloperName:");
+        String devName = input.nextLine();
+        if (devName.equals("###")) {
+            sign();
+        }
+        System.out.println("Enter password:");
+        String password = input.nextLine();
+        if (password.equals("###")) {
+            sign();
+        }
+        int count = 0;
+        for (int i = 0; i < UserManagement.getUsersArr().size(); i++) {
+            if (DeveloperManagement.getDevelopersArr().get(i).getDeveloperName().equals(devName)) {
+                if (UserManagement.getUsersArr().get(i).getPassword().equals(password)) {
+                    System.out.println("Your welcome!");
+                    DeveloperManagement.getDevelopersArr().get(i).getDeveloperMenu().start();
+                    count++;
+                }
+            }
+        }
+        if (count == 0) {
+            System.out.println("Invalid Enties");
+            devSignIn();
+        }
+    }
     public void adminStart() {
         System.out.println("\033[1;94m" + "Admin entry menu" + "\033[0m");
         String usernamerOfAdmin;
         String passwordOfAdmin;
+        Admin admin = new Admin("A", "1");
+        AdminManagement.getAdminsArr().add(admin);
         System.out.println("\n" + "You can type ### and enter to comeback\n");
         System.out.println("Enter your username:");
         Scanner input1 = new Scanner(System.in);
@@ -40,11 +121,18 @@ public class Sign {
         if (passwordOfAdmin.equals("###")) {
             sign();
         }
-        if (usernamerOfAdmin.equals("A") && passwordOfAdmin.equals("1")) {
-            AdminMenu adminMenu = new AdminMenu();
-            adminMenu.startMenu();
-        } else {
-            System.out.println("incorrect username or password");
+        int count = 0;
+        for (int i = 0; i < AdminManagement.getAdminsArr().size(); i++) {
+            if (AdminManagement.getAdminsArr().get(i).getAdminName().equals(usernamerOfAdmin)) {
+                if (AdminManagement.getAdminsArr().get(i).getPassword().equals(passwordOfAdmin)) {
+                    System.out.println("Your welcome!");
+                    AdminManagement.getAdminsArr().get(i).getAdminMenu().startMenu();
+                    count++;
+                }
+            }
+        }
+        if (count == 0) {
+            System.out.println("Invalid Enties");
             adminStart();
         }
     }

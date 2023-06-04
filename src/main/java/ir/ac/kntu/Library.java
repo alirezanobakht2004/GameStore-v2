@@ -26,11 +26,11 @@ public class Library {
 
     public void showGames() {
         int count = 0;
-        for (int i = 0; i < Sign.getUsersArr().get(indexOfUser).getGamesOfUser().size(); i++) {
+        for (int i = 0; i < UserManagement.getUsersArr().get(indexOfUser).getGamesOfUser().size(); i++) {
             System.out.println("Your game title:" + "\033[1;92m"
-                    + Sign.getUsersArr().get(indexOfUser).getGamesOfUser().get(i).getTitle() + "\033[0m"
+                    + UserManagement.getUsersArr().get(indexOfUser).getGamesOfUser().get(i).getTitle() + "\033[0m"
                     + " With index of: " + "\033[1;91m"
-                    + AdminMenu.getGamesArr().indexOf(Sign.getUsersArr().get(indexOfUser).getGamesOfUser().get(i))
+                    + GameManagement.getGamesArr().indexOf(UserManagement.getUsersArr().get(indexOfUser).getGamesOfUser().get(i))
                     + "\033[0m");
             count++;
         }
@@ -41,7 +41,7 @@ public class Library {
             showInfo(u);
             int h = input.nextInt();
             if (h == 1) {
-                AdminMenu.getGamesArr().get(u).getCommunity().start(indexOfUser);
+                GameManagement.getGamesArr().get(u).getCommunity().start(indexOfUser);
                 start(indexOfUser);
             }
             if (h == 2) {
@@ -54,16 +54,16 @@ public class Library {
 
     public void showInfo(int u) {
         System.out.println(
-                "\n" + "Title of game: " + "\033[1;93m" + AdminMenu.getGamesArr().get(u).getTitle() + "\033[0m");
+                "\n" + "Title of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(u).getTitle() + "\033[0m");
         System.out
-                .println("\n" + "Info of game: " + "\033[1;93m" + AdminMenu.getGamesArr().get(u).getInfo() + "\033[0m");
+                .println("\n" + "Info of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(u).getInfo() + "\033[0m");
         System.out.println(
-                "\n" + "genre of game: " + "\033[1;93m" + AdminMenu.getGamesArr().get(u).getGenre() + "\033[0m");
+                "\n" + "genre of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(u).getGenre() + "\033[0m");
         System.out.println(
-                "\n" + "price of game: " + "\033[1;93m" + AdminMenu.getGamesArr().get(u).getPrice() + "\033[0m");
+                "\n" + "price of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(u).getPrice() + "\033[0m");
         System.out.println(
-                "\n" + "rating of game: " + "\033[1;93m" + AdminMenu.getGamesArr().get(u).getCommunity().getRating() + "\033[0m");
-        System.out.println("\n" + AdminMenu.getGamesArr().get(u).getCommunity().getComments() + "\n");
+                "\n" + "rating of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(u).getCommunity().getRating() + "\033[0m");
+        System.out.println("\n" + GameManagement.getGamesArr().get(u).getCommunity().getComments() + "\n");
         System.out.println("\nEnter 1 to go community of game");
         System.out.println("Enter 2 back\n");
     }

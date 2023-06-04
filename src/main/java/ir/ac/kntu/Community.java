@@ -86,7 +86,7 @@ public class Community {
         String comment = inputOne.nextLine();
         String oldCommuent = "\033[1;96m" + comments + "\033[0m";
         setComments(oldCommuent + "\n" + "Username: "
-                + Sign.getUsersArr().get(indexOfUser).getUsername() + " commented: " + "\033[1;96m"
+                + UserManagement.getUsersArr().get(indexOfUser).getUsername() + " commented: " + "\033[1;96m"
                 + comment + "\033[0m");
         System.out.println("\ncomment added successfully!\n");
     }

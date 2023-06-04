@@ -6,10 +6,9 @@ import java.util.Scanner;
 
 public class Game extends Item{
 
-
     private String genre;
 
-    private static List<Developer> developersOfGame = new ArrayList<Developer>();
+    private List<Developer> developersOfGame = new ArrayList<Developer>();
     public Game(){
         super();
     }
@@ -17,7 +16,9 @@ public class Game extends Item{
         super(title,info,price);
         this.genre=genre;
     }
-
+    public List<Developer> getDevelopersOfGame() {
+        return developersOfGame;
+    }
     public String getGenre() {
         return genre;
     }

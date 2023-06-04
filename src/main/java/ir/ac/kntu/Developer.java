@@ -7,8 +7,13 @@ public class Developer{
     private String developerName;
     private String password;
     private DeveloperMenu developerMenu ;
-
     private List<Game> developerGames = new ArrayList<Game>();
+
+    private List<Game> inbox = new ArrayList<Game>();
+
+    private List<Game> scheduleEvent = new ArrayList<Game>();
+
+
     public Developer() {
     }
 
@@ -17,7 +22,12 @@ public class Developer{
         this.password = password;
         developerMenu = new DeveloperMenu();
     }
-
+    public List<Game> getScheduleEvent() {
+        return scheduleEvent;
+    }
+    public int getScheduleEventSize(){
+        return scheduleEvent.size();
+    }
     public String getDeveloperName() {
         return developerName;
     }
@@ -44,5 +54,9 @@ public class Developer{
 
     public List<Game> getDeveloperGames() {
         return developerGames;
+    }
+
+    public List<Game> getInbox() {
+        return inbox;
     }
 }

@@ -65,7 +65,152 @@ public class AdminMenu {
     public void searchAccessories(){
         System.out.println("Enter name of accessory you want:");
         Scanner input = new Scanner(System.in);
+        String t = input.nextLine();
+        int c=0;
+        for (int i=0;i<AccessoriesManagement.getAccessoriesArr().size();i++){
+            System.out.println("*"+AccessoriesManagement.getAccessoriesArr().get(i)+"*");
+        }
+        for (int i=0;i<AccessoriesManagement.getAccessoriesArr().size();i++){
+            if (AccessoriesManagement.getAccessoriesArr().get(i).getTitle().startsWith(t)){
+                System.out.println(AccessoriesManagement.getAccessoriesArr().get(i).getTitle()+" index: "+i);
+                c++;
+            }
+            if(c==0){
+                System.out.println("NO SUCH GAME FOUND!");
+                accessories();
+            }
+            Scanner inputOne = new Scanner(System.in);
+            System.out.println("\033[1;96m" + "Modify or Delete selection Menu" + "\033[0m");
+            System.out.println("1.Modify Accessory");
+            System.out.println("2.delete Accessory");
+            System.out.println("3.back");
+            int des = inputOne.nextInt();
+            switch (des) {
+                case 1:
+                    System.out.println("enter the index of the game you want to modify:");
+                    int index = input.nextInt();
+                    if (AccessoriesManagement.getAccessoriesArr().get(index).getFps()==null) {
+                        gameControllerModify(index);
+                        accessories();
+                    } else {
+                        gameMonitorModify(index);
+                        accessories();
+                    }
+                    break;
+                case 2:
+                    System.out.println("enter the index of the game you want to delete:");
+                    int index1 = input.nextInt();
+                    AccessoriesManagement.getAccessoriesArr().remove(index1);
+                    admin.getAccessories().remove(index1);
+                    System.out.println("\nYour Accessory has been successfully deleted!\n");
+                    accessories();
+                case 3:
+                    accessories();
+                default:
+                    break;
+            }
+        }
+    }
+    public void gameControllerModify(int i) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("\033[0;91m" + "gameController modify menu" + "\033[0m");
+        System.out.println("1.Modify Title");
+        System.out.println("2.Modify Info");
+        System.out.println("3.Modify Price");
+        System.out.println("4.Modify NumberOfAccessory");
+        System.out.println("5.Modify SystemConnection");
+        System.out.println("6.Modify SystemKind");
+        System.out.println("7.Back");
+        int des = input.nextInt();
+        switch (des) {
+            case 1:
+                System.out.println("Enter new title:");
+                Scanner inputOne = new Scanner(System.in);
+                String title=inputOne.nextLine();
+                AccessoriesManagement.getAccessoriesArr().get(i).setTitle(title);
+                break;
+            case 2:
+                Scanner inputTwo = new Scanner(System.in);
+                String titl=inputTwo.nextLine();
+                AccessoriesManagement.getAccessoriesArr().get(i).setInfo(titl);
+                break;
+            case 3:
+                Scanner inputThree = new Scanner(System.in);
+                String tit=inputThree.nextLine();
+                AccessoriesManagement.getAccessoriesArr().get(i).setPrice(tit);
+                break;
+            case 4:
+                Scanner inputFour = new Scanner(System.in);
+                String ti=inputFour.nextLine();
+                AccessoriesManagement.getAccessoriesArr().get(i).setNumberOfAccessory(ti);
+                break;
+            case 5:
+                if (AccessoriesManagement.getAccessoriesArr().get(i).getSystemConnection().equals("Wired")) {
+                    AccessoriesManagement.getAccessoriesArr().get(i).setSystemConnection("Wireless");
+                } else {
+                    AccessoriesManagement.getAccessoriesArr().get(i).setSystemConnection("Wired");
+                }
+                break;
+            case 6:
+                Scanner inputFive = new Scanner(System.in);
+                String t=inputFive.nextLine();
+                AccessoriesManagement.getAccessoriesArr().get(i).setSystemKind(t);
+                break;
+            case 7:
+                accessories();
+            default:
+                break;
+        }
+        accessories();
+    }
 
+    public void gameMonitorModify(int i) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("\033[0;91m" + "gameMonitor modify menu" + "\033[0m");
+        System.out.println("1.Modify Title");
+        System.out.println("2.Modify Info");
+        System.out.println("3.Modify Price");
+        System.out.println("4.Modify NumberOfAccessory");
+        System.out.println("5.Modify Fps");
+        System.out.println("6.Modify Size");
+        System.out.println("7.Modify AnswerTime");
+        System.out.println("8.Back");
+        int des = input.nextInt();
+        Scanner inputOne = new Scanner(System.in);
+        switch (des) {
+            case 1:
+                System.out.println("Enter new value");
+                AccessoriesManagement.getAccessoriesArr().get(i).setTitle(inputOne.nextLine());
+                break;
+            case 2:
+                System.out.println("Enter new value");
+                AccessoriesManagement.getAccessoriesArr().get(i).setInfo(inputOne.nextLine());
+                break;
+            case 3:
+                System.out.println("Enter new value");
+                AccessoriesManagement.getAccessoriesArr().get(i).setPrice(inputOne.nextLine());
+                break;
+            case 4:
+                System.out.println("Enter new value");
+                AccessoriesManagement.getAccessoriesArr().get(i).setNumberOfAccessory(inputOne.nextLine());
+                break;
+            case 5:
+                System.out.println("Enter new value");
+                AccessoriesManagement.getAccessoriesArr().get(i).setFps(inputOne.nextLine());
+                break;
+            case 6:
+                System.out.println("Enter new value");
+                AccessoriesManagement.getAccessoriesArr().get(i).setSize(inputOne.nextLine());
+                break;
+            case 7:
+                System.out.println("Enter new value");
+                AccessoriesManagement.getAccessoriesArr().get(i).setAnswerTime(inputOne.nextLine());
+            case 8:
+                accessories();
+            default:
+                break;
+        }
+        accessories();
     }
     public void createAccessories() {
         System.out.println("\033[1;94m" + "Create Accessories menu" + "\033[0m");

@@ -60,6 +60,7 @@ public class StoreMenu {
                 System.out.print('-');
             }
         }
+        System.out.println();
         System.out.println("Do you want to see games or accessories?");
         System.out.println("1.Game");
         System.out.println("2.Accessory");

@@ -128,20 +128,19 @@ public class StoreMenu {
             System.out.println("\n" + "rating of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getCommunity().getRating() + "\033[0m");
             System.out.println("\n" + GameManagement.getGamesArr().get(i).getCommunity().getComments() + "\n");
         }
-
         if (!UserManagement.getUsersArr().get(indexOfUser).getGamesOfUser().contains(GameManagement.getGamesArr().get(i))) {
-            System.out.println("1." + "\033[1;92m" + "Buy the game" + "\033[0m");
+            int afterDiscountPercent=(100- levelScore(i))/100;
             System.out.println("2.Back");
             Scanner input = new Scanner(System.in);
             int in = input.nextInt();
             switch (in) {
                 case 1:
-                    if (UserManagement.getUsersArr().get(indexOfUser).getWallet() >= Integer.parseInt(GameManagement.getGamesArr().get(i).getPrice())) {
+                    if (UserManagement.getUsersArr().get(indexOfUser).getWallet() >=afterDiscountPercent*Integer.parseInt(GameManagement.getGamesArr().get(i).getPrice())) {
                         UserManagement.getUsersArr().get(indexOfUser).getGamesOfUser().add(GameManagement.getGamesArr().get(i));
                         GameManagement.getGamesArr().get(i).getCommunity().getUserList().add(UserManagement.getUsersArr().get(indexOfUser));
                         UserManagement.getUsersArr().get(indexOfUser).setWallet(
                                 UserManagement.getUsersArr().get(indexOfUser).getWallet()
-                                        - Integer.parseInt(GameManagement.getGamesArr().get(i).getPrice()));
+                                        -afterDiscountPercent*Integer.parseInt(GameManagement.getGamesArr().get(i).getPrice()));
                         System.out.println("\n" + "You bought the game successfully!" + "\n");
                     } else {
                         System.out.println("\033[1;91m" + "Not enough money in wallet" + "\033[0m");
@@ -155,6 +154,26 @@ public class StoreMenu {
             }
         }
         start(indexOfUser);
+    }
+
+    public int levelScore(int i){
+        if(GameManagement.getGamesArr().get(i).getLevel()==1){
+            System.out.println("1." + "\033[1;92m" + "Buy the game with 0% discount" + "\033[0m");
+            return 0;
+        }
+        if (GameManagement.getGamesArr().get(i).getLevel()==2 && UserManagement.getUsersArr().get(indexOfUser).getScore()>=20){
+            System.out.println("1." + "\033[1;92m" + "Buy the game with 10% discount" + "\033[0m");
+            return 10;
+        }
+        if (GameManagement.getGamesArr().get(i).getLevel()==3 && UserManagement.getUsersArr().get(indexOfUser).getScore()>=50){
+            System.out.println("1." + "\033[1;92m" + "Buy the game with 20% discount" + "\033[0m");
+            return 20;
+        }
+        if (GameManagement.getGamesArr().get(i).getLevel()==4 && UserManagement.getUsersArr().get(indexOfUser).getScore()>=100){
+            System.out.println("1." + "\033[1;92m" + "Buy the game with 30% discount" + "\033[0m");
+            return 30;
+        }
+        return 0;
     }
 
     public void searchGame() {

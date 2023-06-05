@@ -117,10 +117,6 @@ public class User {
         this.time = time;
     }
 
-    public int getLevel() {
-        return score;
-    }
-
     public void setScore(int score) {
         this.score = score;
     }

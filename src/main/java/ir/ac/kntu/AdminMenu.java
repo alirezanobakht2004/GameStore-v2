@@ -56,7 +56,8 @@ public class AdminMenu {
         System.out.println("\033[0;91m" + "game manage menu" + "\033[0m");
         System.out.println("1.create games");
         System.out.println("2.modify games or delete games");
-        System.out.println("3.back");
+        System.out.println("3.destruction report to developers");
+        System.out.println("4.back");
         Scanner input = new Scanner(System.in);
         int adminDes = input.nextInt();
         switch (adminDes) {
@@ -67,12 +68,26 @@ public class AdminMenu {
                 searchGame();
                 break;
             case 3:
+                reportGame();
+                break;
+            case 4:
                 startMenu();
             default:
                 break;
         }
     }
 
+    public void reportGame(){
+        System.out.println("\033[1;91m"+"Report Game Menu"+"\033[0m");
+        for (int i = 0; i < GameManagement.getGamesArr().size(); i++) {
+            System.out.println("\n" + "Title of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getTitle() + "\033[0m" + " Index of game is: " + i + "\n");
+        }
+
+        System.out.println("\nEnter index of the game you want:");
+        Scanner input = new Scanner(System.in);
+        int report= input.nextInt();
+
+    }
     public void createGame() {
         System.out.println("\033[43m" + "Create game menu" + "\033[0m");
         Scanner input = new Scanner(System.in);
@@ -84,7 +99,23 @@ public class AdminMenu {
         String info = input.nextLine();
         System.out.println("Enter price:");
         String price = input.nextLine();
-        Game game = new Game(title, genre, info, price);
+        System.out.println("Enter level:");
+        int level = input.nextInt();
+        System.out.println("\033[1;94m" + "Enter game version:" + "\033[0m");
+        System.out.println("1.Beta");
+        System.out.println("2.Original");
+        String des = input.nextLine();
+        GameVersion gameVersion;
+        if (des.equals("1")) {
+            gameVersion = GameVersion.BETA;
+        } else if (des.equals("2")) {
+            gameVersion = GameVersion.ORIGINAL;
+        } else {
+            System.out.println("Wrong entries");
+            gameVersion = GameVersion.ORIGINAL;
+            createGame();
+        }
+        Game game = new Game(title, genre, info, price,level, gameVersion);
         GameManagement.getGamesArr().add(game);
         System.out.println("\nYour game has been succsessfully created!\n");
         gameManage();

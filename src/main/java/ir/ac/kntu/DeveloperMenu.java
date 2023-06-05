@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class DeveloperMenu {
 
@@ -30,6 +29,7 @@ public class DeveloperMenu {
             case 4:
                 break;
             case 5:
+                seeFeedback();
                 break;
             case 6:
                 break;
@@ -40,6 +40,13 @@ public class DeveloperMenu {
             default:
                 break;
         }
+    }
+
+    public void seeFeedback(){
+        for (int i=0;i<developer.getFeedback().size();i++){
+            System.out.println(developer.getFeedback().get(i));
+        }
+        start(DeveloperManagement.getDevelopersArr().indexOf(developer));
     }
 
     public void profile() {
@@ -142,7 +149,23 @@ public class DeveloperMenu {
         String info = input.nextLine();
         System.out.println("Enter price:");
         String price = input.nextLine();
-        Game game = new Game(title, genre, info, price);
+        System.out.println("Enter level:");
+        int level = input.nextInt();
+        System.out.println("\033[1;94m" + "Enter game version:" + "\033[0m");
+        System.out.println("1.Beta");
+        System.out.println("2.Original");
+        String des = input.nextLine();
+        GameVersion gameVersion;
+        if (des.equals("1")) {
+            gameVersion = GameVersion.BETA;
+        } else if (des.equals("2")) {
+            gameVersion = GameVersion.ORIGINAL;
+        } else {
+            System.out.println("Wrong entries");
+            gameVersion = GameVersion.ORIGINAL;
+            createGame();
+        }
+        Game game = new Game(title, genre, info, price,level, gameVersion);
         game.getDevelopersOfGame().add(developer);
         GameManagement.getGamesArr().add(game);
         developer.getDeveloperGames().add(game);

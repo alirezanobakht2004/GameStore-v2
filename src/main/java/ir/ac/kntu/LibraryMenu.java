@@ -7,7 +7,7 @@ public class LibraryMenu {
 
     public void start(int t) {
         indexOfUser = t;
-        System.out.println("\033[43m" + "welcome to library" + "\033[0m");
+        System.out.println("\033[1;96m" + "welcome to library" + "\033[0m");
         System.out.println("1.Show your games");
         System.out.println("2.back");
         Scanner input = new Scanner(System.in);
@@ -30,7 +30,7 @@ public class LibraryMenu {
                     + UserManagement.getUsersArr().get(indexOfUser).getGamesOfUser().get(i).getTitle() + "\033[0m"
                     + " With index of: " + "\033[1;91m"
                     + GameManagement.getGamesArr().indexOf(UserManagement.getUsersArr().get(indexOfUser).getGamesOfUser().get(i))
-                    + "\033[0m");
+                    + "\033[0m" + " VERSION: " + "\033[1;96m" + UserManagement.getUsersArr().get(indexOfUser).getGamesOfUser().get(i).getVersion() + "\033[1;91m");
             count++;
         }
         if (count != 0) {
@@ -44,6 +44,10 @@ public class LibraryMenu {
                 start(indexOfUser);
             }
             if (h == 2) {
+                sendFeedback(u);
+                start(indexOfUser);
+            }
+            if (h == 3) {
                 start(indexOfUser);
             }
         } else {
@@ -52,19 +56,21 @@ public class LibraryMenu {
     }
 
     public void showInfo(int u) {
-        System.out.println(
-                "\n" + "Title of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(u).getTitle() + "\033[0m");
-        System.out
-                .println("\n" + "Info of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(u).getInfo() + "\033[0m");
-        System.out.println(
-                "\n" + "genre of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(u).getGenre() + "\033[0m");
-        System.out.println(
-                "\n" + "price of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(u).getPrice() + "\033[0m");
-        System.out.println(
-                "\n" + "rating of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(u).getCommunity().getRating() + "\033[0m");
-        System.out.println("\n" + GameManagement.getGamesArr().get(u).getCommunity().getComments() + "\n");
-        System.out.println("\nEnter 1 to go community of game");
-        System.out.println("Enter 2 back\n");
+        System.out.println("\n" + "Title of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(u).getTitle() + "\033[0m");
+        System.out.println("\n" + "Info of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(u).getInfo() + "\033[0m");
+        System.out.println("\n" + "level of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(u).getLevel() + "\033[0m");
+        System.out.println("\n" + "genre of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(u).getGenre() + "\033[0m");
+        System.out.println("\n" + "price of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(u).getPrice() + "\033[0m");
+        System.out.println("\n" + "version of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(u).getVersion() + "\033[0m");
+        if (GameManagement.getGamesArr().get(u).getVersion() == GameVersion.ORIGINAL) {
+            System.out.println("\n" + "rating of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(u).getCommunity().getRating() + "\033[0m");
+            System.out.println("\n" + GameManagement.getGamesArr().get(u).getCommunity().getComments() + "\n");
+            System.out.println("\nEnter 1 to go community of game");
+            System.out.println("Enter 3 back\n");
+        } else {
+            System.out.println("\nEnter 2 to send feedback");
+            System.out.println("Enter 3 back\n");
+        }
     }
 
 
@@ -77,5 +83,13 @@ public class LibraryMenu {
             }
         }
         return newString.toString();
+    }
+
+    public void sendFeedback(int u) {
+        System.out.println("\033[1;93m" + "Send Feedback Menu+" + "\033[0m");
+        System.out.println("Enter Your Feedback:");
+        Scanner input = new Scanner(System.in);
+        String feed = input.nextLine();
+        GameManagement.getGamesArr().get(u).getDevelopersOfGame().get(0).getFeedback().add("Game: "+GameManagement.getGamesArr().get(u).getTitle() +" feedback: "+ feed);
     }
 }

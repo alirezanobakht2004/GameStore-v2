@@ -1,5 +1,6 @@
 package ir.ac.kntu;
 
+import java.net.http.HttpClient;
 import java.util.Scanner;
 
 public class StoreMenu {
@@ -8,7 +9,7 @@ public class StoreMenu {
 
     public void start(int t) {
         indexOfUser = t;
-        System.out.println("\033[43m" + "welcome to store" + "\033[0m");
+        System.out.println("\033[1;94m" + "welcome to store" + "\033[0m");
         System.out.println("1.Show all games");
         System.out.println("2.Search game");
         System.out.println("3.Filter games by price");
@@ -47,11 +48,15 @@ public class StoreMenu {
     public void showGame(int i) {
         System.out.println("\n" + "Title of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getTitle() + "\033[0m");
         System.out.println("\n" + "Info of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getInfo() + "\033[0m");
+        System.out.println("\n" + "level of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getLevel() + "\033[0m");
         System.out.println("\n" + "genre of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getGenre() + "\033[0m");
         System.out.println("\n" + "price of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getPrice() + "\033[0m");
-        System.out
-                .println("\n" + "rating of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getCommunity().getRating() + "\033[0m");
-        System.out.println("\n" + GameManagement.getGamesArr().get(i).getCommunity().getComments() + "\n");
+        System.out.println("\n" + "version of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getVersion() + "\033[0m");
+        if (GameManagement.getGamesArr().get(i).getVersion() == GameVersion.ORIGINAL) {
+            System.out.println("\n" + "rating of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getCommunity().getRating() + "\033[0m");
+            System.out.println("\n" + GameManagement.getGamesArr().get(i).getCommunity().getComments() + "\n");
+        }
+
         if (!UserManagement.getUsersArr().get(indexOfUser).getGamesOfUser().contains(GameManagement.getGamesArr().get(i))) {
             System.out.println("1." + "\033[1;92m" + "Buy the game" + "\033[0m");
             System.out.println("2.Back");
@@ -59,7 +64,7 @@ public class StoreMenu {
             int in = input.nextInt();
             switch (in) {
                 case 1:
-                    if (UserManagement.getUsersArr().get(indexOfUser).getWallet() >=Integer.parseInt(GameManagement.getGamesArr().get(i).getPrice()) ) {
+                    if (UserManagement.getUsersArr().get(indexOfUser).getWallet() >= Integer.parseInt(GameManagement.getGamesArr().get(i).getPrice())) {
                         UserManagement.getUsersArr().get(indexOfUser).getGamesOfUser().add(GameManagement.getGamesArr().get(i));
                         GameManagement.getGamesArr().get(i).getCommunity().getUserList().add(UserManagement.getUsersArr().get(indexOfUser));
                         UserManagement.getUsersArr().get(indexOfUser).setWallet(

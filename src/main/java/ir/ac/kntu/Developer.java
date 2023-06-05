@@ -13,6 +13,8 @@ public class Developer{
 
     private List<Game> scheduleEvent = new ArrayList<Game>();
 
+    private List<String> feedback = new ArrayList<String>();
+
 
     public Developer() {
     }
@@ -58,5 +60,13 @@ public class Developer{
 
     public List<Game> getInbox() {
         return inbox;
+    }
+
+    public List<String> getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(List<String> feedback) {
+        this.feedback = feedback;
     }
 }

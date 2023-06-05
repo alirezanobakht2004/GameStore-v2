@@ -6,42 +6,225 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class AdminMenu {
+    Admin admin;
 
-
-    public void startMenu() {
+    public void startMenu(int i) {
+        admin = AdminManagement.getAdminsArr().get(i);
         System.out.println("\033[1;93m" + "which do you want?" + "\033[0m");
-        System.out.println("1.Games");
-        System.out.println("2.Users");
-        System.out.println("3.Add New Admin");
-        System.out.println("4.back");
+        System.out.println("1.Profile");
+        System.out.println("2.Accessories");
+        System.out.println("3.Games");
+        System.out.println("4.Users");
+        System.out.println("5.Add New Admin");
+        System.out.println("6.back");
         Sign s = new Sign();
         Scanner input = new Scanner(System.in);
         int adminDes = input.nextInt();
         switch (adminDes) {
             case 1:
-                gameManage();
+                profile();
                 break;
             case 2:
-                userManage();
+                accessories();
                 break;
             case 3:
-                addAdmin();
+                gameManage();
                 break;
             case 4:
+                userManage();
+                break;
+            case 5:
+                addAdmin();
+                break;
+            case 6:
                 s.sign();
             default:
                 break;
         }
     }
+    public void accessories() {
+        System.out.println("\033[0;91m" + "accessories manage menu" + "\033[0m");
+        System.out.println("1.create accessories");
+        System.out.println("2.modify accessories or delete accessories");
+        System.out.println("3.back");
+        Scanner input = new Scanner(System.in);
+        int adminDes = input.nextInt();
+        switch (adminDes) {
+            case 1:
+                createAccessories();
+                break;
+            case 2:
+                searchAccessories();
+                break;
+            case 3:
+                startMenu(AdminManagement.getAdminsArr().indexOf(admin));
+            default:
+                break;
+        }
+    }
+    public void searchAccessories(){
+        System.out.println("Enter name of accessory you want:");
+        Scanner input = new Scanner(System.in);
 
-    public void addAdmin(){
+    }
+    public void createAccessories() {
+        System.out.println("\033[1;94m" + "Create Accessories menu" + "\033[0m");
+        System.out.println("which do you want to add?");
+        System.out.println("1.GameController");
+        System.out.println("2.GameMonitor");
+        System.out.println("3.Back");
+        Scanner input = new Scanner(System.in);
+        int d = input.nextInt();
+        switch (d) {
+            case 1:
+                createGameController();
+                break;
+            case 2:
+                createGameMonitor();
+                break;
+            case 3:
+                accessories();
+            default:
+                break;
+        }
+    }
+
+    public void createGameController() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter Title:");
+        String title = input.nextLine();
+        System.out.println("Enter Price:");
+        String price = input.nextLine();
+        System.out.println("Enter Info:");
+        String info = input.nextLine();
+        System.out.println("Enter NumberOfAccessory:");
+        String numberOfAccessory = input.nextLine();
+        System.out.println("Enter SystemKind:");
+        String systemKind = input.nextLine();
+        System.out.println("\033[1;94m" + "Enter Connection Way:" + "\033[0m");
+        System.out.println("1.Wireless");
+        System.out.println("2.Wired");
+        String des = input.nextLine();
+        if (des.equals("1")) {
+            GamingController gameC = new GamingController(systemKind, "Wireless", numberOfAccessory, title, info, price);
+            gameC.getAdminAccessoriesSellers().add(admin);
+            admin.getAccessories().add(gameC);
+            AccessoriesManagement.getAccessoriesArr().add(gameC);
+            AccessoriesManagement.getAccessoriesArr().get(AccessoriesManagement.getAccessoriesArr().indexOf(gameC)).setSystemKind(systemKind);
+            AccessoriesManagement.getAccessoriesArr().get(AccessoriesManagement.getAccessoriesArr().indexOf(gameC)).setSystemConnection("Wireless");
+            System.out.println("\nYour Accessory has been successfully created!\n");
+            createAccessories();
+        } else if (des.equals("2")) {
+            GamingController gameC = new GamingController(systemKind, "Wired", numberOfAccessory, title, info, price);
+            gameC.getAdminAccessoriesSellers().add(admin);
+            admin.getAccessories().add(gameC);
+            AccessoriesManagement.getAccessoriesArr().add(gameC);
+            AccessoriesManagement.getAccessoriesArr().get(AccessoriesManagement.getAccessoriesArr().indexOf(gameC)).setSystemKind(systemKind);
+            AccessoriesManagement.getAccessoriesArr().get(AccessoriesManagement.getAccessoriesArr().indexOf(gameC)).setSystemConnection("Wired");
+            System.out.println("\nYour Accessory has been successfully created!\n");
+            createAccessories();
+        } else {
+            System.out.println("Wrong entries");
+            createAccessories();
+        }
+    }
+
+    public void createGameMonitor() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter Title:");
+        String title = input.nextLine();
+        System.out.println("Enter Price:");
+        String price = input.nextLine();
+        System.out.println("Enter Info:");
+        String info = input.nextLine();
+        System.out.println("Enter NumberOfAccessory:");
+        String numberOfAccessory = input.nextLine();
+        System.out.println("Enter Fps:");
+        String fps = input.nextLine();
+        System.out.println("Enter Size:");
+        String size = input.nextLine();
+        System.out.println("Enter AnswerTime:");
+        String answerTime = input.nextLine();
+        GamingMonitor gameM = new GamingMonitor(title, info, price, numberOfAccessory, fps, size, answerTime);
+        gameM.getAdminAccessoriesSellers().add(admin);
+        admin.getAccessories().add(gameM);
+        AccessoriesManagement.getAccessoriesArr().add(gameM);
+        AccessoriesManagement.getAccessoriesArr().get(AccessoriesManagement.getAccessoriesArr().indexOf(gameM)).setFps(fps);
+        AccessoriesManagement.getAccessoriesArr().get(AccessoriesManagement.getAccessoriesArr().indexOf(gameM)).setSize(size);
+        AccessoriesManagement.getAccessoriesArr().get(AccessoriesManagement.getAccessoriesArr().indexOf(gameM)).setAnswerTime(answerTime);
+        System.out.println("\nYour Accessory has been successfully created!\n");
+        createAccessories();
+    }
+    public void profile() {
+        System.out.println("\033[1;94m" + "profile menu" + "\033[0m");
+        System.out.println("1.show information");
+        System.out.println("2.change information");
+        System.out.println("3.Back");
+        Scanner input = new Scanner(System.in);
+        int in = input.nextInt();
+        if (in == 1) {
+            System.out.println("your username:");
+            System.out.println(admin.getAdminName());
+            System.out.println("your password:");
+            System.out.println(admin.getPassword());
+            System.out.println("\n Enter 1 for back");
+            System.out.println(" Enter 2 for exit");
+            int back = input.nextInt();
+            if (back == 1) {
+                profile();
+            }
+            if (back == 2) {
+                System.exit(0);
+            }
+        }
+        if (in == 2) {
+            editProfile();
+        }
+        if (in == 3) {
+            startMenu(AdminManagement.getAdminsArr().indexOf(admin));
+        }
+    }
+
+    public void editProfile() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("\033[1;97m" + "edit profile menu" + "\033[0m");
+        System.out.println("1.change adminName");
+        System.out.println("2.change password");
+        System.out.println("3.back");
+        int inner = input.nextInt();
+        switch (inner) {
+            case 1:
+                System.out.println("Enter new adminName:");
+                Scanner inputOne = new Scanner(System.in);
+                String t = inputOne.nextLine();
+                admin.setAdminName(t);
+                System.out.println("\nyour username changed!\n");
+                profile();
+                break;
+            case 2:
+                System.out.println("Enter new password:");
+                Scanner inputTwo = new Scanner(System.in);
+                String pass = inputTwo.nextLine();
+                admin.setPassword(pass);
+                System.out.println("\nyour password changed!\n");
+                profile();
+                break;
+            case 3:
+                profile();
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void addAdmin() {
         System.out.println("\033[1;95m" + "create admin menu" + "\u001B[0m");
         Scanner input = new Scanner(System.in);
         System.out.println("Enter username:");
         String adminName = input.nextLine();
         System.out.println("Enter password");
         String password = input.nextLine();
-        int count=0;
+        int count = 0;
         for (int i = 0; i < AdminManagement.getAdminsArr().size(); i++) {
             if (AdminManagement.getAdminsArr().get(i).getAdminName().equals(adminName)) {
                 System.out.println("already taken adminName!");
@@ -49,12 +232,13 @@ public class AdminMenu {
             }
         }
         if (count == 0) {
-            Admin admin = new Admin(adminName,password);
+            Admin admin = new Admin(adminName, password);
             AdminManagement.getAdminsArr().add(admin);
             System.out.println("\naccount has been succesfully created!\n");
         }
-        startMenu();
+        startMenu(AdminManagement.getAdminsArr().indexOf(admin));
     }
+
     public void gameManage() {
         System.out.println("\033[0;91m" + "game manage menu" + "\033[0m");
         System.out.println("1.create games");
@@ -74,32 +258,33 @@ public class AdminMenu {
                 reportGame();
                 break;
             case 4:
-                startMenu();
+                startMenu(AdminManagement.getAdminsArr().indexOf(admin));
             default:
                 break;
         }
     }
 
-    public void reportGame(){
-        System.out.println("\033[1;91m"+"Report Game Menu"+"\033[0m");
+    public void reportGame() {
+        System.out.println("\033[1;91m" + "Report Game Menu" + "\033[0m");
         for (int i = 0; i < GameManagement.getGamesArr().size(); i++) {
             System.out.println("\n" + "Title of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getTitle() + "\033[0m" + " Index of game is: " + i + "\n");
         }
-        if(GameManagement.getGamesArr().size()==0){
+        if (GameManagement.getGamesArr().size() == 0) {
             gameManage();
         }
         System.out.println("\nEnter index of the game you want:");
         Scanner input = new Scanner(System.in);
-        int report= input.nextInt();
+        int report = input.nextInt();
         List<Developer> sortedList = GameManagement.getGamesArr().get(report).getDevelopersOfGame().stream().sorted(Comparator.comparingInt(Developer::getScheduleEventSize)).toList();
         System.out.println("Enter ExpiryTime by minute:");
-        int expiry=input.nextInt();
-        InboxGames inboxGames=new InboxGames(GameManagement.getGamesArr().get(report),expiry,TimeUnit.MINUTES.convert(System.nanoTime(), TimeUnit.NANOSECONDS));
+        int expiry = input.nextInt();
+        InboxGames inboxGames = new InboxGames(GameManagement.getGamesArr().get(report), expiry, TimeUnit.MINUTES.convert(System.nanoTime(), TimeUnit.NANOSECONDS));
         sortedList.get(0).getInbox().add(inboxGames);
         gameManage();
     }
+
     public void createGame() {
-        System.out.println("\033[1;92m"+ "Create game menu" + "\033[0m");
+        System.out.println("\033[1;92m" + "Create game menu" + "\033[0m");
         Scanner input = new Scanner(System.in);
         System.out.println("Enter title:");
         String title = input.nextLine();
@@ -126,7 +311,7 @@ public class AdminMenu {
             gameVersion = GameVersion.ORIGINAL;
             createGame();
         }
-        Game game = new Game(title, genre, info, price,level, gameVersion);
+        Game game = new Game(title, genre, info, price, level, gameVersion);
         GameManagement.getGamesArr().add(game);
         System.out.println("\nYour game has been succsessfully created!\n");
         gameManage();
@@ -182,6 +367,7 @@ public class AdminMenu {
         System.out.println("\033[0;91m" + "user manage menu" + "\033[0m");
         System.out.println("1.Users Setting");
         System.out.println("2.create a user");
+        System.out.println("3.see most active users");
         System.out.println("3.back");
         Scanner input = new Scanner(System.in);
         int adminDes = input.nextInt();
@@ -193,12 +379,21 @@ public class AdminMenu {
                 createUser();
                 break;
             case 3:
-                startMenu();
+                seeMostActive();
+            case 4:
+                startMenu(AdminManagement.getAdminsArr().indexOf(admin));
             default:
                 break;
         }
     }
 
+    public void seeMostActive(){
+        List<User> sortedList = UserManagement.getUsersArr().stream().sorted(Comparator.comparingInt(User::getScore)).toList();
+        for (int i=0;i<sortedList.size();i++){
+            System.out.println(sortedList.get(i).getUsername()+" with score: "+ sortedList.get(i).getScore());
+        }
+        userManage();
+    }
     public void createUser() {
         System.out.println("\033[1;95m" + "create user menu" + "\u001B[0m");
         Scanner input = new Scanner(System.in);
@@ -253,7 +448,7 @@ public class AdminMenu {
                 System.out.println("Enter email:");
                 Scanner inputTwo = new Scanner(System.in);
                 String email = inputTwo.nextLine();
-                for (int i = 0; i <UserManagement.getUsersArr().size(); i++) {
+                for (int i = 0; i < UserManagement.getUsersArr().size(); i++) {
                     if (UserManagement.getUsersArr().get(i).getEmail().equals(email)) {
                         userSetting(i);
                         count++;

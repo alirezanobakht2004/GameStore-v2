@@ -8,6 +8,9 @@ public class Accessories extends Item{
     private String numberOfAccessory;
     private List<AccessoriesSeller> accessoriesSellers = new ArrayList<AccessoriesSeller>();
 
+    private List<Admin> adminAccessoriesSellers = new ArrayList<Admin>();
+
+
     private String systemKind;
 
     private String systemConnection;
@@ -28,6 +31,11 @@ public class Accessories extends Item{
     public List<AccessoriesSeller> getAccessoriesSellers() {
         return accessoriesSellers;
     }
+
+    public List<Admin> getAdminAccessoriesSellers() {
+        return adminAccessoriesSellers;
+    }
+
 
     public String getNumberOfAccessory() {
         return numberOfAccessory;

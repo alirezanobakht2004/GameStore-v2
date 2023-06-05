@@ -210,7 +210,7 @@ public class Sign {
             if (AdminManagement.getAdminsArr().get(i).getAdminName().equals(usernamerOfAdmin)) {
                 if (AdminManagement.getAdminsArr().get(i).getPassword().equals(passwordOfAdmin)) {
                     System.out.println("Your welcome!");
-                    AdminManagement.getAdminsArr().get(i).getAdminMenu().startMenu();
+                    AdminManagement.getAdminsArr().get(i).getAdminMenu().startMenu(i);
                     count++;
                 }
             }

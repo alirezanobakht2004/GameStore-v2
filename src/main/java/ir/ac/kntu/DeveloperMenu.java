@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class DeveloperMenu {
 
@@ -42,8 +43,8 @@ public class DeveloperMenu {
         }
     }
 
-    public void seeFeedback(){
-        for (int i=0;i<developer.getFeedback().size();i++){
+    public void seeFeedback() {
+        for (int i = 0; i < developer.getFeedback().size(); i++) {
             System.out.println(developer.getFeedback().get(i));
         }
         start(DeveloperManagement.getDevelopersArr().indexOf(developer));
@@ -154,7 +155,8 @@ public class DeveloperMenu {
         System.out.println("\033[1;94m" + "Enter game version:" + "\033[0m");
         System.out.println("1.Beta");
         System.out.println("2.Original");
-        String des = input.nextLine();
+        Scanner inputOne = new Scanner(System.in);
+        String des = inputOne.nextLine();
         GameVersion gameVersion;
         if (des.equals("1")) {
             gameVersion = GameVersion.BETA;
@@ -165,7 +167,7 @@ public class DeveloperMenu {
             gameVersion = GameVersion.ORIGINAL;
             createGame();
         }
-        Game game = new Game(title, genre, info, price,level, gameVersion);
+        Game game = new Game(title, genre, info, price, level, gameVersion);
         game.getDevelopersOfGame().add(developer);
         GameManagement.getGamesArr().add(game);
         developer.getDeveloperGames().add(game);
@@ -253,6 +255,7 @@ public class DeveloperMenu {
     }
 
     public void inbox() {
+        updateInboxes();
         for (int i = 0; i < developer.getInbox().size(); i++) {
             System.out.println(i + "." + "\033[0;91m" + developer.getInbox().get(i) + "\033[0m");
         }
@@ -269,6 +272,27 @@ public class DeveloperMenu {
                 break;
             default:
                 break;
+        }
+    }
+
+    public void updateInboxes() {
+        for (int i = 0; i < DeveloperManagement.getDevelopersArr().size(); i++) {
+            for (int j = 0; j < DeveloperManagement.getDevelopersArr().get(i).getInbox().size(); j++) {
+                int def = (int) (TimeUnit.MINUTES.convert(System.nanoTime(), TimeUnit.NANOSECONDS) - DeveloperManagement.getDevelopersArr().get(i).getInbox().get(j).getStartTime()) - DeveloperManagement.getDevelopersArr().get(i).getInbox().get(j).getExpiryTime();
+                if (def >= 0) {
+                    List<Developer> sortedList = DeveloperManagement.getDevelopersArr().get(i).getInbox().get(j).getGame().getDevelopersOfGame().stream().sorted(Comparator.comparingInt(Developer::getScheduleEventSize)).toList();
+                    int step=def/DeveloperManagement.getDevelopersArr().get(i).getInbox().get(j).getExpiryTime();
+                    if (sortedList.size() >= sortedList.indexOf(DeveloperManagement.getDevelopersArr().get(i)) + step) {
+                        DeveloperManagement.getDevelopersArr().get(i).getInbox().get(j).setStartTime((TimeUnit.MINUTES.convert(System.nanoTime(), TimeUnit.NANOSECONDS)));
+                        DeveloperManagement.getDevelopersArr().get(i).getInbox().get(j).setExpiryTime(DeveloperManagement.getDevelopersArr().get(i).getInbox().get(j).getExpiryTime()*2);
+                        sortedList.get(0).getInbox().add(DeveloperManagement.getDevelopersArr().get(i).getInbox().get(j));
+                    } else {
+                        DeveloperManagement.getDevelopersArr().get(i).getInbox().get(j).setStartTime((TimeUnit.MINUTES.convert(System.nanoTime(), TimeUnit.NANOSECONDS)));
+                        sortedList.get(sortedList.indexOf(DeveloperManagement.getDevelopersArr().get(i)) + step).getInbox().add(DeveloperManagement.getDevelopersArr().get(i).getInbox().get(j));
+                    }
+                    DeveloperManagement.getDevelopersArr().get(i).getInbox().remove(j);
+                }
+            }
         }
     }
 
@@ -291,7 +315,11 @@ public class DeveloperMenu {
                 System.out.println("Enter index of request to remove:");
                 int indexTwo = input.nextInt();
                 List<Developer> sortedList = GameManagement.getGamesArr().get(indexTwo).getDevelopersOfGame().stream().sorted(Comparator.comparingInt(Developer::getScheduleEventSize)).toList();
-                sortedList.get(0).getInbox().add(developer.getInbox().get(indexTwo));
+                if (sortedList.size() == sortedList.indexOf(developer) + 1) {
+                    sortedList.get(0).getInbox().add(developer.getInbox().get(indexTwo));
+                } else {
+                    sortedList.get(sortedList.indexOf(developer) + 1).getInbox().add(developer.getInbox().get(indexTwo));
+                }
                 developer.getInbox().remove(indexTwo);
                 break;
             case 3:

@@ -9,9 +9,9 @@ public class Developer{
     private DeveloperMenu developerMenu ;
     private List<Game> developerGames = new ArrayList<Game>();
 
-    private List<Game> inbox = new ArrayList<Game>();
+    private List<InboxGames> inbox = new ArrayList<InboxGames>();
 
-    private List<Game> scheduleEvent = new ArrayList<Game>();
+    private List<InboxGames> scheduleEvent = new ArrayList<InboxGames>();
 
     private List<String> feedback = new ArrayList<String>();
 
@@ -24,7 +24,7 @@ public class Developer{
         this.password = password;
         developerMenu = new DeveloperMenu();
     }
-    public List<Game> getScheduleEvent() {
+    public List<InboxGames> getScheduleEvent() {
         return scheduleEvent;
     }
     public int getScheduleEventSize(){
@@ -58,7 +58,7 @@ public class Developer{
         return developerGames;
     }
 
-    public List<Game> getInbox() {
+    public List<InboxGames> getInbox() {
         return inbox;
     }
 

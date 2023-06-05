@@ -5,6 +5,8 @@ import java.util.Scanner;
 public class Sign {
 
     public void sign() {
+        User user = new User("A","1","l","k");
+        UserManagement.getUsersArr().add(user);
         System.out.println("\u001B[33m" + "Select Your Role" + "\u001B[0m");
         System.out.println("Enter 1 if you are Admin");
         System.out.println("Enter 2 if you are User");

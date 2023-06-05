@@ -2,8 +2,6 @@ package ir.ac.kntu;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 public class User {
 
@@ -23,7 +21,7 @@ public class User {
 
     private long startTime;
 
-    private int level;
+    private int score;
 
     private String friendsRequest="Friends request:";
 
@@ -113,11 +111,11 @@ public class User {
     }
 
     public int getLevel() {
-        return level;
+        return score;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public long getStartTime() {
@@ -134,5 +132,9 @@ public class User {
 
     public void setUserMenu(UserMenu userMenu) {
         this.userMenu = userMenu;
+    }
+
+    public int getScore() {
+        return score;
     }
 }

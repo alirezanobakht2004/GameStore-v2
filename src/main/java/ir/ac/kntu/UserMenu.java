@@ -34,7 +34,7 @@ public class UserMenu {
                 user.setStartTime(0);
                 System.out.println();
                 user.setTime(user.getTime()+TimeUnit.SECONDS.convert(duration, TimeUnit.NANOSECONDS));
-                user.setLevel((int) user.getTime()/60);
+                user.setScore((int) user.getTime()/60);
                 Sign back = new Sign();
                 back.sign();
             default:
@@ -62,6 +62,8 @@ public class UserMenu {
             System.out.println(user.getPhoneNumber());
             System.out.println("your wallet amount:");
             System.out.println(user.getWallet());
+            System.out.println("your score:");
+            System.out.println(user.getScore());
             System.out.println("\n Enter 1 for back");
             System.out.println(" Enter 2 for exit");
 

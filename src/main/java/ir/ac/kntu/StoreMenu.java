@@ -10,14 +10,14 @@ public class StoreMenu {
     public void start(int t) {
         indexOfUser = t;
         System.out.println("\033[1;94m" + "welcome to store" + "\033[0m");
-        System.out.println("1.Show all games");
+        System.out.println("1.Show all games and accessories");
         System.out.println("2.Search game");
         System.out.println("3.Filter games by price");
         System.out.println("4.back");
         Scanner input = new Scanner(System.in);
         switch (input.nextInt()) {
             case 1:
-                showGames();
+                showGamesAndAcc();
                 break;
             case 2:
                 searchGame();
@@ -33,13 +33,32 @@ public class StoreMenu {
         }
     }
 
-    public void showGames() {
+    public void showGamesAndAcc() {
         for (int i = 0; i < GameManagement.getGamesArr().size(); i++) {
-            System.out
-                    .println("\n" + "Title of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getTitle() + "\033[0m"
-                            + " Index of game is: " + i + "\n");
+            String game= "* Title of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getTitle() + "\033[0m" + " Index of game is: " + i+" *";
+            System.out.println();
+            for (int u=0;u<game.length()-11;u++){
+                System.out.print('*');
+            }
+            System.out.println();
+            System.out.println(game);
+            for (int u=0;u<game.length()-11;u++){
+                System.out.print('*');
+            }
         }
 
+        for (int i = 0; i < AccessoriesManagement.getAccessoriesArr().size(); i++) {
+            String acc= "| Title of accessory: " + "\033[1;93m" + AccessoriesManagement.getAccessoriesArr().get(i).getTitle() + "\033[0m" + " Index of accessory is: " + i+" |";
+            System.out.println();
+            for (int u=0;u<acc.length()-11;u++){
+                System.out.print('-');
+            }
+            System.out.println();
+            System.out.println(acc);
+            for (int u=0;u<acc.length()-11;u++){
+                System.out.print('-');
+            }
+        }
         System.out.println("\nEnter index of the game you want:");
         Scanner input = new Scanner(System.in);
         showGame(input.nextInt());

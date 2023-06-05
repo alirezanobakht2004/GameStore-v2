@@ -3,6 +3,7 @@ package ir.ac.kntu;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class AdminMenu {
 
@@ -91,11 +92,14 @@ public class AdminMenu {
         Scanner input = new Scanner(System.in);
         int report= input.nextInt();
         List<Developer> sortedList = GameManagement.getGamesArr().get(report).getDevelopersOfGame().stream().sorted(Comparator.comparingInt(Developer::getScheduleEventSize)).toList();
-        sortedList.get(0).getInbox().add(GameManagement.getGamesArr().get(report));
+        System.out.println("Enter ExpiryTime by minute:");
+        int expiry=input.nextInt();
+        InboxGames inboxGames=new InboxGames(GameManagement.getGamesArr().get(report),expiry,TimeUnit.MINUTES.convert(System.nanoTime(), TimeUnit.NANOSECONDS));
+        sortedList.get(0).getInbox().add(inboxGames);
         gameManage();
     }
     public void createGame() {
-        System.out.println("\033[43m" + "Create game menu" + "\033[0m");
+        System.out.println("\033[1;92m"+ "Create game menu" + "\033[0m");
         Scanner input = new Scanner(System.in);
         System.out.println("Enter title:");
         String title = input.nextLine();
@@ -110,7 +114,8 @@ public class AdminMenu {
         System.out.println("\033[1;94m" + "Enter game version:" + "\033[0m");
         System.out.println("1.Beta");
         System.out.println("2.Original");
-        String des = input.nextLine();
+        Scanner inputOne = new Scanner(System.in);
+        String des = inputOne.nextLine();
         GameVersion gameVersion;
         if (des.equals("1")) {
             gameVersion = GameVersion.BETA;

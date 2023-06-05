@@ -10,6 +10,8 @@ public class Admin {
 
     private List<Accessories> accessories = new ArrayList<Accessories>();
 
+    private List<Game> games = new ArrayList<Game>();
+
     public AdminMenu getAdminMenu() {
         return adminMenu;
     }
@@ -37,5 +39,9 @@ public class Admin {
 
     public List<Accessories> getAccessories() {
         return accessories;
+    }
+
+    public List<Game> getGames() {
+        return games;
     }
 }

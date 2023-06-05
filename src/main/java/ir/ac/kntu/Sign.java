@@ -13,22 +13,32 @@ public class Sign {
         System.out.println("Enter 3 if you are Developer");
         System.out.println("Enter 4 if you are AccessoriesSeller");
         System.out.println("Enter 5 for leaving");
-        Scanner input = new Scanner(System.in);
-        int in = input.nextInt();
-        if (in == 1) {
-            adminStart();
-        }
-        if (in == 2) {
-            userStart();
-        }
-        if (in == 3) {
-            developerStart();
-        }
-        if (in == 4) {
-            accessoriesSellerStart();
-        }
-        if (in == 5) {
-            System.exit(0);
+        try {
+            Scanner input = new Scanner(System.in);
+            int in = input.nextInt();
+            switch (in){
+                case 1:
+                    adminStart();
+                    break;
+                case 2:
+                    userStart();
+                    break;
+                case 3:
+                    developerStart();
+                    break;
+                case 4:
+                    accessoriesSellerStart();
+                    break;
+                case 5:
+                    System.exit(0);
+                default:
+                    System.out.println("\nwrong entry!");
+                    sign();
+                    break;
+            }
+        } catch (Exception e){
+            System.out.println("\nwrong entry!");
+            sign();
         }
     }
 
@@ -38,16 +48,27 @@ public class Sign {
         System.out.println("Enter 1 for sign up");
         System.out.println("Enter 2 for sign in");
         System.out.println("Enter 3 for back");
-        Scanner input = new Scanner(System.in);
-        int in = input.nextInt();
-        if (in == 1) {
-            accSignUp();
-        }
-        if (in == 2) {
-            accSignIn();
-        }
-        if (in == 3) {
-            sign();
+        try {
+            Scanner input = new Scanner(System.in);
+            int in = input.nextInt();
+            switch (in) {
+                case 1:
+                    accSignUp();
+                    break;
+                case 2:
+                    accSignIn();
+                    break;
+                case 3:
+                    sign();
+                    break;
+                default:
+                    System.out.println("wrong entry!");
+                    accessoriesSellerStart();
+                    break;
+            }
+        } catch (Exception e){
+            System.out.println("\nwrong entry!");
+            accessoriesSellerStart();
         }
     }
 

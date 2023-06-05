@@ -51,15 +51,18 @@ public class DeveloperMenu {
         for (int i = 0; i < developer.getDeveloperGames().size(); i++) {
             System.out.println("Game title: " + developer.getDeveloperGames().get(i).getTitle() + " with index of: " + i);
         }
-        System.out.println("Enter index of game you want to add developer:");
+        System.out.println("Enter index of game you want to add developer");
         System.out.println("Enter -1 to back");
         int n =input.nextInt();
         if(n==-1){
             start(DeveloperManagement.getDevelopersArr().indexOf(developer));
         }
         else {
+            System.out.println("Developers:");
             for (int j=0;j<DeveloperManagement.getDevelopersArr().size();j++){
-                System.out.println(DeveloperManagement.getDevelopersArr().get(j).getDeveloperName() + " index of: "+ j);
+                if(DeveloperManagement.getDevelopersArr().get(j)!=developer){
+                    System.out.println(DeveloperManagement.getDevelopersArr().get(j).getDeveloperName() + " index of: "+ j);
+                }
             }
             System.out.println("Enter index of developer you want:");
             int m=input.nextInt();
@@ -71,7 +74,7 @@ public class DeveloperMenu {
 
     public void seeScheduleEvent() {
         for (int i = 0; i < developer.getScheduleEvent().size(); i++) {
-            System.out.println(developer.getScheduleEvent().get(i)+" index: "+i);
+            System.out.println(developer.getScheduleEvent().get(i).getGame().getTitle()+" index: "+i);
         }
         System.out.println("Enter index of fixed feedback");
         System.out.println("Enter -1 to back");
@@ -298,7 +301,7 @@ public class DeveloperMenu {
     public void inbox() {
         updateInboxes();
         for (int i = 0; i < developer.getInbox().size(); i++) {
-            System.out.println(i + "." + "\033[0;91m" + developer.getInbox().get(i) + "\033[0m");
+            System.out.println(i + "." + "\033[0;91m" + developer.getInbox().get(i).getGame().getTitle() + "\033[0m");
         }
         System.out.println("1.accept or reject a request:");
         System.out.println("2.back");

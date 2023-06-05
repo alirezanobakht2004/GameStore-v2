@@ -208,9 +208,14 @@ public class AccessoriesSellerMenu {
 
     public void searchAccessories() {
         Scanner input = new Scanner(System.in);
+        int c=0;
         System.out.println("\033[1;96m" + "Your Accessories" + "\033[0m");
         for (int i = 0; i < AccessoriesManagement.getAccessoriesArr().size(); i++) {
             System.out.println("Accessory title: " + AccessoriesManagement.getAccessoriesArr().get(i).getTitle() + " with index of: " + i);
+            c++;
+        }
+        if(c==0){
+            accessories();
         }
         System.out.println("\033[1;96m" + "Modify or Delete selection Menu" + "\033[0m");
         System.out.println("1.Modify Accessory");
@@ -289,11 +294,11 @@ public class AccessoriesSellerMenu {
                 AccessoriesManagement.getAccessoriesArr().get(i).setSystemKind(t);
                 break;
             case 7:
-                searchAccessories();
+                accessories();
             default:
                 break;
         }
-        searchAccessories();
+        accessories();
     }
 
     public void gameMonitorModify(int i) {
@@ -308,32 +313,33 @@ public class AccessoriesSellerMenu {
         System.out.println("7.Modify AnswerTime");
         System.out.println("8.Back");
         int des = input.nextInt();
+        Scanner inputOne = new Scanner(System.in);
         switch (des) {
             case 1:
-                AccessoriesManagement.getAccessoriesArr().get(i).setTitle(input.nextLine());
+                AccessoriesManagement.getAccessoriesArr().get(i).setTitle(inputOne.nextLine());
                 break;
             case 2:
-                AccessoriesManagement.getAccessoriesArr().get(i).setInfo(input.nextLine());
+                AccessoriesManagement.getAccessoriesArr().get(i).setInfo(inputOne.nextLine());
                 break;
             case 3:
-                AccessoriesManagement.getAccessoriesArr().get(i).setPrice(input.nextLine());
+                AccessoriesManagement.getAccessoriesArr().get(i).setPrice(inputOne.nextLine());
                 break;
             case 4:
-                AccessoriesManagement.getAccessoriesArr().get(i).setNumberOfAccessory(input.nextLine());
+                AccessoriesManagement.getAccessoriesArr().get(i).setNumberOfAccessory(inputOne.nextLine());
                 break;
             case 5:
-                AccessoriesManagement.getAccessoriesArr().get(i).setFps(input.nextLine());
+                AccessoriesManagement.getAccessoriesArr().get(i).setFps(inputOne.nextLine());
                 break;
             case 6:
-                AccessoriesManagement.getAccessoriesArr().get(i).setSize(input.nextLine());
+                AccessoriesManagement.getAccessoriesArr().get(i).setSize(inputOne.nextLine());
                 break;
             case 7:
-                AccessoriesManagement.getAccessoriesArr().get(i).setAnswerTime(input.nextLine());
+                AccessoriesManagement.getAccessoriesArr().get(i).setAnswerTime(inputOne.nextLine());
             case 8:
-                searchAccessories();
+                accessories();
             default:
                 break;
         }
-        searchAccessories();
+        accessories();
     }
 }

@@ -1,6 +1,7 @@
 package ir.ac.kntu;
 
 import java.net.http.HttpClient;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class StoreMenu {
@@ -35,42 +36,76 @@ public class StoreMenu {
 
     public void showGamesAndAcc() {
         for (int i = 0; i < GameManagement.getGamesArr().size(); i++) {
-            String game= "* Title of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getTitle() + "\033[0m" + " Index of game is: " + i+" *";
+            String game = "* Title of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getTitle() + "\033[0m" + " Index of game is: " + i + " *";
             System.out.println();
-            for (int u=0;u<game.length()-11;u++){
+            for (int u = 0; u < game.length() - 11; u++) {
                 System.out.print('*');
             }
             System.out.println();
             System.out.println(game);
-            for (int u=0;u<game.length()-11;u++){
+            for (int u = 0; u < game.length() - 11; u++) {
                 System.out.print('*');
             }
         }
 
         for (int i = 0; i < AccessoriesManagement.getAccessoriesArr().size(); i++) {
-            String acc= "| Title of accessory: " + "\033[1;93m" + AccessoriesManagement.getAccessoriesArr().get(i).getTitle() + "\033[0m" + " Index of accessory is: " + i+" |";
+            String acc = "| Title of accessory: " + "\033[1;93m" + AccessoriesManagement.getAccessoriesArr().get(i).getTitle() + "\033[0m" + " Index of accessory is: " + i + " |";
             System.out.println();
-            for (int u=0;u<acc.length()-11;u++){
+            for (int u = 0; u < acc.length() - 11; u++) {
                 System.out.print('-');
             }
             System.out.println();
             System.out.println(acc);
-            for (int u=0;u<acc.length()-11;u++){
+            for (int u = 0; u < acc.length() - 11; u++) {
                 System.out.print('-');
             }
         }
-        System.out.println("\nEnter index of the game you want:");
+        System.out.println("Do you want to see games or accessories?");
+        System.out.println("1.Game");
+        System.out.println("2.Accessory");
+        System.out.println("3.Back");
         Scanner input = new Scanner(System.in);
-        showGame(input.nextInt());
+        int t = input.nextInt();
+        switch (t) {
+            case 1:
+                System.out.println("\nEnter index of the game you want:");
+                Scanner inputOne = new Scanner(System.in);
+                showGame(inputOne.nextInt());
+                break;
+            case 2:
+                System.out.println("\nEnter index of the accessory you want:");
+                Scanner inputTwo = new Scanner(System.in);
+                showAccessory(inputTwo.nextInt());
+                break;
+            case 3:
+                start(indexOfUser);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void showAccessory(int i) {
+        Accessories acc = AccessoriesManagement.getAccessoriesArr().get(i);
+        if (acc.getFps() == null) {
+            for (String s : Arrays.asList("\n" + "Title of accessory: " + "\033[1;93m" + acc.getTitle() + "\033[0m", "\n" + "Info of accessory: " + "\033[1;93m" + acc.getInfo() + "\033[0m", "\n" + "price of accessory: " + "\033[1;93m" + acc.getPrice() + "\033[0m", "\n" + "systemConnection of accessory: " + "\033[1;93m" + acc.getSystemConnection() + "\033[0m", "\n" + "systemKind of accessory: " + "\033[1;93m" + acc.getSystemKind() + "\033[0m")) {
+                System.out.println(s);
+            }
+        } else {
+            for (String s : Arrays.asList("\n" + "Title of accessory: " + "\033[1;93m" + acc.getTitle() + "\033[0m", "\n" + "Info of accessory: " + "\033[1;93m" + acc.getInfo() + "\033[0m", "\n" + "price of accessory: " + "\033[1;93m" + acc.getPrice() + "\033[0m", "\n" + "fps of accessory: " + "\033[1;93m" + acc.getFps() + "\033[0m", "\n" + "size of accessory: " + "\033[1;93m" + acc.getSize() + "\033[0m", "\n" + "answerTime of accessory: " + "\033[1;93m" + acc.getAnswerTime() + "\033[0m")) {
+                System.out.println(s);
+            }
+        }
+        System.out.println("1." + "\033[1;92m" + "Buy the accessory" + "\033[0m");
+        System.out.println("2.Back");
+
+
     }
 
     public void showGame(int i) {
-        System.out.println("\n" + "Title of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getTitle() + "\033[0m");
-        System.out.println("\n" + "Info of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getInfo() + "\033[0m");
-        System.out.println("\n" + "level of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getLevel() + "\033[0m");
-        System.out.println("\n" + "genre of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getGenre() + "\033[0m");
-        System.out.println("\n" + "price of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getPrice() + "\033[0m");
-        System.out.println("\n" + "version of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getVersion() + "\033[0m");
+        for (String s : Arrays.asList("\n" + "Title of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getTitle() + "\033[0m", "\n" + "Info of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getInfo() + "\033[0m", "\n" + "level of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getLevel() + "\033[0m", "\n" + "genre of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getGenre() + "\033[0m", "\n" + "price of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getPrice() + "\033[0m", "\n" + "version of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getVersion() + "\033[0m")) {
+            System.out.println(s);
+        }
         if (GameManagement.getGamesArr().get(i).getVersion() == GameVersion.ORIGINAL) {
             System.out.println("\n" + "rating of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getCommunity().getRating() + "\033[0m");
             System.out.println("\n" + GameManagement.getGamesArr().get(i).getCommunity().getComments() + "\n");

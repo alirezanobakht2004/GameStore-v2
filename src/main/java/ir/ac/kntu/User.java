@@ -29,9 +29,16 @@ public class User {
 
     private List<Game> gamesOfUser = new ArrayList<Game>();
 
+    private List<Accessories> accessoriesOfUser = new ArrayList<Accessories>();
+
     public List<Game> getGamesOfUser() {
         return gamesOfUser;
     }
+
+    public List<Accessories> getAccessoriesOfUser() {
+        return accessoriesOfUser;
+    }
+
 
     public User(String username, String password, String phoneNumber, String email) {
         this.username = username;

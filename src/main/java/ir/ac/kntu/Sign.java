@@ -84,7 +84,7 @@ public class Sign {
         System.out.println("\033[1;95m" + "sign in menu" + "\033[0m");
         Scanner input = new Scanner(System.in);
         System.out.println("\n" + "You can type ### and enter to comeback\n");
-        System.out.println("Enter DeveloperName:");
+        System.out.println("Enter accessorySellerName:");
         String accName = input.nextLine();
         if (accName.equals("###")) {
             sign();

@@ -1,4 +1,4 @@
-<?xml gameVersion="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -6,43 +6,43 @@
 
     <groupId>ir.ac.kntu</groupId>
     <artifactId>hw-assignment-todo</artifactId>
-    <gameVersion>1.0-SNAPSHOT</gameVersion>
+    <version>1.0-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <gameVersion>4.13.2</gameVersion>
+            <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-core</artifactId>
-            <gameVersion>2.2</gameVersion>
+            <version>2.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.puppycrawl.tools</groupId>
             <artifactId>checkstyle</artifactId>
-            <gameVersion>10.0</gameVersion>
+            <version>10.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>net.sourceforge.pmd</groupId>
             <artifactId>pmd-java</artifactId>
-            <gameVersion>6.43.0</gameVersion>
+            <version>6.43.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>net.sourceforge.pmd</groupId>
             <artifactId>pmd-core</artifactId>
-            <gameVersion>6.43.0</gameVersion>
+            <version>6.43.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
-            <gameVersion>23.0.0</gameVersion>
+            <version>23.0.0</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
@@ -58,7 +58,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <gameVersion>3.8.1</gameVersion>
+                    <version>3.8.1</version>
                     <configuration>
                         <!-- <maven.compiler.source>1.8</maven.compiler.source> -->
                         <!-- <maven.compiler.target>1.8</maven.compiler.target> -->
@@ -68,7 +68,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <gameVersion>3.2.0</gameVersion>
+                    <version>3.2.0</version>
                     <executions>
                         <execution>
                             <goals>
@@ -80,7 +80,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <gameVersion>2.22.2</gameVersion>
+                    <version>2.22.2</version>
                 </plugin>
             </plugins>
         </pluginManagement>

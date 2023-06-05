@@ -43,15 +43,25 @@ public class DeveloperMenu {
         }
     }
 
+    public void seeScheduleEvent() {
+        for (int i = 0; i < developer.getScheduleEvent().size(); i++) {
+            System.out.println(developer.getScheduleEvent().get(i)+" index: "+i);
+        }
+        System.out.println("Enter index of fixed feedback");
+        System.out.println("Enter -1 to back");
+        Scanner input = new Scanner(System.in);
+        int n = input.nextInt();
+        if(n==-1){
+            start(DeveloperManagement.getDevelopersArr().indexOf(developer));
+        }
+        developer.getScheduleEvent().remove(n);
+        System.out.println("\n game fixed successfully!");
+        start(DeveloperManagement.getDevelopersArr().indexOf(developer));
+    }
     public void seeFeedback() {
         for (int i = 0; i < developer.getFeedback().size(); i++) {
             System.out.println(developer.getFeedback().get(i)+" index: "+i);
         }
-        System.out.println("Enter index of fixed feedback");
-        Scanner input = new Scanner(System.in);
-        int n = input.nextInt();
-        developer.getFeedback().remove(n);
-        System.out.println("\n game fixed successfully!");
         start(DeveloperManagement.getDevelopersArr().indexOf(developer));
     }
 

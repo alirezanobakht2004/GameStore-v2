@@ -28,11 +28,13 @@ public class DeveloperMenu {
                 inbox();
                 break;
             case 4:
+                seeScheduleEvent();
                 break;
             case 5:
                 seeFeedback();
                 break;
             case 6:
+                addDeveloper();
                 break;
             case 7:
                 Sign sign = new Sign();
@@ -40,6 +42,30 @@ public class DeveloperMenu {
                 break;
             default:
                 break;
+        }
+    }
+
+    public void addDeveloper(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("\033[1;96m" + "Your Games" + "\033[0m");
+        for (int i = 0; i < developer.getDeveloperGames().size(); i++) {
+            System.out.println("Game title: " + developer.getDeveloperGames().get(i).getTitle() + " with index of: " + i);
+        }
+        System.out.println("Enter index of game you want to add developer:");
+        System.out.println("Enter -1 to back");
+        int n =input.nextInt();
+        if(n==-1){
+            start(DeveloperManagement.getDevelopersArr().indexOf(developer));
+        }
+        else {
+            for (int j=0;j<DeveloperManagement.getDevelopersArr().size();j++){
+                System.out.println(DeveloperManagement.getDevelopersArr().get(j).getDeveloperName() + " index of: "+ j);
+            }
+            System.out.println("Enter index of developer you want:");
+            int m=input.nextInt();
+            DeveloperManagement.getDevelopersArr().get(m).getDeveloperGames().add(developer.getDeveloperGames().get(n));
+            developer.getDeveloperGames().get(n).getDevelopersOfGame().add(DeveloperManagement.getDevelopersArr().get(m));
+            start(DeveloperManagement.getDevelopersArr().indexOf(developer));
         }
     }
 

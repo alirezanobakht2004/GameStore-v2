@@ -1,5 +1,7 @@
 package ir.ac.kntu;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Scanner;
 
 public class AdminMenu {
@@ -88,7 +90,9 @@ public class AdminMenu {
         System.out.println("\nEnter index of the game you want:");
         Scanner input = new Scanner(System.in);
         int report= input.nextInt();
-
+        List<Developer> sortedList = GameManagement.getGamesArr().get(report).getDevelopersOfGame().stream().sorted(Comparator.comparingInt(Developer::getScheduleEventSize)).toList();
+        sortedList.get(0).getInbox().add(GameManagement.getGamesArr().get(report));
+        gameManage();
     }
     public void createGame() {
         System.out.println("\033[43m" + "Create game menu" + "\033[0m");

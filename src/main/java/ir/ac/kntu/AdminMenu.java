@@ -82,7 +82,9 @@ public class AdminMenu {
         for (int i = 0; i < GameManagement.getGamesArr().size(); i++) {
             System.out.println("\n" + "Title of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getTitle() + "\033[0m" + " Index of game is: " + i + "\n");
         }
-
+        if(GameManagement.getGamesArr().size()==0){
+            gameManage();
+        }
         System.out.println("\nEnter index of the game you want:");
         Scanner input = new Scanner(System.in);
         int report= input.nextInt();

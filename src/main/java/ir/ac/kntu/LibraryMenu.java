@@ -1,5 +1,6 @@
 package ir.ac.kntu;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class LibraryMenu {
@@ -9,6 +10,7 @@ public class LibraryMenu {
         indexOfUser = t;
         System.out.println("\033[1;96m" + "welcome to library" + "\033[0m");
         System.out.println("1.Show your games");
+        System.out.println("2.show your accessories");
         System.out.println("2.back");
         Scanner input = new Scanner(System.in);
         switch (input.nextInt()) {
@@ -16,12 +18,57 @@ public class LibraryMenu {
                 showGames();
                 break;
             case 2:
+                showAccessories();
+                break;
+            case 3:
                 UserManagement.getUsersArr().get(indexOfUser).getUserMenu().userMenu(indexOfUser);
                 break;
             default:
                 break;
         }
     }
+
+    public void showAccessories() {
+        int count = 0;
+        for (int i = 0; i < UserManagement.getUsersArr().get(indexOfUser).getAccessoriesOfUser().size(); i++) {
+            System.out.println("Accessory: " + UserManagement.getUsersArr().get(indexOfUser).getAccessoriesOfUser().get(i) + " index: " + i);
+            count++;
+        }
+        if (count != 0) {
+            System.out.println("Enter index of Accessory:");
+            Scanner input = new Scanner(System.in);
+            int u = input.nextInt();
+            showAccInfo(u);
+            int h = input.nextInt();
+            if (h == 1) {
+                AccessoriesManagement.getAccessoriesArr().get(u).getCommunity().start(indexOfUser);
+                start(indexOfUser);
+            }
+            if (h == 2) {
+                start(indexOfUser);
+            }
+        } else {
+            start(indexOfUser);
+        }
+    }
+
+    public void showAccInfo(int u) {
+        for (int i = 0; i < UserManagement.getUsersArr().get(indexOfUser).getAccessoriesOfUser().size(); i++) {
+            Accessories acc = UserManagement.getUsersArr().get(indexOfUser).getAccessoriesOfUser().get(u);
+            if (acc.getFps() == null) {
+                for (String s : Arrays.asList("\n" + "Title of accessory: " + "\033[1;93m" + acc.getTitle() + "\033[0m", "\n" + "Info of accessory: " + "\033[1;93m" + acc.getInfo() + "\033[0m", "\n" + "price of accessory: " + "\033[1;93m" + acc.getPrice() + "\033[0m", "\n" + "systemConnection of accessory: " + "\033[1;93m" + acc.getSystemConnection() + "\033[0m", "\n" + "systemKind of accessory: " + "\033[1;93m" + acc.getSystemKind() + "\033[0m")) {
+                    System.out.println(s);
+                }
+            } else {
+                for (String s : Arrays.asList("\n" + "Title of accessory: " + "\033[1;93m" + acc.getTitle() + "\033[0m", "\n" + "Info of accessory: " + "\033[1;93m" + acc.getInfo() + "\033[0m", "\n" + "price of accessory: " + "\033[1;93m" + acc.getPrice() + "\033[0m", "\n" + "fps of accessory: " + "\033[1;93m" + acc.getFps() + "\033[0m", "\n" + "size of accessory: " + "\033[1;93m" + acc.getSize() + "\033[0m", "\n" + "answerTime of accessory: " + "\033[1;93m" + acc.getAnswerTime() + "\033[0m")) {
+                    System.out.println(s);
+                }
+            }
+            System.out.println("Enter 1 to see community");
+            System.out.println("Enter 2 to back");
+        }
+    }
+
 
     public void showGames() {
         int count = 0;
@@ -90,6 +137,6 @@ public class LibraryMenu {
         System.out.println("Enter Your Feedback:");
         Scanner input = new Scanner(System.in);
         String feed = input.nextLine();
-        GameManagement.getGamesArr().get(u).getDevelopersOfGame().get(0).getFeedback().add("Game: "+GameManagement.getGamesArr().get(u).getTitle() +" feedback: "+ feed);
+        GameManagement.getGamesArr().get(u).getDevelopersOfGame().get(0).getFeedback().add("Game: " + GameManagement.getGamesArr().get(u).getTitle() + " feedback: " + feed);
     }
 }

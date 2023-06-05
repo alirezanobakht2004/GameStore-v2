@@ -98,8 +98,26 @@ public class StoreMenu {
         }
         System.out.println("1." + "\033[1;92m" + "Buy the accessory" + "\033[0m");
         System.out.println("2.Back");
-
-
+        Scanner input = new Scanner(System.in);
+        int in = input.nextInt();
+        switch (in) {
+            case 1:
+                if (UserManagement.getUsersArr().get(indexOfUser).getWallet() >= Integer.parseInt(acc.getPrice())) {
+                    UserManagement.getUsersArr().get(indexOfUser).getAccessoriesOfUser().add(acc);
+                    acc.getCommunity().getUserList().add(UserManagement.getUsersArr().get(indexOfUser));
+                    UserManagement.getUsersArr().get(indexOfUser).setWallet(UserManagement.getUsersArr().get(indexOfUser).getWallet() - Integer.parseInt(acc.getPrice()));
+                    System.out.println("\n" + "You bought the accessory successfully!" + "\n");
+                } else {
+                    System.out.println("\033[1;91m" + "Not enough money in wallet" + "\033[0m");
+                }
+                break;
+            case 2:
+                start(indexOfUser);
+                break;
+            default:
+                break;
+        }
+        start(indexOfUser);
     }
 
     public void showGame(int i) {

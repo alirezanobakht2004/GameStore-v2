@@ -15,6 +15,7 @@ public class Developer{
 
     private List<String> feedback = new ArrayList<String>();
 
+    private Boolean isAdmin=false;
 
     public Developer() {
     }
@@ -68,5 +69,13 @@ public class Developer{
 
     public void setFeedback(List<String> feedback) {
         this.feedback = feedback;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        isAdmin = admin;
     }
 }

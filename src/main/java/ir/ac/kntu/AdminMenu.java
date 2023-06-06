@@ -3,7 +3,6 @@ package ir.ac.kntu;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 public class AdminMenu {
     private Admin admin;
@@ -47,7 +46,9 @@ public class AdminMenu {
         admin.getAdminAccessorySeller().getAccessoriesSellerMenu().start(AccessoriesSellerManagement.getAccessoriesSellerArr().indexOf(admin.getAdminAccessorySeller()));
     }
 
-
+    public void gameManage() {
+        admin.getAdminDevelpoer().getDeveloperMenu().start(DeveloperManagement.getDevelopersArr().indexOf(admin.getAdminDevelpoer()));
+    }
 
     public void profile() {
         System.out.println("\033[1;94m" + "profile menu" + "\033[0m");
@@ -133,136 +134,13 @@ public class AdminMenu {
         startMenu(AdminManagement.getAdminsArr().indexOf(admin));
     }
 
-    public void gameManage() {
-        System.out.println("\033[0;91m" + "game manage menu" + "\033[0m");
-        System.out.println("1.create games");
-        System.out.println("2.modify games or delete games");
-        System.out.println("3.destruction report to developers");
-        System.out.println("4.back");
-        Scanner input = new Scanner(System.in);
-        int adminDes = input.nextInt();
-        switch (adminDes) {
-            case 1:
-                createGame();
-                break;
-            case 2:
-                searchGame();
-                break;
-            case 3:
-                reportGame();
-                break;
-            case 4:
-                startMenu(AdminManagement.getAdminsArr().indexOf(admin));
-            default:
-                break;
-        }
-    }
-
-    public void reportGame() {
-        System.out.println("\033[1;91m" + "Report Game Menu" + "\033[0m");
-        for (int i = 0; i < GameManagement.getGamesArr().size(); i++) {
-            System.out.println("\n" + "Title of game: " + "\033[1;93m" + GameManagement.getGamesArr().get(i).getTitle() + "\033[0m" + " Index of game is: " + i + "\n");
-        }
-        if (GameManagement.getGamesArr().size() == 0) {
-            gameManage();
-        }
-        System.out.println("\nEnter index of the game you want:");
-        Scanner input = new Scanner(System.in);
-        int report = input.nextInt();
-        List<Developer> sortedList = GameManagement.getGamesArr().get(report).getDevelopersOfGame().stream().sorted(Comparator.comparingInt(Developer::getScheduleEventSize)).toList();
-        System.out.println("Enter ExpiryTime by minute:");
-        int expiry = input.nextInt();
-        InboxGames inboxGames = new InboxGames(GameManagement.getGamesArr().get(report), expiry, TimeUnit.MINUTES.convert(System.nanoTime(), TimeUnit.NANOSECONDS));
-        sortedList.get(0).getInbox().add(inboxGames);
-        gameManage();
-    }
-
-    public void createGame() {
-        System.out.println("\033[1;92m" + "Create game menu" + "\033[0m");
-        Scanner input = new Scanner(System.in);
-        System.out.println("Enter title:");
-        String title = input.nextLine();
-        System.out.println("Enter genre");
-        String genre = input.nextLine();
-        System.out.println("Enter info:");
-        String info = input.nextLine();
-        System.out.println("Enter price:");
-        String price = input.nextLine();
-        System.out.println("Enter level:");
-        int level = input.nextInt();
-        System.out.println("\033[1;94m" + "Enter game version:" + "\033[0m");
-        System.out.println("1.Beta");
-        System.out.println("2.Original");
-        Scanner inputOne = new Scanner(System.in);
-        String des = inputOne.nextLine();
-        GameVersion gameVersion;
-        if (des.equals("1")) {
-            gameVersion = GameVersion.BETA;
-        } else if (des.equals("2")) {
-            gameVersion = GameVersion.ORIGINAL;
-        } else {
-            System.out.println("Wrong entries");
-            gameVersion = GameVersion.ORIGINAL;
-            createGame();
-        }
-        Game game = new Game(title, genre, info, price, level, gameVersion);
-        GameManagement.getGamesArr().add(game);
-        System.out.println("\nYour game has been succsessfully created!\n");
-        gameManage();
-    }
-
-    public void searchGame() {
-        Scanner input = new Scanner(System.in);
-        System.out.println("\033[1;91m" + "Modify or Delete game menu" + "\033[0m");
-        System.out.println("Enter name of game:");
-        String name = input.nextLine();
-        int count = 0;
-        for (int i = 0; i < GameManagement.getGamesArr().size(); i++) {
-            if (GameManagement.getGamesArr().get(i).getTitle().startsWith(name)) {
-                System.out.println("name of game: " + GameManagement.getGamesArr().get(i).getTitle() +
-                        " genre " + GameManagement.getGamesArr().get(i).getGenre() +
-                        " info: " + GameManagement.getGamesArr().get(i).getInfo() + " index of game is: " +
-                        "\033[1;93m" + String.valueOf(i) + "\033[0m");
-                count++;
-            }
-        }
-
-        if (count == 0) {
-            System.out.println("there was no such a game!");
-            searchGame();
-        } else {
-            System.out.println("\033[1;96m" + "Modify or Delete selection Menu" + "\033[0m");
-            System.out.println("1.Modify game");
-            System.out.println("2.delete game");
-            System.out.println("3.back");
-            int des = input.nextInt();
-            switch (des) {
-                case 1:
-                    System.out.println("enter the index of the game you want to modify:");
-                    int index = input.nextInt();
-                    Game game = new Game();
-                    game.gameModify(index);
-                    break;
-                case 2:
-                    System.out.println("enter the index of the game you want to delete:");
-                    int index1 = input.nextInt();
-                    GameManagement.getGamesArr().remove(index1);
-                    System.out.println("\nYour game has been succsessfully deleted!\n");
-                case 3:
-                    gameManage();
-                default:
-                    break;
-            }
-
-        }
-    }
 
     public void userManage() {
         System.out.println("\033[0;91m" + "user manage menu" + "\033[0m");
         System.out.println("1.Users Setting");
         System.out.println("2.create a user");
         System.out.println("3.see most active users");
-        System.out.println("3.back");
+        System.out.println("4.back");
         Scanner input = new Scanner(System.in);
         int adminDes = input.nextInt();
         switch (adminDes) {

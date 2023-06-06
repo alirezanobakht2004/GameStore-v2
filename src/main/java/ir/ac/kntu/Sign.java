@@ -210,9 +210,11 @@ public class Sign {
         for (int i = 0; i < DeveloperManagement.getDevelopersArr().size(); i++) {
             if (DeveloperManagement.getDevelopersArr().get(i).getDeveloperName().equals(devName)) {
                 if (DeveloperManagement.getDevelopersArr().get(i).getPassword().equals(password)) {
-                    System.out.println("Your welcome!");
-                    DeveloperManagement.getDevelopersArr().get(i).getDeveloperMenu().start(i);
-                    count++;
+                    if (!DeveloperManagement.getDevelopersArr().get(i).isAdmin()){
+                        System.out.println("Your welcome!");
+                        DeveloperManagement.getDevelopersArr().get(i).getDeveloperMenu().start(i);
+                        count++;
+                    }
                 }
             }
         }

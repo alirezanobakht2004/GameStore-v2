@@ -237,7 +237,7 @@ public class AccessoriesSellerMenu {
         } else {
             int c = 0;
             System.out.println("\033[1;96m" + "Your Accessories" + "\033[0m");
-            for (int i = 0; i < AccessoriesManagement.getAccessoriesArr().size(); i++) {
+            for (int i = 0; i < accessoriesSeller.getAccessories().size(); i++) {
                 System.out.println("Accessory title: " + accessoriesSeller.getAccessories().get(i).getTitle() + " with index of: " + AccessoriesManagement.getAccessoriesArr().indexOf(accessoriesSeller.getAccessories().get(i)));
                 c++;
             }
@@ -290,22 +290,25 @@ public class AccessoriesSellerMenu {
         int des = input.nextInt();
         switch (des) {
             case 1:
-                System.out.println("Enter new title:");
+                System.out.println("Enter new:");
                 Scanner inputOne = new Scanner(System.in);
                 String title = inputOne.nextLine();
                 AccessoriesManagement.getAccessoriesArr().get(i).setTitle(title);
                 break;
             case 2:
+                System.out.println("Enter new:");
                 Scanner inputTwo = new Scanner(System.in);
                 String titl = inputTwo.nextLine();
                 AccessoriesManagement.getAccessoriesArr().get(i).setInfo(titl);
                 break;
             case 3:
+                System.out.println("Enter new:");
                 Scanner inputThree = new Scanner(System.in);
                 String tit = inputThree.nextLine();
                 AccessoriesManagement.getAccessoriesArr().get(i).setPrice(tit);
                 break;
             case 4:
+                System.out.println("Enter new:");
                 Scanner inputFour = new Scanner(System.in);
                 String ti = inputFour.nextLine();
                 AccessoriesManagement.getAccessoriesArr().get(i).setNumberOfAccessory(ti);
@@ -318,6 +321,7 @@ public class AccessoriesSellerMenu {
                 }
                 break;
             case 6:
+                System.out.println("Enter new:");
                 Scanner inputFive = new Scanner(System.in);
                 String t = inputFive.nextLine();
                 AccessoriesManagement.getAccessoriesArr().get(i).setSystemKind(t);
@@ -345,24 +349,31 @@ public class AccessoriesSellerMenu {
         Scanner inputOne = new Scanner(System.in);
         switch (des) {
             case 1:
+                System.out.println("Enter new:");
                 AccessoriesManagement.getAccessoriesArr().get(i).setTitle(inputOne.nextLine());
                 break;
             case 2:
+                System.out.println("Enter new:");
                 AccessoriesManagement.getAccessoriesArr().get(i).setInfo(inputOne.nextLine());
                 break;
             case 3:
+                System.out.println("Enter new:");
                 AccessoriesManagement.getAccessoriesArr().get(i).setPrice(inputOne.nextLine());
                 break;
             case 4:
+                System.out.println("Enter new:");
                 AccessoriesManagement.getAccessoriesArr().get(i).setNumberOfAccessory(inputOne.nextLine());
                 break;
             case 5:
+                System.out.println("Enter new:");
                 AccessoriesManagement.getAccessoriesArr().get(i).setFps(inputOne.nextLine());
                 break;
             case 6:
+                System.out.println("Enter new:");
                 AccessoriesManagement.getAccessoriesArr().get(i).setSize(inputOne.nextLine());
                 break;
             case 7:
+                System.out.println("Enter new:");
                 AccessoriesManagement.getAccessoriesArr().get(i).setAnswerTime(inputOne.nextLine());
             case 8:
                 accessories();

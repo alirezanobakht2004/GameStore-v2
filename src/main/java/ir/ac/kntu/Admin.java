@@ -7,8 +7,8 @@ public class Admin {
     private String adminName;
     private String password;
     private AdminMenu adminMenu=new AdminMenu();
-    private List<Game> games = new ArrayList<Game>();
 
+    private Developer adminDevelpoer;
     private AccessoriesSeller adminAccessorySeller;
     public AdminMenu getAdminMenu() {
         return adminMenu;
@@ -36,13 +36,21 @@ public class Admin {
         adminAccessorySeller = new AccessoriesSeller(adminName,password);
         adminAccessorySeller.setAdmin(true);
         AccessoriesSellerManagement.getAccessoriesSellerArr().add(adminAccessorySeller);
+        adminDevelpoer = new Developer(adminName,password);
+        adminDevelpoer.setAdmin(true);
+        DeveloperManagement.getDevelopersArr().add(adminDevelpoer);
     }
 
-    public List<Game> getGames() {
-        return games;
-    }
 
     public AccessoriesSeller getAdminAccessorySeller() {
         return adminAccessorySeller;
+    }
+
+    public Developer getAdminDevelpoer() {
+        return adminDevelpoer;
+    }
+
+    public void setAdminDevelpoer(Developer adminDevelpoer) {
+        this.adminDevelpoer = adminDevelpoer;
     }
 }

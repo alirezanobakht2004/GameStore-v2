@@ -16,7 +16,7 @@ public class Game extends Item{
     public Game(){
         super();
     }
-    public Game(String title, String genre, String info, String price, int level, GameVersion gameVersion){
+    public Game(String title, String genre, String info, int price, int level, GameVersion gameVersion){
         super(title,info,price);
         this.genre=genre;
         this.level=level;
@@ -67,7 +67,7 @@ public class Game extends Item{
             case 4 -> {
                 System.out.println("Enter new price:");
                 Scanner inputFour = new Scanner(System.in);
-                GameManagement.getGamesArr().get(i).setPrice(inputFour.nextLine());
+                GameManagement.getGamesArr().get(i).setPrice(inputFour.nextInt());
                 System.out.println("your game price changed!");
                 gameModify(i);
             }

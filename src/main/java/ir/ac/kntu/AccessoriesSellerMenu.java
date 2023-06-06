@@ -156,11 +156,13 @@ public class AccessoriesSellerMenu {
         System.out.println("Enter Title:");
         String title = input.nextLine();
         System.out.println("Enter Price:");
-        String price = input.nextLine();
+        Scanner ino = new Scanner(System.in);
+        int price = ino.nextInt();
         System.out.println("Enter Info:");
         String info = input.nextLine();
         System.out.println("Enter NumberOfAccessory:");
-        String numberOfAccessory = input.nextLine();
+        Scanner in = new Scanner(System.in);
+        int numberOfAccessory = in.nextInt();
         System.out.println("Enter SystemKind:");
         String systemKind = input.nextLine();
         System.out.println("\033[1;94m" + "Enter Connection Way:" + "\033[0m");
@@ -196,11 +198,13 @@ public class AccessoriesSellerMenu {
         System.out.println("Enter Title:");
         String title = input.nextLine();
         System.out.println("Enter Price:");
-        String price = input.nextLine();
+        Scanner ino = new Scanner(System.in);
+        int price = ino.nextInt();
         System.out.println("Enter Info:");
         String info = input.nextLine();
         System.out.println("Enter NumberOfAccessory:");
-        String numberOfAccessory = input.nextLine();
+        Scanner in = new Scanner(System.in);
+        int numberOfAccessory = in.nextInt();
         System.out.println("Enter Fps:");
         String fps = input.nextLine();
         System.out.println("Enter Size:");
@@ -304,13 +308,13 @@ public class AccessoriesSellerMenu {
             case 3:
                 System.out.println("Enter new:");
                 Scanner inputThree = new Scanner(System.in);
-                String tit = inputThree.nextLine();
+                int tit = inputThree.nextInt();
                 AccessoriesManagement.getAccessoriesArr().get(i).setPrice(tit);
                 break;
             case 4:
                 System.out.println("Enter new:");
                 Scanner inputFour = new Scanner(System.in);
-                String ti = inputFour.nextLine();
+                int ti = inputFour.nextInt();
                 AccessoriesManagement.getAccessoriesArr().get(i).setNumberOfAccessory(ti);
                 break;
             case 5:
@@ -358,11 +362,13 @@ public class AccessoriesSellerMenu {
                 break;
             case 3:
                 System.out.println("Enter new:");
-                AccessoriesManagement.getAccessoriesArr().get(i).setPrice(inputOne.nextLine());
+                Scanner in = new Scanner(System.in);
+                AccessoriesManagement.getAccessoriesArr().get(i).setPrice(in.nextInt());
                 break;
             case 4:
                 System.out.println("Enter new:");
-                AccessoriesManagement.getAccessoriesArr().get(i).setNumberOfAccessory(inputOne.nextLine());
+                Scanner inpu = new Scanner(System.in);
+                AccessoriesManagement.getAccessoriesArr().get(i).setNumberOfAccessory(inpu.nextInt());
                 break;
             case 5:
                 System.out.println("Enter new:");

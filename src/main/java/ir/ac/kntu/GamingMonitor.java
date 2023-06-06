@@ -16,7 +16,7 @@ public class GamingMonitor extends Accessories {
     public GamingMonitor() {
     }
 
-    public GamingMonitor(String title, String info, String price, String numberOfAccessory, String fps, String size, String answerTime) {
+    public GamingMonitor(String title, String info, int price, int numberOfAccessory, String fps, String size, String answerTime) {
         super(title, info, price, numberOfAccessory);
         this.fps = fps;
         this.size = size;

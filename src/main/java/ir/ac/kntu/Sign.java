@@ -89,7 +89,7 @@ public class Sign {
         int count = 0;
         for (int i = 0; i < AccessoriesSellerManagement.getAccessoriesSellerArr().size(); i++) {
             if (AccessoriesSellerManagement.getAccessoriesSellerArr().get(i).getAccessoriesSellerName().equals(accName)) {
-                System.out.println("already taken DeveloperName!");
+                System.out.println("already taken AccessoriesSellerName!");
                 count++;
             }
         }

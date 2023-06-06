@@ -7,7 +7,7 @@ public class Item {
     private String title;
     private String info;
 
-    private String price;
+    private int price;
 
     private Community community;
 
@@ -16,7 +16,7 @@ public class Item {
     public Item(){
         community = new Community();
     }
-    public Item(String title, String info, String price) {
+    public Item(String title, String info, int price) {
         community = new Community();
         this.title = title;
         this.info = info;
@@ -39,11 +39,11 @@ public class Item {
         this.info = info;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

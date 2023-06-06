@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Accessories extends Item{
 
-    private String numberOfAccessory;
+    private int numberOfAccessory;
     private List<AccessoriesSeller> accessoriesSellers = new ArrayList<AccessoriesSeller>();
 
     private String systemKind;
@@ -21,7 +21,7 @@ public class Accessories extends Item{
         super();
     }
 
-    public Accessories(String title, String info, String price, String numberOfAccessory) {
+    public Accessories(String title, String info, int price, int numberOfAccessory) {
         super(title, info, price);
         this.numberOfAccessory = numberOfAccessory;
     }
@@ -30,11 +30,11 @@ public class Accessories extends Item{
     }
 
 
-    public String getNumberOfAccessory() {
+    public int getNumberOfAccessory() {
         return numberOfAccessory;
     }
 
-    public void setNumberOfAccessory(String numberOfAccessory) {
+    public void setNumberOfAccessory(int numberOfAccessory) {
         this.numberOfAccessory = numberOfAccessory;
     }
 

@@ -234,7 +234,8 @@ public class DeveloperMenu {
         System.out.println("Enter info:");
         String info = input.nextLine();
         System.out.println("Enter price:");
-        String price = input.nextLine();
+        Scanner in = new Scanner(System.in);
+        int price = in.nextInt();
         System.out.println("Enter level:");
         int level = input.nextInt();
         System.out.println("\033[1;94m" + "Enter game version:" + "\033[0m");
@@ -346,7 +347,7 @@ public class DeveloperMenu {
             case 4 -> {
                 System.out.println("Enter new price:");
                 Scanner inputFour = new Scanner(System.in);
-                GameManagement.getGamesArr().get(i).setPrice(inputFour.nextLine());
+                GameManagement.getGamesArr().get(i).setPrice(inputFour.nextInt());
                 System.out.println("your game price changed!");
                 gameModify(i);
             }

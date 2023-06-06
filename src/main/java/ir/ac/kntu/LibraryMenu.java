@@ -11,7 +11,7 @@ public class LibraryMenu {
         System.out.println("\033[1;96m" + "welcome to library" + "\033[0m");
         System.out.println("1.Show your games");
         System.out.println("2.show your accessories");
-        System.out.println("2.back");
+        System.out.println("3.back");
         Scanner input = new Scanner(System.in);
         switch (input.nextInt()) {
             case 1:
@@ -31,7 +31,7 @@ public class LibraryMenu {
     public void showAccessories() {
         int count = 0;
         for (int i = 0; i < UserManagement.getUsersArr().get(indexOfUser).getAccessoriesOfUser().size(); i++) {
-            System.out.println("Accessory: " + UserManagement.getUsersArr().get(indexOfUser).getAccessoriesOfUser().get(i) + " index: " + i);
+            System.out.println("Accessory: " + UserManagement.getUsersArr().get(indexOfUser).getAccessoriesOfUser().get(i).getTitle() + " index: " + AccessoriesManagement.getAccessoriesArr().indexOf(UserManagement.getUsersArr().get(indexOfUser).getAccessoriesOfUser().get(i)));
             count++;
         }
         if (count != 0) {
@@ -120,17 +120,6 @@ public class LibraryMenu {
         }
     }
 
-
-    public String friendsReq(String freReq, String user) {
-        String[] lines = freReq.split("\n");
-        StringBuilder newString = new StringBuilder();
-        for (String line : lines) {
-            if (!line.contains(user)) {
-                newString.append(line).append("\n");
-            }
-        }
-        return newString.toString();
-    }
 
     public void sendFeedback(int u) {
         System.out.println("\033[1;93m" + "Send Feedback Menu+" + "\033[0m");

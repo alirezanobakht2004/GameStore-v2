@@ -13,7 +13,7 @@ public class GamingController extends Accessories {
         super();
     }
 
-    public GamingController(String systemKind, SystemConnection systemConnection, String numberOfAccessory, String title, String info, String price){
+    public GamingController(String systemKind, SystemConnection systemConnection, int numberOfAccessory, String title, String info, int price){
         super(title,info,price,numberOfAccessory);
         this.systemKind=systemKind;
         this.systemConnection=systemConnection;

@@ -271,7 +271,7 @@ public void gameSearchResult(){
         int count = 0;
         for (int i = 0; i < AccessoriesManagement.getAccessoriesArr().size(); i++) {
             if (AccessoriesManagement.getAccessoriesArr().get(i).getTitle().startsWith(name)) {
-                System.out.println("name of game: " + AccessoriesManagement.getAccessoriesArr().get(i).getTitle() + " index of accessory is: " +
+                System.out.println("name of accessory: " + AccessoriesManagement.getAccessoriesArr().get(i).getTitle() + " index of accessory is: " +
                         "\033[1;93m" + i + "\033[0m");
                 count++;
             }
@@ -300,17 +300,34 @@ public void gameSearchResult(){
                 System.out.println("name of game: " + GameManagement.getGamesArr().get(i).getTitle() +
                         " genre: " + GameManagement.getGamesArr().get(i).getGenre() +
                         " info: " + GameManagement.getGamesArr().get(i).getInfo() + " index of game is: " +
-                        "\033[1;93m" + String.valueOf(i) + "\033[0m");
+                        "\033[1;93m" + i + "\033[0m");
+                count++;
+            }
+        }
+        for (int i = 0; i < AccessoriesManagement.getAccessoriesArr().size(); i++) {
+            if (AccessoriesManagement.getAccessoriesArr().get(i).getPrice() <= high && AccessoriesManagement.getAccessoriesArr().get(i).getPrice() >= low) {
+                System.out.println("name of accessory: " + AccessoriesManagement.getAccessoriesArr().get(i).getTitle() +
+                        " index of accessory is: " +
+                        "\033[1;93m" + i + "\033[0m");
                 count++;
             }
         }
         if (count == 0) {
-            System.out.println("there was no such a game!");
+            System.out.println("there was no such a game or accessory!");
             start(indexOfUser);
         } else {
-            System.out.println("\033[1;96m" + "Enter the index of the game you want to see:" + "\033[0m");
-            int des = input.nextInt();
-            showGame(des);
+            System.out.println("1.see game");
+            System.out.println("2.see accessory");
+            int f = input.nextInt();
+            if(f==1){
+                System.out.println("\033[1;96m" + "Enter the index of the game you want to see:" + "\033[0m");
+                int des = input.nextInt();
+                showGame(des);
+            } else {
+                System.out.println("\033[1;96m" + "Enter the index of the accessory you want to see:" + "\033[0m");
+                int des1 = input.nextInt();
+                showAccessory(des1);
+            }
         }
     }
 

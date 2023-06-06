@@ -1,7 +1,9 @@
 package ir.ac.kntu;
 
-import java.net.http.HttpClient;
+
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Scanner;
 
 public class StoreMenu {
@@ -12,26 +14,44 @@ public class StoreMenu {
         indexOfUser = t;
         System.out.println("\033[1;94m" + "welcome to store" + "\033[0m");
         System.out.println("1.Show all games and accessories");
-        System.out.println("2.Search game");
+        System.out.println("2.Search game and accessories");
         System.out.println("3.Filter games by price");
-        System.out.println("4.back");
+        System.out.println("4.See Best Sellers");
+        System.out.println("5.back");
         Scanner input = new Scanner(System.in);
         switch (input.nextInt()) {
             case 1:
                 showGamesAndAcc();
                 break;
             case 2:
-                searchGame();
+                searchGameAndAcc();
                 break;
             case 3:
                 filterPrice();
                 break;
             case 4:
+                bestSellers();
+                break;
+            case 5:
                 UserManagement.getUsersArr().get(indexOfUser).getUserMenu().userMenu(indexOfUser);
                 break;
             default:
                 break;
         }
+    }
+
+    public void bestSellers(){
+        List<Game> sortedList = GameManagement.getGamesArr().stream().sorted(Comparator.comparingInt(Game::getNumberBought)).toList();
+        List<Accessories> sortedListTwo = AccessoriesManagement.getAccessoriesArr().stream().sorted(Comparator.comparingInt(Accessories::getNumberBought)).toList();
+        System.out.println("\033[1;93m"+"Best seller games"+"\033[0m");
+        for (int i=0;i<sortedList.size();i++){
+            System.out.println("Title: "+sortedList.get(i).getTitle()+ "sold "+ sortedList.get(i).getNumberBought()+ " times");
+        }
+        System.out.println("\033[1;93m"+"Best seller Accessories"+"\033[0m");
+        for (int i=0;i<sortedListTwo.size();i++){
+            System.out.println("Title: "+sortedListTwo.get(i).getTitle()+"sold "+ sortedListTwo.get(i).getNumberBought()+ " times");
+        }
+        start(indexOfUser);
     }
 
     public void showGamesAndAcc() {
@@ -106,10 +126,12 @@ public class StoreMenu {
                 if (UserManagement.getUsersArr().get(indexOfUser).getWallet() >= acc.getPrice()) {
                     if(acc.getNumberOfAccessory()>0){
                         if(UserManagement.getUsersArr().get(indexOfUser).getAccessoriesOfUser().contains(acc)){
+                            acc.setNumberBought(acc.getNumberBought()+1);
                             acc.setNumberOfAccessory(acc.getNumberOfAccessory()-1);
                             UserManagement.getUsersArr().get(indexOfUser).setWallet(UserManagement.getUsersArr().get(indexOfUser).getWallet() - acc.getPrice());
                             System.out.println("\n" + "You bought the accessory again!" + "\n");
                         }else {
+                            acc.setNumberBought(acc.getNumberBought()+1);
                             acc.setNumberOfAccessory(acc.getNumberOfAccessory()-1);
                             UserManagement.getUsersArr().get(indexOfUser).getAccessoriesOfUser().add(acc);
                             acc.getCommunity().getUserList().add(UserManagement.getUsersArr().get(indexOfUser));
@@ -154,6 +176,7 @@ public class StoreMenu {
                         UserManagement.getUsersArr().get(indexOfUser).setWallet(
                                 UserManagement.getUsersArr().get(indexOfUser).getWallet()
                                         -afterDiscountPercent*GameManagement.getGamesArr().get(i).getPrice());
+                        GameManagement.getGamesArr().get(i).setNumberBought(GameManagement.getGamesArr().get(i).getNumberBought()+1);
                         System.out.println("\n" + "You bought the game successfully!" + "\n");
                     } else {
                         System.out.println("\033[1;91m" + "Not enough money in wallet" + "\033[0m");
@@ -189,37 +212,81 @@ public class StoreMenu {
         return 0;
     }
 
-    public void searchGame() {
-        System.out.println("\n" + "You can type ### and enter to comeback\n");
+    public void searchGameAndAcc() {
         Scanner input = new Scanner(System.in);
-        System.out.println("\033[46m" + "Search game menu" + "\033[0m");
-        System.out.println("Enter name of game:");
+        System.out.println("\033[46m" + "Search game and accessory menu" + "\033[0m");
+        System.out.println("Enter what do you want to search?");
+        System.out.println("1.Games");
+        System.out.println("2.Accessories");
+        int t = input.nextInt();
+        switch (t){
+            case 1:
+                gameSearchResult();
+                break;
+            case 2:
+                accessorySearchResult();
+                break;
+            default:
+                break;
+        }
+        start(indexOfUser);
+    }
+public void gameSearchResult(){
+    Scanner input = new Scanner(System.in);
+    System.out.println("\n" + "You can type ### and enter to comeback\n");
+    System.out.println("Enter name of game:");
+    String name = input.nextLine();
+    if (name.equals("###")) {
+        start(indexOfUser);
+    }
+    int count = 0;
+    for (int i = 0; i < GameManagement.getGamesArr().size(); i++) {
+        if (GameManagement.getGamesArr().get(i).getTitle().startsWith(name)) {
+            System.out.println("name of game: " + GameManagement.getGamesArr().get(i).getTitle() +
+                    " genre: " + GameManagement.getGamesArr().get(i).getGenre() +
+                    " info: " + GameManagement.getGamesArr().get(i).getInfo() + " index of game is: " +
+                    "\033[1;93m" + i + "\033[0m");
+            count++;
+        }
+    }
+
+    if (count == 0) {
+        System.out.println("there was no such a game!");
+        searchGameAndAcc();
+    } else {
+        System.out.println("\033[1;96m" + "Enter the index of the game you want to see:" + "\033[0m");
+        int des = input.nextInt();
+        showGame(des);
+    }
+
+}
+    public void accessorySearchResult(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("\n" + "You can type ### and enter to comeback\n");
+        System.out.println("Enter name of accessory:");
         String name = input.nextLine();
         if (name.equals("###")) {
             start(indexOfUser);
         }
         int count = 0;
-        for (int i = 0; i < GameManagement.getGamesArr().size(); i++) {
-            if (GameManagement.getGamesArr().get(i).getTitle().startsWith(name)) {
-                System.out.println("name of game: " + GameManagement.getGamesArr().get(i).getTitle() +
-                        " genre: " + GameManagement.getGamesArr().get(i).getGenre() +
-                        " info: " + GameManagement.getGamesArr().get(i).getInfo() + " index of game is: " +
-                        "\033[1;93m" + String.valueOf(i) + "\033[0m");
+        for (int i = 0; i < AccessoriesManagement.getAccessoriesArr().size(); i++) {
+            if (AccessoriesManagement.getAccessoriesArr().get(i).getTitle().startsWith(name)) {
+                System.out.println("name of game: " + AccessoriesManagement.getAccessoriesArr().get(i).getTitle() + " index of accessory is: " +
+                        "\033[1;93m" + i + "\033[0m");
                 count++;
             }
         }
 
         if (count == 0) {
-            System.out.println("there was no such a game!");
-            searchGame();
+            System.out.println("there was no such a accessory!");
+            searchGameAndAcc();
         } else {
-            System.out.println("\033[1;96m" + "Enter the index of the game you want to see:" + "\033[0m");
+            System.out.println("\033[1;96m" + "Enter the index of the accessory you want to see:" + "\033[0m");
             int des = input.nextInt();
-            showGame(des);
+            showAccessory(des);
         }
 
     }
-
     public void filterPrice() {
         System.out.println("\033[0;101m" + "Filter by price menu" + "\033[0m");
         Scanner input = new Scanner(System.in);

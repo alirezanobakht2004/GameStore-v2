@@ -16,6 +16,7 @@ public class Accessories extends Item{
 
     private String size;
 
+    private int numberBought=0;
     private String answerTime;
     public Accessories(){
         super();
@@ -79,4 +80,11 @@ public class Accessories extends Item{
     }
 
 
+    public int getNumberBought() {
+        return numberBought;
+    }
+
+    public void setNumberBought(int numberBought) {
+        this.numberBought = numberBought;
+    }
 }

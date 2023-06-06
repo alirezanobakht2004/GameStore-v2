@@ -51,7 +51,7 @@ public class Friends {
         System.out.println("\033[46m" + "Friends list menu" + "\033[0m");
         System.out.println("\n" + UserManagement.getUsersArr().get(indexOfUser).getFriends() + "\n");
         System.out.println("Enter -1 to comeback");
-        System.out.println("Enter index of your friend to see his|her games\n");
+        System.out.println("Enter index of your friend to see his|her games and accessories\n");
         Scanner inputOne = new Scanner(System.in);
         int friendUs = inputOne.nextInt();
         if (friendUs == -1) {
@@ -60,6 +60,10 @@ public class Friends {
             for (int o = 0; o < UserManagement.getUsersArr().get(friendUs).getGamesOfUser().size(); o++) {
                 System.out.println("Title of game: "
                         + UserManagement.getUsersArr().get(friendUs).getGamesOfUser().get(o).getTitle());
+            }
+            for (int o = 0; o < UserManagement.getUsersArr().get(friendUs).getAccessoriesOfUser().size(); o++) {
+                System.out.println("Title of accessory: "
+                        + UserManagement.getUsersArr().get(friendUs).getAccessoriesOfUser().get(o).getTitle());
             }
         }
     }
@@ -89,6 +93,10 @@ public class Friends {
                 for (int o = 0; o < UserManagement.getUsersArr().get(friendUs1).getGamesOfUser().size(); o++) {
                     System.out.println("Title of game: "
                             + UserManagement.getUsersArr().get(friendUs1).getGamesOfUser().get(o).getTitle());
+                }
+                for (int o = 0; o < UserManagement.getUsersArr().get(friendUs1).getAccessoriesOfUser().size(); o++) {
+                    System.out.println("Title of accessory: "
+                            + UserManagement.getUsersArr().get(friendUs1).getAccessoriesOfUser().get(o).getTitle());
                 }
             }
         }

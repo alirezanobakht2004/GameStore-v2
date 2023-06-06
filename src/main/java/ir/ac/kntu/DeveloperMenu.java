@@ -229,8 +229,20 @@ public class DeveloperMenu {
         Scanner input = new Scanner(System.in);
         System.out.println("Enter title:");
         String title = input.nextLine();
-        System.out.println("Enter genre");
-        String genre = input.nextLine();
+        System.out.println("\033[1;94m" + "Enter game genre:" + "\033[0m");
+        System.out.println("1."+GameKind.SHOOTING);
+        System.out.println("2."+GameKind.SIMULATION);
+        System.out.println("3."+GameKind.STRATEGY);
+        Scanner i = new Scanner(System.in);
+        String d = i.nextLine();
+        GameKind genre;
+        if (d.equals("1")) {
+            genre=GameKind.SHOOTING;
+        } else if (d.equals("2")) {
+            genre = GameKind.SIMULATION;
+        } else {
+            genre=GameKind.STRATEGY;
+        }
         System.out.println("Enter info:");
         String info = input.nextLine();
         System.out.println("Enter price:");
@@ -331,9 +343,21 @@ public class DeveloperMenu {
                 gameModify(i);
             }
             case 2 -> {
-                System.out.println("Enter new genre:");
-                Scanner inputTwo = new Scanner(System.in);
-                GameManagement.getGamesArr().get(i).setGenre(inputTwo.nextLine());
+                System.out.println("\033[1;94m" + "Enter new genre:" + "\033[0m");
+                System.out.println("1."+GameKind.SHOOTING);
+                System.out.println("2."+GameKind.SIMULATION);
+                System.out.println("3."+GameKind.STRATEGY);
+                Scanner ino = new Scanner(System.in);
+                String d = ino.nextLine();
+                GameKind genre;
+                if (d.equals("1")) {
+                    genre=GameKind.SHOOTING;
+                } else if (d.equals("2")) {
+                    genre = GameKind.SIMULATION;
+                } else {
+                    genre=GameKind.STRATEGY;
+                }
+                GameManagement.getGamesArr().get(i).setGenre(genre);
                 System.out.println("your game genre changed!");
                 gameModify(i);
             }

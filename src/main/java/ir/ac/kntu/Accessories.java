@@ -8,12 +8,9 @@ public class Accessories extends Item{
     private String numberOfAccessory;
     private List<AccessoriesSeller> accessoriesSellers = new ArrayList<AccessoriesSeller>();
 
-    private List<Admin> adminAccessoriesSellers = new ArrayList<Admin>();
-
-
     private String systemKind;
 
-    private String systemConnection;
+    private SystemConnection systemConnection;
 
     private String fps;
 
@@ -30,10 +27,6 @@ public class Accessories extends Item{
     }
     public List<AccessoriesSeller> getAccessoriesSellers() {
         return accessoriesSellers;
-    }
-
-    public List<Admin> getAdminAccessoriesSellers() {
-        return adminAccessoriesSellers;
     }
 
 
@@ -69,11 +62,11 @@ public class Accessories extends Item{
         this.fps = fps;
     }
 
-    public String getSystemConnection() {
+    public SystemConnection getSystemConnection() {
         return systemConnection;
     }
 
-    public void setSystemConnection(String systemConnection) {
+    public void setSystemConnection(SystemConnection systemConnection) {
         this.systemConnection = systemConnection;
     }
 
@@ -84,4 +77,6 @@ public class Accessories extends Item{
     public void setSystemKind(String systemKind) {
         this.systemKind = systemKind;
     }
+
+
 }

@@ -119,14 +119,17 @@ public class Sign {
         for (int i = 0; i < AccessoriesSellerManagement.getAccessoriesSellerArr().size(); i++) {
             if (AccessoriesSellerManagement.getAccessoriesSellerArr().get(i).getAccessoriesSellerName().equals(accName)) {
                 if (AccessoriesSellerManagement.getAccessoriesSellerArr().get(i).getPassword().equals(password)) {
-                    System.out.println("Your welcome!");
-                    AccessoriesSellerManagement.getAccessoriesSellerArr().get(i).getAccessoriesSellerMenu().start(i);
-                    count++;
+                    if(!AccessoriesSellerManagement.getAccessoriesSellerArr().get(i).isAdmin())
+                    {
+                        System.out.println("Your welcome!");
+                        AccessoriesSellerManagement.getAccessoriesSellerArr().get(i).getAccessoriesSellerMenu().start(i);
+                        count++;
+                    }
                 }
             }
         }
         if (count == 0) {
-            System.out.println("Invalid Enties");
+            System.out.println("Invalid Entries!");
             sign();
         }
     }
@@ -136,16 +139,27 @@ public class Sign {
         System.out.println("Enter 1 for sign up");
         System.out.println("Enter 2 for sign in");
         System.out.println("Enter 3 for back");
-        Scanner input = new Scanner(System.in);
-        int in = input.nextInt();
-        if (in == 1) {
-            devSignUp();
-        }
-        if (in == 2) {
-            devSignIn();
-        }
-        if (in == 3) {
-            sign();
+        try {
+            Scanner input = new Scanner(System.in);
+            int in = input.nextInt();
+            switch (in) {
+                case 1:
+                    devSignUp();
+                    break;
+                case 2:
+                    devSignIn();
+                    break;
+                case 3:
+                    sign();
+                    break;
+                default:
+                    System.out.println("wrong entry!");
+                    developerStart();
+                    break;
+            }
+        } catch (Exception e){
+            System.out.println("\nwrong entry!");
+            developerStart();
         }
     }
 
@@ -247,16 +261,27 @@ public class Sign {
         System.out.println("Enter 1 for sign up");
         System.out.println("Enter 2 for sign in");
         System.out.println("Enter 3 for back");
-        Scanner input = new Scanner(System.in);
-        int in = input.nextInt();
-        if (in == 1) {
-            signUp();
-        }
-        if (in == 2) {
-            signIn();
-        }
-        if (in == 3) {
-            sign();
+        try {
+            Scanner input = new Scanner(System.in);
+            int in = input.nextInt();
+            switch (in) {
+                case 1:
+                    signUp();
+                    break;
+                case 2:
+                    signIn();
+                    break;
+                case 3:
+                    sign();
+                    break;
+                default:
+                    System.out.println("wrong entry!");
+                    userStart();
+                    break;
+            }
+        } catch (Exception e){
+            System.out.println("\nwrong entry!");
+            userStart();
         }
     }
 

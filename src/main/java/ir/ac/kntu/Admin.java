@@ -7,11 +7,9 @@ public class Admin {
     private String adminName;
     private String password;
     private AdminMenu adminMenu=new AdminMenu();
-
-    private List<Accessories> accessories = new ArrayList<Accessories>();
-
     private List<Game> games = new ArrayList<Game>();
 
+    private AccessoriesSeller adminAccessorySeller;
     public AdminMenu getAdminMenu() {
         return adminMenu;
     }
@@ -35,13 +33,16 @@ public class Admin {
     public Admin(String adminName, String password) {
         this.adminName = adminName;
         this.password = password;
-    }
-
-    public List<Accessories> getAccessories() {
-        return accessories;
+        adminAccessorySeller = new AccessoriesSeller(adminName,password);
+        adminAccessorySeller.setAdmin(true);
+        AccessoriesSellerManagement.getAccessoriesSellerArr().add(adminAccessorySeller);
     }
 
     public List<Game> getGames() {
         return games;
+    }
+
+    public AccessoriesSeller getAdminAccessorySeller() {
+        return adminAccessorySeller;
     }
 }

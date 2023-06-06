@@ -7,7 +7,9 @@ public class AccessoriesSeller {
 
     private String accessoriesSellerName;
     private String password;
-    AccessoriesSellerMenu accessoriesSellerMenu;
+    private AccessoriesSellerMenu accessoriesSellerMenu;
+
+    private boolean isAdmin=false;
 
     private List<Accessories> accessories = new ArrayList<Accessories>();
 
@@ -40,5 +42,13 @@ public class AccessoriesSeller {
 
     public List<Accessories> getAccessories() {
         return accessories;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 }

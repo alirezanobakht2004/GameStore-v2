@@ -8,6 +8,9 @@ public class AccessoriesSellerMenu {
 
     public void start(int i) {
         accessoriesSeller = AccessoriesSellerManagement.getAccessoriesSellerArr().get(i);
+        if (accessoriesSeller.isAdmin()) {
+            accessories();
+        }
         for (String s : Arrays.asList("\033[1;93m" + "Welcome to AccessoriesSeller menu!" + "\033[0m", "1.Profile", "2.Accessories", "3.back")) {
             System.out.println(s);
         }
@@ -76,7 +79,7 @@ public class AccessoriesSellerMenu {
         int inner = input.nextInt();
         switch (inner) {
             case 1 -> {
-                System.out.println("Enter new developerName:");
+                System.out.println("Enter new accSellerName:");
                 Scanner inputOne = new Scanner(System.in);
                 accessoriesSeller.setAccessoriesSellerName(inputOne.nextLine());
                 System.out.println("\nyour username changed!\n");
@@ -111,6 +114,15 @@ public class AccessoriesSellerMenu {
                 searchAccessories();
                 break;
             case 3:
+                if (accessoriesSeller.isAdmin()) {
+                    for (int i = 0; i < AdminManagement.getAdminsArr().size(); i++) {
+                        if (AdminManagement.getAdminsArr().get(i).getAdminName().equals(accessoriesSeller.getAccessoriesSellerName())) {
+                            if (AdminManagement.getAdminsArr().get(i).getPassword().equals(accessoriesSeller.getPassword())) {
+                                AdminManagement.getAdminsArr().get(i).getAdminMenu().startMenu(i);
+                            }
+                        }
+                    }
+                }
                 start(AccessoriesSellerManagement.getAccessoriesSellerArr().indexOf(accessoriesSeller));
             default:
                 break;
@@ -156,21 +168,21 @@ public class AccessoriesSellerMenu {
         System.out.println("2.Wired");
         String des = input.nextLine();
         if (des.equals("1")) {
-            GamingController gameC = new GamingController(systemKind, "Wireless", numberOfAccessory, title, info, price);
+            GamingController gameC = new GamingController(systemKind, SystemConnection.WIRELESS, numberOfAccessory, title, info, price);
             gameC.getAccessoriesSellers().add(accessoriesSeller);
             accessoriesSeller.getAccessories().add(gameC);
             AccessoriesManagement.getAccessoriesArr().add(gameC);
             AccessoriesManagement.getAccessoriesArr().get(AccessoriesManagement.getAccessoriesArr().indexOf(gameC)).setSystemKind(systemKind);
-            AccessoriesManagement.getAccessoriesArr().get(AccessoriesManagement.getAccessoriesArr().indexOf(gameC)).setSystemConnection("Wireless");
+            AccessoriesManagement.getAccessoriesArr().get(AccessoriesManagement.getAccessoriesArr().indexOf(gameC)).setSystemConnection(SystemConnection.WIRELESS);
             System.out.println("\nYour Accessory has been successfully created!\n");
             createAccessories();
         } else if (des.equals("2")) {
-            GamingController gameC = new GamingController(systemKind, "Wired", numberOfAccessory, title, info, price);
+            GamingController gameC = new GamingController(systemKind, SystemConnection.WIRED, numberOfAccessory, title, info, price);
             gameC.getAccessoriesSellers().add(accessoriesSeller);
             accessoriesSeller.getAccessories().add(gameC);
             AccessoriesManagement.getAccessoriesArr().add(gameC);
             AccessoriesManagement.getAccessoriesArr().get(AccessoriesManagement.getAccessoriesArr().indexOf(gameC)).setSystemKind(systemKind);
-            AccessoriesManagement.getAccessoriesArr().get(AccessoriesManagement.getAccessoriesArr().indexOf(gameC)).setSystemConnection("Wired");
+            AccessoriesManagement.getAccessoriesArr().get(AccessoriesManagement.getAccessoriesArr().indexOf(gameC)).setSystemConnection(SystemConnection.WIRED);
             System.out.println("\nYour Accessory has been successfully created!\n");
             createAccessories();
         } else {
@@ -207,16 +219,33 @@ public class AccessoriesSellerMenu {
     }
 
     public void searchAccessories() {
+        if (accessoriesSeller.isAdmin()) {
+            System.out.println("Enter name of accessory you want:");
+            Scanner inputOne = new Scanner(System.in);
+            String t = inputOne.nextLine();
+            int c = 0;
+            for (int i = 0; i < AccessoriesManagement.getAccessoriesArr().size(); i++) {
+                if (AccessoriesManagement.getAccessoriesArr().get(i).getTitle().startsWith(t)) {
+                    System.out.println(AccessoriesManagement.getAccessoriesArr().get(i).getTitle() + " index: " + i);
+                    c++;
+                }
+            }
+            if (c == 0) {
+                System.out.println("NO SUCH GAME FOUND!");
+                accessories();
+            }
+        } else {
+            int c = 0;
+            System.out.println("\033[1;96m" + "Your Accessories" + "\033[0m");
+            for (int i = 0; i < AccessoriesManagement.getAccessoriesArr().size(); i++) {
+                System.out.println("Accessory title: " + accessoriesSeller.getAccessories().get(i).getTitle() + " with index of: " + AccessoriesManagement.getAccessoriesArr().indexOf(accessoriesSeller.getAccessories().get(i)));
+                c++;
+            }
+            if (c == 0) {
+                accessories();
+            }
+        }
         Scanner input = new Scanner(System.in);
-        int c=0;
-        System.out.println("\033[1;96m" + "Your Accessories" + "\033[0m");
-        for (int i = 0; i < AccessoriesManagement.getAccessoriesArr().size(); i++) {
-            System.out.println("Accessory title: " + AccessoriesManagement.getAccessoriesArr().get(i).getTitle() + " with index of: " + i);
-            c++;
-        }
-        if(c==0){
-            accessories();
-        }
         System.out.println("\033[1;96m" + "Modify or Delete selection Menu" + "\033[0m");
         System.out.println("1.Modify Accessory");
         System.out.println("2.delete Accessory");
@@ -224,7 +253,7 @@ public class AccessoriesSellerMenu {
         int des = input.nextInt();
         switch (des) {
             case 1:
-                System.out.println("enter the index of the game you want to modify:");
+                System.out.println("enter the index of the accessory you want to modify:");
                 int index = input.nextInt();
                 if (AccessoriesManagement.getAccessoriesArr().get(index) instanceof GamingController) {
                     gameControllerModify(index);
@@ -235,7 +264,7 @@ public class AccessoriesSellerMenu {
                 }
                 break;
             case 2:
-                System.out.println("enter the index of the game you want to delete:");
+                System.out.println("enter the index of the accessory you want to delete:");
                 int index1 = input.nextInt();
                 AccessoriesManagement.getAccessoriesArr().remove(index1);
                 accessoriesSeller.getAccessories().remove(index1);
@@ -263,34 +292,34 @@ public class AccessoriesSellerMenu {
             case 1:
                 System.out.println("Enter new title:");
                 Scanner inputOne = new Scanner(System.in);
-                String title=inputOne.nextLine();
+                String title = inputOne.nextLine();
                 AccessoriesManagement.getAccessoriesArr().get(i).setTitle(title);
                 break;
             case 2:
                 Scanner inputTwo = new Scanner(System.in);
-                String titl=inputTwo.nextLine();
+                String titl = inputTwo.nextLine();
                 AccessoriesManagement.getAccessoriesArr().get(i).setInfo(titl);
                 break;
             case 3:
                 Scanner inputThree = new Scanner(System.in);
-                String tit=inputThree.nextLine();
+                String tit = inputThree.nextLine();
                 AccessoriesManagement.getAccessoriesArr().get(i).setPrice(tit);
                 break;
             case 4:
                 Scanner inputFour = new Scanner(System.in);
-                String ti=inputFour.nextLine();
+                String ti = inputFour.nextLine();
                 AccessoriesManagement.getAccessoriesArr().get(i).setNumberOfAccessory(ti);
                 break;
             case 5:
-                if (AccessoriesManagement.getAccessoriesArr().get(i).getSystemConnection().equals("Wired")) {
-                    AccessoriesManagement.getAccessoriesArr().get(i).setSystemConnection("Wireless");
+                if (AccessoriesManagement.getAccessoriesArr().get(i).getSystemConnection().equals(SystemConnection.WIRED)) {
+                    AccessoriesManagement.getAccessoriesArr().get(i).setSystemConnection(SystemConnection.WIRELESS);
                 } else {
-                    AccessoriesManagement.getAccessoriesArr().get(i).setSystemConnection("Wired");
+                    AccessoriesManagement.getAccessoriesArr().get(i).setSystemConnection(SystemConnection.WIRED);
                 }
                 break;
             case 6:
                 Scanner inputFive = new Scanner(System.in);
-                String t=inputFive.nextLine();
+                String t = inputFive.nextLine();
                 AccessoriesManagement.getAccessoriesArr().get(i).setSystemKind(t);
                 break;
             case 7:

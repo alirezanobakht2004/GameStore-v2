@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Sign {
 
     public void sign() {
-        User user = new User("A","1","l","k");
+        User user = new User("A", "1", "l", "k");
         UserManagement.getUsersArr().add(user);
         System.out.println("\u001B[33m" + "Select Your Role" + "\u001B[0m");
         System.out.println("Enter 1 if you are Admin");
@@ -16,7 +16,7 @@ public class Sign {
         try {
             Scanner input = new Scanner(System.in);
             int in = input.nextInt();
-            switch (in){
+            switch (in) {
                 case 1:
                     adminStart();
                     break;
@@ -36,13 +36,13 @@ public class Sign {
                     sign();
                     break;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("\nwrong entry!");
             sign();
         }
     }
 
-    public void accessoriesSellerStart(){
+    public void accessoriesSellerStart() {
         System.out.println("\033[1;94m" + "AccessoriesSeller entry menu" + "\033[0m");
         System.out.println("\033[1;92m" + "Sign up or Sign in" + "\033[0m");
         System.out.println("Enter 1 for sign up");
@@ -66,7 +66,7 @@ public class Sign {
                     accessoriesSellerStart();
                     break;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("\nwrong entry!");
             accessoriesSellerStart();
         }
@@ -119,8 +119,7 @@ public class Sign {
         for (int i = 0; i < AccessoriesSellerManagement.getAccessoriesSellerArr().size(); i++) {
             if (AccessoriesSellerManagement.getAccessoriesSellerArr().get(i).getAccessoriesSellerName().equals(accName)) {
                 if (AccessoriesSellerManagement.getAccessoriesSellerArr().get(i).getPassword().equals(password)) {
-                    if(!AccessoriesSellerManagement.getAccessoriesSellerArr().get(i).isAdmin())
-                    {
+                    if (!AccessoriesSellerManagement.getAccessoriesSellerArr().get(i).isAdmin()) {
                         System.out.println("Your welcome!");
                         AccessoriesSellerManagement.getAccessoriesSellerArr().get(i).getAccessoriesSellerMenu().start(i);
                         count++;
@@ -133,6 +132,7 @@ public class Sign {
             sign();
         }
     }
+
     public void developerStart() {
         System.out.println("\033[1;94m" + "Developer entry menu" + "\033[0m");
         System.out.println("\033[1;92m" + "Sign up or Sign in" + "\033[0m");
@@ -157,7 +157,7 @@ public class Sign {
                     developerStart();
                     break;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("\nwrong entry!");
             developerStart();
         }
@@ -210,7 +210,7 @@ public class Sign {
         for (int i = 0; i < DeveloperManagement.getDevelopersArr().size(); i++) {
             if (DeveloperManagement.getDevelopersArr().get(i).getDeveloperName().equals(devName)) {
                 if (DeveloperManagement.getDevelopersArr().get(i).getPassword().equals(password)) {
-                    if (!DeveloperManagement.getDevelopersArr().get(i).isAdmin()){
+                    if (!DeveloperManagement.getDevelopersArr().get(i).isAdmin()) {
                         System.out.println("Your welcome!");
                         DeveloperManagement.getDevelopersArr().get(i).getDeveloperMenu().start(i);
                         count++;
@@ -281,7 +281,7 @@ public class Sign {
                     userStart();
                     break;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("\nwrong entry!");
             userStart();
         }
@@ -291,25 +291,17 @@ public class Sign {
         Scanner input = new Scanner(System.in);
         signUp1();
         String username = input.nextLine();
-        if (username.equals("###")) {
-            sign();
-        }
+        checkBack(username);
         System.out.println("Enter password:");
         String password = input.nextLine();
-        if (password.equals("###")) {
-            sign();
-        }
+        checkBack(password);
         passwordMatch(password);
         System.out.println("Enter email:");
         String email = input.nextLine();
-        if (email.equals("###")) {
-            sign();
-        }
+        checkBack(password);
         System.out.println("Enter phonenumber:");
         String phoneNumber = input.nextLine();
-        if (phoneNumber.equals("###")) {
-            sign();
-        }
+        checkBack(password);
         User user = new User(username, password, phoneNumber, email);
         int count = 0;
         for (int i = 0; i < UserManagement.getUsersArr().size(); i++) {
@@ -335,6 +327,12 @@ public class Sign {
             System.out.println("\nYou signed up!\n");
         }
         sign();
+    }
+
+    public void checkBack(String n) {
+        if (n.equals("###")) {
+            sign();
+        }
     }
 
     public void signUp1() {

@@ -139,14 +139,9 @@ public class Friends {
                 int countReq = 0;
                 for (int j = 0; j < UserManagement.getUsersArr().size(); j++) {
                     if (UserManagement.getUsersArr().get(j).getUsername().equals(userAcc)) {
-                        UserManagement.getUsersArr().get(indexOfUser).setFriends(
-                                UserManagement.getUsersArr().get(indexOfUser).getFriends() + "\nFriend: " + userAcc + " index: "
-                                        + j
-                                        + "\n");
-                        UserManagement.getUsersArr().get(j).setFriends(UserManagement.getUsersArr().get(j).getFriends() + "\n" + "Friend: "
-                                + UserManagement.getUsersArr().get(indexOfUser).getUsername() + " index: " + indexOfUser + "\n");
-                        UserManagement.getUsersArr().get(indexOfUser).setFriendsRequest(
-                                friendsReq(UserManagement.getUsersArr().get(indexOfUser).getFriendsRequest(), userAcc));
+                        UserManagement.getUsersArr().get(indexOfUser).setFriends(UserManagement.getUsersArr().get(indexOfUser).getFriends() + "\nFriend: " + userAcc + " index: " + j + "\n");
+                        UserManagement.getUsersArr().get(j).setFriends(UserManagement.getUsersArr().get(j).getFriends() + "\n" + "Friend: " + UserManagement.getUsersArr().get(indexOfUser).getUsername() + " index: " + indexOfUser + "\n");
+                        UserManagement.getUsersArr().get(indexOfUser).setFriendsRequest(friendsReq(UserManagement.getUsersArr().get(indexOfUser).getFriendsRequest(), userAcc));
                         countReq++;
                         System.out.println("User accepted!");
                         break;
@@ -161,8 +156,7 @@ public class Friends {
                 int countRej = 0;
                 for (int j = 0; j < UserManagement.getUsersArr().size(); j++) {
                     if (UserManagement.getUsersArr().get(j).getUsername().equals(userRej)) {
-                        UserManagement.getUsersArr().get(indexOfUser).setFriendsRequest(
-                                friendsReq(UserManagement.getUsersArr().get(indexOfUser).getFriendsRequest(), userRej));
+                        UserManagement.getUsersArr().get(indexOfUser).setFriendsRequest(friendsReq(UserManagement.getUsersArr().get(indexOfUser).getFriendsRequest(), userRej));
                         countRej++;
                     }
                 }

@@ -223,32 +223,7 @@ public class AccessoriesSellerMenu {
     }
 
     public void searchAccessories() {
-        if (accessoriesSeller.isAdmin()) {
-            System.out.println("Enter name of accessory you want:");
-            Scanner inputOne = new Scanner(System.in);
-            String t = inputOne.nextLine();
-            int c = 0;
-            for (int i = 0; i < AccessoriesManagement.getAccessoriesArr().size(); i++) {
-                if (AccessoriesManagement.getAccessoriesArr().get(i).getTitle().startsWith(t)) {
-                    System.out.println(AccessoriesManagement.getAccessoriesArr().get(i).getTitle() + " index: " + i);
-                    c++;
-                }
-            }
-            if (c == 0) {
-                System.out.println("NO SUCH GAME FOUND!");
-                accessories();
-            }
-        } else {
-            int c = 0;
-            System.out.println("\033[1;96m" + "Your Accessories" + "\033[0m");
-            for (int i = 0; i < accessoriesSeller.getAccessories().size(); i++) {
-                System.out.println("Accessory title: " + accessoriesSeller.getAccessories().get(i).getTitle() + " with index of: " + AccessoriesManagement.getAccessoriesArr().indexOf(accessoriesSeller.getAccessories().get(i)));
-                c++;
-            }
-            if (c == 0) {
-                accessories();
-            }
-        }
+        beforeSearch();
         Scanner input = new Scanner(System.in);
         System.out.println("\033[1;96m" + "Modify or Delete selection Menu" + "\033[0m");
         System.out.println("1.Modify Accessory");
@@ -281,6 +256,35 @@ public class AccessoriesSellerMenu {
         }
     }
 
+    public void beforeSearch() {
+        if (accessoriesSeller.isAdmin()) {
+            System.out.println("Enter name of accessory you want:");
+            Scanner inputOne = new Scanner(System.in);
+            String t = inputOne.nextLine();
+            int c = 0;
+            for (int i = 0; i < AccessoriesManagement.getAccessoriesArr().size(); i++) {
+                if (AccessoriesManagement.getAccessoriesArr().get(i).getTitle().startsWith(t)) {
+                    System.out.println(AccessoriesManagement.getAccessoriesArr().get(i).getTitle() + " index: " + i);
+                    c++;
+                }
+            }
+            if (c == 0) {
+                System.out.println("NO SUCH GAME FOUND!");
+                accessories();
+            }
+        } else {
+            int c = 0;
+            System.out.println("\033[1;96m" + "Your Accessories" + "\033[0m");
+            for (int i = 0; i < accessoriesSeller.getAccessories().size(); i++) {
+                System.out.println("Accessory title: " + accessoriesSeller.getAccessories().get(i).getTitle() + " with index of: " + AccessoriesManagement.getAccessoriesArr().indexOf(accessoriesSeller.getAccessories().get(i)));
+                c++;
+            }
+            if (c == 0) {
+                accessories();
+            }
+        }
+    }
+
     public void gameControllerModify(int i) {
         Scanner input = new Scanner(System.in);
         System.out.println("\033[0;91m" + "gameController modify menu" + "\033[0m");
@@ -292,18 +296,17 @@ public class AccessoriesSellerMenu {
         System.out.println("6.Modify SystemKind");
         System.out.println("7.Back");
         int des = input.nextInt();
+        gameControllerModifyDecision(i, des);
+        accessories();
+    }
+
+    public void gameControllerModifyDecision(int i, int des) {
         switch (des) {
             case 1:
-                System.out.println("Enter new:");
-                Scanner inputOne = new Scanner(System.in);
-                String title = inputOne.nextLine();
-                AccessoriesManagement.getAccessoriesArr().get(i).setTitle(title);
+                modifyT(i);
                 break;
             case 2:
-                System.out.println("Enter new:");
-                Scanner inputTwo = new Scanner(System.in);
-                String titl = inputTwo.nextLine();
-                AccessoriesManagement.getAccessoriesArr().get(i).setInfo(titl);
+                modifyI(i);
                 break;
             case 3:
                 System.out.println("Enter new:");
@@ -335,20 +338,27 @@ public class AccessoriesSellerMenu {
             default:
                 break;
         }
-        accessories();
+    }
+
+    public void modifyT(int i) {
+        System.out.println("Enter new:");
+        Scanner inputOne = new Scanner(System.in);
+        String title = inputOne.nextLine();
+        AccessoriesManagement.getAccessoriesArr().get(i).setTitle(title);
+    }
+
+    public void modifyI(int i) {
+        System.out.println("Enter new:");
+        Scanner inputTwo = new Scanner(System.in);
+        String titl = inputTwo.nextLine();
+        AccessoriesManagement.getAccessoriesArr().get(i).setInfo(titl);
     }
 
     public void gameMonitorModify(int i) {
         Scanner input = new Scanner(System.in);
-        System.out.println("\033[0;91m" + "gameMonitor modify menu" + "\033[0m");
-        System.out.println("1.Modify Title");
-        System.out.println("2.Modify Info");
-        System.out.println("3.Modify Price");
-        System.out.println("4.Modify NumberOfAccessory");
-        System.out.println("5.Modify Fps");
-        System.out.println("6.Modify Size");
-        System.out.println("7.Modify AnswerTime");
-        System.out.println("8.Back");
+        for (String s : Arrays.asList("\033[0;91m" + "gameMonitor modify menu" + "\033[0m", "1.Modify Title", "2.Modify Info", "3.Modify Price", "4.Modify NumberOfAccessory", "5.Modify Fps", "6.Modify Size", "7.Modify AnswerTime", "8.Back")) {
+            System.out.println(s);
+        }
         int des = input.nextInt();
         Scanner inputOne = new Scanner(System.in);
         switch (des) {

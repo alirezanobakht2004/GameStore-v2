@@ -6,7 +6,9 @@ import java.util.List;
 public class AccessoriesSeller {
 
     private String accessoriesSellerName;
+
     private String password;
+
     private AccessoriesSellerMenu accessoriesSellerMenu;
 
     private boolean isAdmin=false;

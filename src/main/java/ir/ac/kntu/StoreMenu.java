@@ -67,25 +67,13 @@ public class StoreMenu {
                 System.out.print('*');
             }
         }
-
         for (int i = 0; i < AccessoriesManagement.getAccessoriesArr().size(); i++) {
             String acc = "| Title of accessory: " + "\033[1;93m" + AccessoriesManagement.getAccessoriesArr().get(i).getTitle() + "\033[0m" + " Index of accessory is: " + i + " |";
-            System.out.println();
-            for (int u = 0; u < acc.length() - 11; u++) {
-                System.out.print('-');
-            }
-            System.out.println();
+            printkhat(acc);
             System.out.println(acc);
-            for (int u = 0; u < acc.length() - 11; u++) {
-                System.out.print('-');
-            }
+            printkhat(acc);
         }
-        System.out.println();
-        System.out.println("Do you want to see games or accessories?");
-        System.out.println("1.Game");
-        System.out.println("2.Accessory");
-        System.out.println("3.Seeing sum of few items price");
-        System.out.println("4.Back");
+        printShowGames();
         Scanner input = new Scanner(System.in);
         int t = input.nextInt();
         switch (t) {
@@ -108,6 +96,23 @@ public class StoreMenu {
             default:
                 break;
         }
+    }
+
+    public void printkhat(String acc) {
+        System.out.println();
+        for (int u = 0; u < acc.length() - 11; u++) {
+            System.out.print('-');
+        }
+        System.out.println();
+    }
+
+    public void printShowGames() {
+        System.out.println();
+        System.out.println("Do you want to see games or accessories?");
+        System.out.println("1.Game");
+        System.out.println("2.Accessory");
+        System.out.println("3.Seeing sum of few items price");
+        System.out.println("4.Back");
     }
 
     public void sumItems(int count) {
@@ -156,15 +161,7 @@ public class StoreMenu {
 
     public void showAccessory(int i) {
         Accessories acc = AccessoriesManagement.getAccessoriesArr().get(i);
-        if (acc.getFps() == null) {
-            for (String s : Arrays.asList("\n" + "Title of accessory: " + "\033[1;93m" + acc.getTitle() + "\033[0m", "\n" + "Info of accessory: " + "\033[1;93m" + acc.getInfo() + "\033[0m", "\n" + "price of accessory: " + "\033[1;93m" + acc.getPrice() + "\033[0m", "\n" + "systemConnection of accessory: " + "\033[1;93m" + acc.getSystemConnection() + "\033[0m", "\n" + "systemKind of accessory: " + "\033[1;93m" + acc.getSystemKind() + "\033[0m")) {
-                System.out.println(s);
-            }
-        } else {
-            for (String s : Arrays.asList("\n" + "Title of accessory: " + "\033[1;93m" + acc.getTitle() + "\033[0m", "\n" + "Info of accessory: " + "\033[1;93m" + acc.getInfo() + "\033[0m", "\n" + "price of accessory: " + "\033[1;93m" + acc.getPrice() + "\033[0m", "\n" + "fps of accessory: " + "\033[1;93m" + acc.getFps() + "\033[0m", "\n" + "size of accessory: " + "\033[1;93m" + acc.getSize() + "\033[0m", "\n" + "answerTime of accessory: " + "\033[1;93m" + acc.getAnswerTime() + "\033[0m")) {
-                System.out.println(s);
-            }
-        }
+        beforeShowAccessory(acc, i);
         System.out.println("1." + "\033[1;92m" + "Buy the accessory" + "\033[0m");
         System.out.println("2.Back");
         Scanner input = new Scanner(System.in);
@@ -201,6 +198,18 @@ public class StoreMenu {
                 break;
         }
         start(indexOfUser);
+    }
+
+    public void beforeShowAccessory(Accessories acc, int i) {
+        if (acc.getFps() == null) {
+            for (String s : Arrays.asList("\n" + "Title of accessory: " + "\033[1;93m" + acc.getTitle() + "\033[0m", "\n" + "Info of accessory: " + "\033[1;93m" + acc.getInfo() + "\033[0m", "\n" + "price of accessory: " + "\033[1;93m" + acc.getPrice() + "\033[0m", "\n" + "systemConnection of accessory: " + "\033[1;93m" + acc.getSystemConnection() + "\033[0m", "\n" + "systemKind of accessory: " + "\033[1;93m" + acc.getSystemKind() + "\033[0m")) {
+                System.out.println(s);
+            }
+        } else {
+            for (String s : Arrays.asList("\n" + "Title of accessory: " + "\033[1;93m" + acc.getTitle() + "\033[0m", "\n" + "Info of accessory: " + "\033[1;93m" + acc.getInfo() + "\033[0m", "\n" + "price of accessory: " + "\033[1;93m" + acc.getPrice() + "\033[0m", "\n" + "fps of accessory: " + "\033[1;93m" + acc.getFps() + "\033[0m", "\n" + "size of accessory: " + "\033[1;93m" + acc.getSize() + "\033[0m", "\n" + "answerTime of accessory: " + "\033[1;93m" + acc.getAnswerTime() + "\033[0m")) {
+                System.out.println(s);
+            }
+        }
     }
 
     public void showGame(int i) {
@@ -317,49 +326,7 @@ public class StoreMenu {
         System.out.println("2.search by category");
         System.out.println("3.back");
         int y = input1.nextInt();
-        switch (y) {
-            case 1:
-                categoryChecker = 0;
-                break;
-            case 2:
-                System.out.println("1.search among game monitors");
-                System.out.println("2.search among game controllers");
-                System.out.println("3.back");
-                int r = input1.nextInt();
-                switch (r) {
-                    case 1:
-                        categoryChecker = 1;
-                        break;
-                    case 2:
-                        System.out.println("1.wired");
-                        System.out.println("2.wireless");
-                        System.out.println("3.back");
-                        int k = input1.nextInt();
-                        switch (k) {
-                            case 1:
-                                categoryChecker = 2;
-                                break;
-                            case 2:
-                                categoryChecker = 3;
-                                break;
-                            case 3:
-                                accessorySearchResult();
-                                break;
-                        }
-                        break;
-                    case 3:
-                        accessorySearchResult();
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            case 3:
-                start(indexOfUser);
-                break;
-            default:
-                break;
-        }
+        categoryChecker = kindChecker(y);
         Scanner input = new Scanner(System.in);
         System.out.println("\n" + "You can type ### and enter to comeback\n");
         System.out.println("Enter name of accessory:");
@@ -382,7 +349,6 @@ public class StoreMenu {
                 count = categoryCheckerFour(name);
                 break;
         }
-
         if (count == 0) {
             System.out.println("there was no such a accessory!");
             searchGameAndAcc();
@@ -391,7 +357,48 @@ public class StoreMenu {
             int des = input.nextInt();
             showAccessory(des);
         }
+    }
 
+    public int kindChecker(int y) {
+        Scanner input1 = new Scanner(System.in);
+        switch (y) {
+            case 1:
+                return 0;
+            case 2:
+                System.out.println("1.search among game monitors\n2.search among game controllers\n3.back\"");
+                int r = input1.nextInt();
+                switch (r) {
+                    case 1:
+                        return 1;
+                    case 2:
+                        System.out.println("1.wired\n2.wireless\n3.back\"");
+                        int k = input1.nextInt();
+                        switch (k) {
+                            case 1:
+                                return 2;
+                            case 2:
+                                return 3;
+                            case 3:
+                                accessorySearchResult();
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+                    case 3:
+                        accessorySearchResult();
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 3:
+                start(indexOfUser);
+                break;
+            default:
+                break;
+        }
+        return 0;
     }
 
     public int categoryCheckerOne(String name) {
@@ -424,8 +431,7 @@ public class StoreMenu {
         int count = 0;
         for (int i = 0; i < AccessoriesManagement.getAccessoriesArr().size(); i++) {
             if (AccessoriesManagement.getAccessoriesArr().get(i).getTitle().startsWith(name)) {
-                if(AccessoriesManagement.getAccessoriesArr().get(i).getSystemConnection()==SystemConnection.WIRED)
-                {
+                if (AccessoriesManagement.getAccessoriesArr().get(i).getSystemConnection() == SystemConnection.WIRED) {
                     System.out.println("name of accessory: " + AccessoriesManagement.getAccessoriesArr().get(i).getTitle() + " index of accessory is: " +
                             "\033[1;93m" + i + "\033[0m");
                     count++;
@@ -439,8 +445,7 @@ public class StoreMenu {
         int count = 0;
         for (int i = 0; i < AccessoriesManagement.getAccessoriesArr().size(); i++) {
             if (AccessoriesManagement.getAccessoriesArr().get(i).getTitle().startsWith(name)) {
-                if(AccessoriesManagement.getAccessoriesArr().get(i).getSystemConnection()==SystemConnection.WIRELESS)
-                {
+                if (AccessoriesManagement.getAccessoriesArr().get(i).getSystemConnection() == SystemConnection.WIRELESS) {
                     System.out.println("name of accessory: " + AccessoriesManagement.getAccessoriesArr().get(i).getTitle() + " index of accessory is: " +
                             "\033[1;93m" + i + "\033[0m");
                     count++;

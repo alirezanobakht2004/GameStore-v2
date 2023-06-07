@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Item {
     private String title;
+
     private String info;
 
     private int price;
@@ -16,6 +17,7 @@ public class Item {
     public Item(){
         community = new Community();
     }
+
     public Item(String title, String info, int price) {
         community = new Community();
         this.title = title;

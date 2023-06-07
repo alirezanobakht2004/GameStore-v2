@@ -15,18 +15,22 @@ public class Game extends Item{
     private int numberBought=0;
 
     private List<Developer> developersOfGame = new ArrayList<Developer>();
+
     public Game(){
         super();
     }
+
     public Game(String title, GameKind genre, String info, int price, int level, GameVersion gameVersion){
         super(title,info,price);
         this.genre=genre;
         this.level=level;
         this.gameVersion = gameVersion;
     }
+
     public List<Developer> getDevelopersOfGame() {
         return developersOfGame;
     }
+
     public GameKind getGenre() {
         return genre;
     }

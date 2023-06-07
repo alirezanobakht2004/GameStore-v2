@@ -206,16 +206,7 @@ public class AdminMenu {
         int count = 0;
         switch (in) {
             case 1:
-                System.out.println("Enter username:");
-                Scanner inputOne = new Scanner(System.in);
-                String user = inputOne.nextLine();
-                for (int i = 0; i < UserManagement.getUsersArr().size(); i++) {
-                    if (UserManagement.getUsersArr().get(i).getUsername().equals(user)) {
-                        userSetting(i);
-                        count++;
-                    }
-                }
-                countAlarm(count);
+                count+= enterUserName(count);
                 break;
             case 2:
                 System.out.println("Enter email:");
@@ -250,6 +241,20 @@ public class AdminMenu {
         searchUser();
     }
 
+    public int enterUserName(int count){
+        System.out.println("Enter username:");
+        Scanner inputOne = new Scanner(System.in);
+        String user = inputOne.nextLine();
+        for (int i = 0; i < UserManagement.getUsersArr().size(); i++) {
+            if (UserManagement.getUsersArr().get(i).getUsername().equals(user)) {
+                userSetting(i);
+                count++;
+            }
+        }
+        countAlarm(count);
+        return count;
+    }
+
     public void searchUser1() {
         System.out.println("\033[46m" + "Search user menu" + "\033[0m");
         System.out.println("how do you want to search user?");
@@ -259,9 +264,6 @@ public class AdminMenu {
         System.out.println("4.back");
     }
 
-    public void searchUser2() {
-
-    }
 
     public void userSetting(int i) {
         System.out.println("\033[1;96m" + "User Setting Menu" + "\033[0m");

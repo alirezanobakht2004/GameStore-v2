@@ -1,18 +1,23 @@
 package ir.ac.kntu;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Scanner;
+
 
 public class Sign {
 
     public void sign() {
+        //uncomment this if you want to see output in html form
+        //outHtml();
         User user = new User("A", "1", "l", "k");
         UserManagement.getUsersArr().add(user);
         System.out.println("\u001B[33m" + "Select Your Role" + "\u001B[0m");
-        System.out.println("Enter 1 if you are Admin");
-        System.out.println("Enter 2 if you are User");
-        System.out.println("Enter 3 if you are Developer");
-        System.out.println("Enter 4 if you are AccessoriesSeller");
-        System.out.println("Enter 5 for leaving");
+        System.out.println("\nEnter 1 if you are Admin ");
+        System.out.println("\nEnter 2 if you are User ");
+        System.out.println("\nEnter 3 if you are Developer ");
+        System.out.println("\nEnter 4 if you are AccessoriesSeller ");
+        System.out.println("\nEnter 5 for leaving ");
         try {
             Scanner input = new Scanner(System.in);
             int in = input.nextInt();
@@ -30,6 +35,7 @@ public class Sign {
                     accessoriesSellerStart();
                     break;
                 case 5:
+
                     System.exit(0);
                 default:
                     System.out.println("\nwrong entry!");
@@ -39,6 +45,17 @@ public class Sign {
         } catch (Exception e) {
             System.out.println("\nwrong entry!");
             sign();
+        }
+    }
+
+    public void outHtml() {
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream("Mirror.html");
+            MyPrintStream printStream = new MyPrintStream(fileOutputStream);
+            System.setOut(printStream);
+            System.setErr(printStream);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

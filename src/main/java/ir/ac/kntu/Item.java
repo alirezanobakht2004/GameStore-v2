@@ -8,7 +8,7 @@ public class Item {
 
     private String info;
 
-    private int price;
+    private float price;
 
     private Community community;
 
@@ -41,7 +41,7 @@ public class Item {
         this.info = info;
     }
 
-    public int getPrice() {
+    public float getPrice() {
         return price;
     }
 

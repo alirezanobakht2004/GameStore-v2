@@ -1,9 +1,6 @@
 package ir.ac.kntu;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class StoreMenu {
 
@@ -41,14 +38,16 @@ public class StoreMenu {
 
     public void bestSellers() {
         List<Game> sortedList = GameManagement.getGamesArr().stream().sorted(Comparator.comparingInt(Game::getNumberBought)).toList();
+        Collections.reverse(sortedList);
         List<Accessories> sortedListTwo = AccessoriesManagement.getAccessoriesArr().stream().sorted(Comparator.comparingInt(Accessories::getNumberBought)).toList();
+        Collections.reverse(sortedListTwo);
         System.out.println("\033[1;93m" + "Best seller games" + "\033[0m");
         for (int i = 0; i < sortedList.size(); i++) {
-            System.out.println("Title: " + sortedList.get(i).getTitle() + "sold " + sortedList.get(i).getNumberBought() + " times");
+            System.out.println("Title: " + sortedList.get(i).getTitle() + " sold " + sortedList.get(i).getNumberBought() + " times");
         }
         System.out.println("\033[1;93m" + "Best seller Accessories" + "\033[0m");
         for (int i = 0; i < sortedListTwo.size(); i++) {
-            System.out.println("Title: " + sortedListTwo.get(i).getTitle() + "sold " + sortedListTwo.get(i).getNumberBought() + " times");
+            System.out.println("Title: " + sortedListTwo.get(i).getTitle() + " sold " + sortedListTwo.get(i).getNumberBought() + " times");
         }
         start(indexOfUser);
     }
@@ -220,7 +219,7 @@ public class StoreMenu {
             System.out.println("\n" + GameManagement.getGamesArr().get(i).getCommunity().getComments() + "\n");
         }
         if (!UserManagement.getUsersArr().get(indexOfUser).getGamesOfUser().contains(GameManagement.getGamesArr().get(i))) {
-            int afterDiscountPercent = (100 - levelScore(i)) / 100;
+            float afterDiscountPercent =  (100 - levelScore(i)) / (float)100;
             System.out.println("2.Back");
             Scanner input = new Scanner(System.in);
             int in = input.nextInt();
@@ -248,23 +247,24 @@ public class StoreMenu {
         start(indexOfUser);
     }
 
-    public int levelScore(int i) {
+    public float levelScore(int i) {
         if (GameManagement.getGamesArr().get(i).getLevel() == 1) {
             System.out.println("1." + "\033[1;92m" + "Buy the game with 0% discount" + "\033[0m");
             return 0;
         }
-        if (GameManagement.getGamesArr().get(i).getLevel() == 2 && UserManagement.getUsersArr().get(indexOfUser).getScore() >= 20) {
+        if (GameManagement.getGamesArr().get(i).getLevel() == 2 && UserManagement.getUsersArr().get(indexOfUser).getScore() >= 2) {
             System.out.println("1." + "\033[1;92m" + "Buy the game with 10% discount" + "\033[0m");
             return 10;
         }
-        if (GameManagement.getGamesArr().get(i).getLevel() == 3 && UserManagement.getUsersArr().get(indexOfUser).getScore() >= 50) {
+        if (GameManagement.getGamesArr().get(i).getLevel() == 3 && UserManagement.getUsersArr().get(indexOfUser).getScore() >= 3) {
             System.out.println("1." + "\033[1;92m" + "Buy the game with 20% discount" + "\033[0m");
             return 20;
         }
-        if (GameManagement.getGamesArr().get(i).getLevel() == 4 && UserManagement.getUsersArr().get(indexOfUser).getScore() >= 100) {
+        if (GameManagement.getGamesArr().get(i).getLevel() == 4 && UserManagement.getUsersArr().get(indexOfUser).getScore() >= 4) {
             System.out.println("1." + "\033[1;92m" + "Buy the game with 30% discount" + "\033[0m");
             return 30;
         }
+        System.out.println("\033[1;91m"+"\n not enough score to buy the game!\n"+ "\033[0m");
         return 0;
     }
 

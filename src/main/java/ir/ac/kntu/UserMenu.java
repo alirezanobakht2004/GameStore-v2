@@ -34,7 +34,6 @@ public class UserMenu {
                 long endTime = System.nanoTime();
                 long duration = endTime - user.getStartTime();
                 user.setStartTime(0);
-                System.out.println();
                 user.setTime(user.getTime() + TimeUnit.SECONDS.convert(duration, TimeUnit.NANOSECONDS));
                 user.setScore((int) user.getTime() / 60);
                 Sign back = new Sign();

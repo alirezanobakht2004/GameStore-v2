@@ -15,7 +15,7 @@ public class User {
 
     private String email;
 
-    private int wallet = 0;
+    private float wallet = 0;
 
     private long time;
 
@@ -75,7 +75,7 @@ public class User {
         return password;
     }
 
-    public void setWallet(int wallet) {
+    public void setWallet(float wallet) {
         this.wallet = wallet;
     }
 
@@ -87,7 +87,7 @@ public class User {
         return email;
     }
 
-    public int getWallet() {
+    public float getWallet() {
         return wallet;
     }
 

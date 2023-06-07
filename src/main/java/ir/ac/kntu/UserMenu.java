@@ -4,7 +4,9 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class UserMenu {
+
     private User user;
+
     public void userMenu(int i) {
         user=UserManagement.getUsersArr().get(i);
         System.out.println("\033[1;92m" + "User Menu" + "\033[0m");
@@ -89,12 +91,7 @@ public class UserMenu {
 
     public void editProfile() {
         Scanner input = new Scanner(System.in);
-        System.out.println("\033[1;97m" + "edit profile menu" + "\033[0m");
-        System.out.println("1.change username");
-        System.out.println("2.change password");
-        System.out.println("3.change email");
-        System.out.println("4.change phonenumber");
-        System.out.println("5.back");
+        beforeEdit();
         int inner = input.nextInt();
         switch (inner) {
             case 1:
@@ -103,7 +100,6 @@ public class UserMenu {
                 String t = inputOne.nextLine();
                 user.setUsername(t);
                 System.out.println("\nyour username changed!\n");
-                profile();
                 break;
             case 2:
                 System.out.println("Enter new password:");
@@ -115,7 +111,6 @@ public class UserMenu {
                 } else {
                     System.out.println("\nwrong pattern!\n");
                 }
-                profile();
                 break;
             case 3:
                 System.out.println("Enter new email:");
@@ -123,7 +118,6 @@ public class UserMenu {
                 String l = inputThree.nextLine();
                 user.setEmail(l);
                 System.out.println("\nyour email changed!\n");
-                profile();
                 break;
             case 4:
                 System.out.println("Enter new phonenumber:");
@@ -131,16 +125,23 @@ public class UserMenu {
                 String p = inputFour.nextLine();
                 user.setPhoneNumber(p);
                 System.out.println("\nyour phonenumber changed!\n");
-                profile();
                 break;
             case 5:
-                profile();
                 break;
             default:
                 break;
         }
+        profile();
     }
 
+    public void beforeEdit(){
+        System.out.println("\033[1;97m" + "edit profile menu" + "\033[0m");
+        System.out.println("1.change username");
+        System.out.println("2.change password");
+        System.out.println("3.change email");
+        System.out.println("4.change phonenumber");
+        System.out.println("5.back");
+    }
     public void wallet() {
         System.out.println("enter amount of money you want to add:");
         Scanner input = new Scanner(System.in);

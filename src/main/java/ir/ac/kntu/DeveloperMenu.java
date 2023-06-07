@@ -12,16 +12,7 @@ public class DeveloperMenu {
 
     public void start(int i) {
         developer = DeveloperManagement.getDevelopersArr().get(i);
-        if (developer.isAdmin()) {
-            for (String s : Arrays.asList("\033[1;93m" + "Welcome to game menu!" + "\033[0m", "2.Games", "3.Inbox", "4.ScheduleEvent", "5.See Feedback", "6.Add Developers", "7.Back")) {
-                System.out.println(s);
-            }
-        } else {
-            for (String s : Arrays.asList("\033[1;93m" + "Welcome to developer menu!" + "\033[0m", "1.Profile", "2.Games", "3.Inbox", "4.ScheduleEvent", "5.See Feedback", "6.Add Developers", "7.Back")) {
-                System.out.println(s);
-            }
-        }
-
+        beforeStart(developer);
         Scanner input = new Scanner(System.in);
         int n = input.nextInt();
         switch (n) {
@@ -44,7 +35,7 @@ public class DeveloperMenu {
                 addDeveloper();
                 break;
             case 7:
-                if(developer.isAdmin()){
+                if (developer.isAdmin()) {
                     for (int j = 0; j < AdminManagement.getAdminsArr().size(); j++) {
                         if (AdminManagement.getAdminsArr().get(j).getAdminName().equals(developer.getDeveloperName())) {
                             if (AdminManagement.getAdminsArr().get(j).getPassword().equals(developer.getPassword())) {
@@ -59,6 +50,18 @@ public class DeveloperMenu {
                 break;
             default:
                 break;
+        }
+    }
+
+    public void beforeStart(Developer developer) {
+        if (developer.isAdmin()) {
+            for (String s : Arrays.asList("\033[1;93m" + "Welcome to game menu!" + "\033[0m", "2.Games", "3.Inbox", "4.ScheduleEvent", "5.See Feedback", "6.Add Developers", "7.Back")) {
+                System.out.println(s);
+            }
+        } else {
+            for (String s : Arrays.asList("\033[1;93m" + "Welcome to developer menu!" + "\033[0m", "1.Profile", "2.Games", "3.Inbox", "4.ScheduleEvent", "5.See Feedback", "6.Add Developers", "7.Back")) {
+                System.out.println(s);
+            }
         }
     }
 
@@ -184,7 +187,7 @@ public class DeveloperMenu {
         System.out.println("1.create games");
         System.out.println("2.modify games or delete games");
         System.out.println("3.back");
-        if(developer.isAdmin()){
+        if (developer.isAdmin()) {
             System.out.println("4.destruction report to developers");
         }
         Scanner input = new Scanner(System.in);
@@ -205,6 +208,7 @@ public class DeveloperMenu {
                 break;
         }
     }
+
     public void reportGame() {
         System.out.println("\033[1;91m" + "Report Game Menu" + "\033[0m");
         for (int i = 0; i < GameManagement.getGamesArr().size(); i++) {
@@ -229,19 +233,16 @@ public class DeveloperMenu {
         Scanner input = new Scanner(System.in);
         System.out.println("Enter title:");
         String title = input.nextLine();
-        System.out.println("\033[1;94m" + "Enter game genre:" + "\033[0m");
-        System.out.println("1."+GameKind.SHOOTING);
-        System.out.println("2."+GameKind.SIMULATION);
-        System.out.println("3."+GameKind.STRATEGY);
+        printGameGenres();
         Scanner i = new Scanner(System.in);
         String d = i.nextLine();
         GameKind genre;
         if (d.equals("1")) {
-            genre=GameKind.SHOOTING;
+            genre = GameKind.SHOOTING;
         } else if (d.equals("2")) {
             genre = GameKind.SIMULATION;
         } else {
-            genre=GameKind.STRATEGY;
+            genre = GameKind.STRATEGY;
         }
         System.out.println("Enter info:");
         String info = input.nextLine();
@@ -273,18 +274,22 @@ public class DeveloperMenu {
         games();
     }
 
+    public void printGameGenres() {
+        System.out.println("\033[1;94m" + "Enter game genre:" + "\033[0m");
+        System.out.println("1." + GameKind.SHOOTING);
+        System.out.println("2." + GameKind.SIMULATION);
+        System.out.println("3." + GameKind.STRATEGY);
+    }
+
     public void searchGame() {
-        if(developer.isAdmin()){
+        if (developer.isAdmin()) {
             System.out.println("Enter name of game:");
             Scanner inputOne = new Scanner(System.in);
             String name = inputOne.nextLine();
             int count = 0;
             for (int i = 0; i < GameManagement.getGamesArr().size(); i++) {
                 if (GameManagement.getGamesArr().get(i).getTitle().startsWith(name)) {
-                    System.out.println("name of game: " + GameManagement.getGamesArr().get(i).getTitle() +
-                            " genre " + GameManagement.getGamesArr().get(i).getGenre() +
-                            " info: " + GameManagement.getGamesArr().get(i).getInfo() + " index of game is: " +
-                            "\033[1;93m" + i + "\033[0m");
+                    System.out.println("name of game: " + GameManagement.getGamesArr().get(i).getTitle() + " genre " + GameManagement.getGamesArr().get(i).getGenre() + " info: " + GameManagement.getGamesArr().get(i).getInfo() + " index of game is: " + "\033[1;93m" + i + "\033[0m");
                     count++;
                 }
             }
@@ -299,10 +304,7 @@ public class DeveloperMenu {
             }
         }
         Scanner input = new Scanner(System.in);
-        System.out.println("\033[1;96m" + "Modify or Delete selection Menu" + "\033[0m");
-        System.out.println("1.Modify game");
-        System.out.println("2.delete game");
-        System.out.println("3.back");
+        printModify();
         int des = input.nextInt();
         switch (des) {
             case 1:
@@ -322,17 +324,18 @@ public class DeveloperMenu {
             default:
                 break;
         }
+    }
 
+    public void printModify() {
+        System.out.println("\033[1;96m" + "Modify or Delete selection Menu" + "\033[0m");
+        System.out.println("1.Modify game");
+        System.out.println("2.delete game");
+        System.out.println("3.back");
     }
 
     public void gameModify(int i) {
         Scanner input = new Scanner(System.in);
-        System.out.println("\033[0;91m" + "game modify menu" + "\033[0m");
-        System.out.println("1.change title");
-        System.out.println("2.change genre");
-        System.out.println("3.change info");
-        System.out.println("4.change price");
-        System.out.println("5.back");
+        beforeGameModify();
         int in = input.nextInt();
         switch (in) {
             case 1 -> {
@@ -343,20 +346,10 @@ public class DeveloperMenu {
                 gameModify(i);
             }
             case 2 -> {
-                System.out.println("\033[1;94m" + "Enter new genre:" + "\033[0m");
-                System.out.println("1."+GameKind.SHOOTING);
-                System.out.println("2."+GameKind.SIMULATION);
-                System.out.println("3."+GameKind.STRATEGY);
+                printGameGenres();
                 Scanner ino = new Scanner(System.in);
                 String d = ino.nextLine();
-                GameKind genre;
-                if (d.equals("1")) {
-                    genre=GameKind.SHOOTING;
-                } else if (d.equals("2")) {
-                    genre = GameKind.SIMULATION;
-                } else {
-                    genre=GameKind.STRATEGY;
-                }
+                GameKind genre = gameGenre(d);
                 GameManagement.getGamesArr().get(i).setGenre(genre);
                 System.out.println("your game genre changed!");
                 gameModify(i);
@@ -381,6 +374,26 @@ public class DeveloperMenu {
             default -> {
                 break;
             }
+        }
+    }
+
+    public void beforeGameModify() {
+        System.out.println("\033[0;91m" + "game modify menu" + "\033[0m");
+        System.out.println("1.change title");
+        System.out.println("2.change genre");
+        System.out.println("3.change info");
+        System.out.println("4.change price");
+        System.out.println("5.back");
+    }
+
+
+    public GameKind gameGenre(String d) {
+        if (d.equals("1")) {
+            return GameKind.SHOOTING;
+        } else if (d.equals("2")) {
+            return GameKind.SIMULATION;
+        } else {
+            return GameKind.STRATEGY;
         }
     }
 

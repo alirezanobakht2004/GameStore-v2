@@ -6,6 +6,7 @@ import java.util.List;
 public class Accessories extends Item{
 
     private int numberOfAccessory;
+
     private List<AccessoriesSeller> accessoriesSellers = new ArrayList<AccessoriesSeller>();
 
     private String systemKind;
@@ -17,7 +18,9 @@ public class Accessories extends Item{
     private String size;
 
     private int numberBought=0;
+
     private String answerTime;
+
     public Accessories(){
         super();
     }
@@ -26,6 +29,7 @@ public class Accessories extends Item{
         super(title, info, price);
         this.numberOfAccessory = numberOfAccessory;
     }
+
     public List<AccessoriesSeller> getAccessoriesSellers() {
         return accessoriesSellers;
     }

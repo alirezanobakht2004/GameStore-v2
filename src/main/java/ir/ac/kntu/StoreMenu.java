@@ -307,7 +307,6 @@ public class StoreMenu {
                 count++;
             }
         }
-
         if (count == 0) {
             System.out.println("there was no such a game!");
             searchGameAndAcc();
@@ -316,7 +315,6 @@ public class StoreMenu {
             int des = input.nextInt();
             showGame(des);
         }
-
     }
 
     public void accessorySearchResult() {
@@ -347,6 +345,8 @@ public class StoreMenu {
                 break;
             case 3:
                 count = categoryCheckerFour(name);
+                break;
+            default:
                 break;
         }
         if (count == 0) {
@@ -498,5 +498,4 @@ public class StoreMenu {
             }
         }
     }
-
 }

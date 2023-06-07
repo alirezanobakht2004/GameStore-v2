@@ -11,7 +11,7 @@ public class Community {
 
     private String comments="comments:";
 
-    private float Rating=0;
+    private float rating =0;
 
     private int ratingNumber = 0;
 
@@ -36,11 +36,11 @@ public class Community {
     }
 
     public float getRating() {
-        return Rating;
+        return rating;
     }
 
     public void setRating(float rating) {
-        Rating = rating;
+        this.rating = rating;
     }
 
 

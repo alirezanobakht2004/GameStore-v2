@@ -5,7 +5,7 @@ import java.util.List;
 
 public class User {
 
-    private UserMenu userMenu ;
+    private UserMenu userMenu;
 
     private String username;
 
@@ -23,9 +23,9 @@ public class User {
 
     private int score;
 
-    private String friendsRequest="Friends request:";
+    private String friendsRequest = "Friends request:";
 
-    private String friends="Friends:";
+    private String friends = "Friends:";
 
     private List<Game> gamesOfUser = new ArrayList<Game>();
 
@@ -45,7 +45,7 @@ public class User {
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        userMenu =new UserMenu();
+        userMenu = new UserMenu();
     }
 
     public User() {
@@ -106,7 +106,6 @@ public class User {
     public void setFriends(String friends) {
         this.friends = friends;
     }
-
 
 
     public long getTime() {

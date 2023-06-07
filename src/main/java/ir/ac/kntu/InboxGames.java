@@ -3,13 +3,13 @@ package ir.ac.kntu;
 public class InboxGames {
     private Game game;
 
-    private int  ExpiryTime;
+    private int expiryTime;
 
     private long startTime;
 
     public InboxGames(Game game, int expiryTime, long startTime) {
         this.game = game;
-        ExpiryTime = expiryTime;
+        this.expiryTime = expiryTime;
         this.startTime = startTime;
     }
 
@@ -22,11 +22,11 @@ public class InboxGames {
     }
 
     public int getExpiryTime() {
-        return ExpiryTime;
+        return expiryTime;
     }
 
     public void setExpiryTime(int expiryTime) {
-        ExpiryTime = expiryTime;
+        this.expiryTime = expiryTime;
     }
 
     public long getStartTime() {

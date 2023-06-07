@@ -3,19 +3,27 @@ package ir.ac.kntu;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Developer{
+public class Developer {
+
     private String developerName;
+
     private String password;
-    private DeveloperMenu developerMenu ;
+
+    private DeveloperMenu developerMenu;
+
     private List<Game> developerGames = new ArrayList<Game>();
+
 
     private List<InboxGames> inbox = new ArrayList<InboxGames>();
 
+
     private List<InboxGames> scheduleEvent = new ArrayList<InboxGames>();
+
 
     private List<String> feedback = new ArrayList<String>();
 
-    private Boolean isAdmin=false;
+
+    private Boolean isAdmin = false;
 
     public Developer() {
     }
@@ -25,12 +33,15 @@ public class Developer{
         this.password = password;
         developerMenu = new DeveloperMenu();
     }
+
     public List<InboxGames> getScheduleEvent() {
         return scheduleEvent;
     }
-    public int getScheduleEventSize(){
+
+    public int getScheduleEventSize() {
         return scheduleEvent.size();
     }
+
     public String getDeveloperName() {
         return developerName;
     }

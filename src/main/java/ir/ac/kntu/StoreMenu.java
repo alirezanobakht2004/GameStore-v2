@@ -84,7 +84,8 @@ public class StoreMenu {
         System.out.println("Do you want to see games or accessories?");
         System.out.println("1.Game");
         System.out.println("2.Accessory");
-        System.out.println("3.Back");
+        System.out.println("3.Seeing sum of few items price");
+        System.out.println("4.Back");
         Scanner input = new Scanner(System.in);
         int t = input.nextInt();
         switch (t) {
@@ -99,13 +100,58 @@ public class StoreMenu {
                 showAccessory(inputTwo.nextInt());
                 break;
             case 3:
+                sumItems(0);
+                break;
+            case 4:
                 start(indexOfUser);
                 break;
             default:
                 break;
         }
     }
-
+public void sumItems(int count){
+    System.out.println("Enter Item Category");
+    System.out.println("1.Game");
+    System.out.println("2.Accessory");
+    System.out.println("3.back");
+    Scanner input=new Scanner(System.in);
+    int d = input.nextInt();
+    switch (d){
+        case 1:
+            System.out.println("Enter index of game");
+            int t = input.nextInt();
+            count+=GameManagement.getGamesArr().get(t).getPrice();
+            System.out.println(count);
+            System.out.println("1.continue");
+            System.out.println("2.back");
+            int k= input.nextInt();
+            if(k==1){
+                sumItems(count);
+            } else {
+                searchGameAndAcc();
+            }
+            break;
+        case 2:
+            System.out.println("Enter index of accessory");
+            int o = input.nextInt();
+            count+=AccessoriesManagement.getAccessoriesArr().get(o).getPrice();
+            System.out.println(count);
+            System.out.println("1.continue");
+            System.out.println("2.back");
+            int u= input.nextInt();
+            if(u==1){
+                sumItems(count);
+            } else {
+                searchGameAndAcc();
+            }
+            break;
+        case 3:
+            searchGameAndAcc();
+            break;
+        default:
+            break;
+    }
+}
     public void showAccessory(int i) {
         Accessories acc = AccessoriesManagement.getAccessoriesArr().get(i);
         if (acc.getFps() == null) {

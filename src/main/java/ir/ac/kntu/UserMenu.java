@@ -8,7 +8,7 @@ public class UserMenu {
     private User user;
 
     public void userMenu(int i) {
-        user=UserManagement.getUsersArr().get(i);
+        user = UserManagement.getUsersArr().get(i);
         System.out.println("\033[1;92m" + "User Menu" + "\033[0m");
         System.out.println("Enter 1 for profile");
         System.out.println("Enter 2 for library");
@@ -32,11 +32,11 @@ public class UserMenu {
                 break;
             case 5:
                 long endTime = System.nanoTime();
-                long duration = endTime-user.getStartTime();
+                long duration = endTime - user.getStartTime();
                 user.setStartTime(0);
                 System.out.println();
-                user.setTime(user.getTime()+TimeUnit.SECONDS.convert(duration, TimeUnit.NANOSECONDS));
-                user.setScore((int) user.getTime()/60);
+                user.setTime(user.getTime() + TimeUnit.SECONDS.convert(duration, TimeUnit.NANOSECONDS));
+                user.setScore((int) user.getTime() / 60);
                 Sign back = new Sign();
                 back.sign();
             default:
@@ -134,7 +134,7 @@ public class UserMenu {
         profile();
     }
 
-    public void beforeEdit(){
+    public void beforeEdit() {
         System.out.println("\033[1;97m" + "edit profile menu" + "\033[0m");
         System.out.println("1.change username");
         System.out.println("2.change password");
@@ -142,11 +142,12 @@ public class UserMenu {
         System.out.println("4.change phonenumber");
         System.out.println("5.back");
     }
+
     public void wallet() {
         System.out.println("enter amount of money you want to add:");
         Scanner input = new Scanner(System.in);
         int g = input.nextInt();
-        user.setWallet(user.getWallet()+g);
+        user.setWallet(user.getWallet() + g);
         System.out.println("\nYou charged your wallet!\n");
         this.profile();
     }

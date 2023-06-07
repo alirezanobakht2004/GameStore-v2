@@ -7,28 +7,33 @@ public class AccessoriesSellerMenu {
     private AccessoriesSeller accessoriesSeller;
 
     public void start(int i) {
-        accessoriesSeller = AccessoriesSellerManagement.getAccessoriesSellerArr().get(i);
-        if (accessoriesSeller.isAdmin()) {
-            accessories();
-        }
-        for (String s : Arrays.asList("\033[1;93m" + "Welcome to AccessoriesSeller menu!" + "\033[0m", "1.Profile", "2.Accessories", "3.back")) {
-            System.out.println(s);
-        }
-        Scanner input = new Scanner(System.in);
-        int n = input.nextInt();
-        switch (n) {
-            case 1:
-                profile();
-                break;
-            case 2:
+        try {
+            accessoriesSeller = AccessoriesSellerManagement.getAccessoriesSellerArr().get(i);
+            if (accessoriesSeller.isAdmin()) {
                 accessories();
-                break;
-            case 3:
-                Sign sign = new Sign();
-                sign.sign();
-                break;
-            default:
-                break;
+            }
+            for (String s : Arrays.asList("\033[1;93m" + "Welcome to AccessoriesSeller menu!" + "\033[0m", "1.Profile", "2.Accessories", "3.back")) {
+                System.out.println(s);
+            }
+            Scanner input = new Scanner(System.in);
+            int n = input.nextInt();
+            switch (n) {
+                case 1:
+                    profile();
+                    break;
+                case 2:
+                    accessories();
+                    break;
+                case 3:
+                    Sign sign = new Sign();
+                    sign.sign();
+                    break;
+                default:
+                    break;
+            }
+        } catch (Exception e) {
+            System.out.println("\nwrong entry!");
+            start(AccessoriesSellerManagement.getAccessoriesSellerArr().indexOf(accessoriesSeller));
         }
     }
 

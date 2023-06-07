@@ -14,32 +14,38 @@ public class StoreMenu {
         System.out.println("3.Filter games and accessories by price");
         System.out.println("4.See Best Sellers");
         System.out.println("5.back");
-        Scanner input = new Scanner(System.in);
-        switch (input.nextInt()) {
-            case 1:
-                showGamesAndAcc();
-                break;
-            case 2:
-                searchGameAndAcc();
-                break;
-            case 3:
-                filterPrice();
-                break;
-            case 4:
-                bestSellers();
-                break;
-            case 5:
-                UserManagement.getUsersArr().get(indexOfUser).getUserMenu().userMenu(indexOfUser);
-                break;
-            default:
-                break;
+        try {
+            Scanner input = new Scanner(System.in);
+            switch (input.nextInt()) {
+                case 1:
+                    showGamesAndAcc();
+                    break;
+                case 2:
+                    searchGameAndAcc();
+                    break;
+                case 3:
+                    filterPrice();
+                    break;
+                case 4:
+                    bestSellers();
+                    break;
+                case 5:
+                    UserManagement.getUsersArr().get(indexOfUser).getUserMenu().userMenu(indexOfUser);
+                    break;
+                default:
+                    break;
+            }
+        }catch (Exception e) {
+            System.out.println("\nwrong entry!");
+            start(indexOfUser);
         }
+
     }
 
     public void bestSellers() {
-        List<Game> sortedList = GameManagement.getGamesArr().stream().sorted(Comparator.comparingInt(Game::getNumberBought)).toList();
+        List<Game> sortedList = new ArrayList<>(GameManagement.getGamesArr().stream().sorted(Comparator.comparingInt(Game::getNumberBought)).toList());
         Collections.reverse(sortedList);
-        List<Accessories> sortedListTwo = AccessoriesManagement.getAccessoriesArr().stream().sorted(Comparator.comparingInt(Accessories::getNumberBought)).toList();
+        List<Accessories> sortedListTwo = new ArrayList<>(AccessoriesManagement.getAccessoriesArr().stream().sorted(Comparator.comparingInt(Accessories::getNumberBought)).toList());
         Collections.reverse(sortedListTwo);
         System.out.println("\033[1;93m" + "Best seller games" + "\033[0m");
         for (int i = 0; i < sortedList.size(); i++) {

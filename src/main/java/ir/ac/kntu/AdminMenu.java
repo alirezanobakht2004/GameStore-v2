@@ -1,5 +1,6 @@
 package ir.ac.kntu;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
@@ -160,7 +161,8 @@ public class AdminMenu {
     }
 
     public void seeMostActive() {
-        List<User> sortedList = UserManagement.getUsersArr().stream().sorted(Comparator.comparingInt(User::getScore)).toList();
+        List<User> sortedList = new java.util.ArrayList<>(UserManagement.getUsersArr().stream().sorted(Comparator.comparingInt(User::getScore)).toList());
+        Collections.reverse(sortedList);
         for (int i = 0; i < sortedList.size(); i++) {
             System.out.println(sortedList.get(i).getUsername() + " with score: " + sortedList.get(i).getScore());
         }

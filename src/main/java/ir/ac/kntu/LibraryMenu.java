@@ -12,19 +12,24 @@ public class LibraryMenu {
         System.out.println("1.Show your games");
         System.out.println("2.show your accessories");
         System.out.println("3.back");
-        Scanner input = new Scanner(System.in);
-        switch (input.nextInt()) {
-            case 1:
-                showGames();
-                break;
-            case 2:
-                showAccessories();
-                break;
-            case 3:
-                UserManagement.getUsersArr().get(indexOfUser).getUserMenu().userMenu(indexOfUser);
-                break;
-            default:
-                break;
+        try {
+            Scanner input = new Scanner(System.in);
+            switch (input.nextInt()) {
+                case 1:
+                    showGames();
+                    break;
+                case 2:
+                    showAccessories();
+                    break;
+                case 3:
+                    UserManagement.getUsersArr().get(indexOfUser).getUserMenu().userMenu(indexOfUser);
+                    break;
+                default:
+                    break;
+            }
+        } catch (Exception e) {
+            System.out.println("\nwrong entry!");
+            start(indexOfUser);
         }
     }
 

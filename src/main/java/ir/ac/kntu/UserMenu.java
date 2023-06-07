@@ -15,32 +15,38 @@ public class UserMenu {
         System.out.println("Enter 3 for store");
         System.out.println("Enter 4 for friends");
         System.out.println("Enter 5 for back");
-        Scanner input = new Scanner(System.in);
-        int in = input.nextInt();
-        switch (in) {
-            case 1:
-                profile();
-                break;
-            case 2:
-                library(i);
-                break;
-            case 3:
-                store(i);
-                break;
-            case 4:
-                friends(i);
-                break;
-            case 5:
-                long endTime = System.nanoTime();
-                long duration = endTime - user.getStartTime();
-                user.setStartTime(0);
-                user.setTime(user.getTime() + TimeUnit.SECONDS.convert(duration, TimeUnit.NANOSECONDS));
-                user.setScore((int) user.getTime() / 60);
-                Sign back = new Sign();
-                back.sign();
-            default:
-                break;
+        try {
+            Scanner input = new Scanner(System.in);
+            int in = input.nextInt();
+            switch (in) {
+                case 1:
+                    profile();
+                    break;
+                case 2:
+                    library(i);
+                    break;
+                case 3:
+                    store(i);
+                    break;
+                case 4:
+                    friends(i);
+                    break;
+                case 5:
+                    long endTime = System.nanoTime();
+                    long duration = endTime - user.getStartTime();
+                    user.setStartTime(0);
+                    user.setTime(user.getTime() + TimeUnit.SECONDS.convert(duration, TimeUnit.NANOSECONDS));
+                    user.setScore((int) user.getTime() / 60);
+                    Sign back = new Sign();
+                    back.sign();
+                default:
+                    break;
+            }
+        } catch (Exception e) {
+            System.out.println("\nwrong entry!");
+            userMenu(UserManagement.getUsersArr().indexOf(user));
         }
+
     }
 
     public void profile() {

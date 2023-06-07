@@ -1,9 +1,6 @@
 package ir.ac.kntu;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class DeveloperMenu {
@@ -11,45 +8,50 @@ public class DeveloperMenu {
     private Developer developer;
 
     public void start(int i) {
-        developer = DeveloperManagement.getDevelopersArr().get(i);
-        beforeStart(developer);
-        Scanner input = new Scanner(System.in);
-        int n = input.nextInt();
-        switch (n) {
-            case 1:
-                profile();
-                break;
-            case 2:
-                games();
-                break;
-            case 3:
-                inbox();
-                break;
-            case 4:
-                seeScheduleEvent();
-                break;
-            case 5:
-                seeFeedback();
-                break;
-            case 6:
-                addDeveloper();
-                break;
-            case 7:
-                if (developer.isAdmin()) {
-                    for (int j = 0; j < AdminManagement.getAdminsArr().size(); j++) {
-                        if (AdminManagement.getAdminsArr().get(j).getAdminName().equals(developer.getDeveloperName())) {
-                            if (AdminManagement.getAdminsArr().get(j).getPassword().equals(developer.getPassword())) {
-                                AdminManagement.getAdminsArr().get(j).getAdminMenu().startMenu(j);
+        try {
+            developer = DeveloperManagement.getDevelopersArr().get(i);
+            beforeStart(developer);
+            Scanner input = new Scanner(System.in);
+            int n = input.nextInt();
+            switch (n) {
+                case 1:
+                    profile();
+                    break;
+                case 2:
+                    games();
+                    break;
+                case 3:
+                    inbox();
+                    break;
+                case 4:
+                    seeScheduleEvent();
+                    break;
+                case 5:
+                    seeFeedback();
+                    break;
+                case 6:
+                    addDeveloper();
+                    break;
+                case 7:
+                    if (developer.isAdmin()) {
+                        for (int j = 0; j < AdminManagement.getAdminsArr().size(); j++) {
+                            if (AdminManagement.getAdminsArr().get(j).getAdminName().equals(developer.getDeveloperName())) {
+                                if (AdminManagement.getAdminsArr().get(j).getPassword().equals(developer.getPassword())) {
+                                    AdminManagement.getAdminsArr().get(j).getAdminMenu().startMenu(j);
+                                }
                             }
                         }
+                    } else {
+                        Sign sign = new Sign();
+                        sign.sign();
                     }
-                } else {
-                    Sign sign = new Sign();
-                    sign.sign();
-                }
-                break;
-            default:
-                break;
+                    break;
+                default:
+                    break;
+            }
+        }catch (Exception e) {
+            System.out.println("\nwrong entry!");
+            start(DeveloperManagement.getDevelopersArr().indexOf(developer));
         }
     }
 
@@ -79,14 +81,15 @@ public class DeveloperMenu {
         } else {
             System.out.println("Developers:");
             for (int j = 0; j < DeveloperManagement.getDevelopersArr().size(); j++) {
-                if (DeveloperManagement.getDevelopersArr().get(j) != developer) {
+                if (DeveloperManagement.getDevelopersArr().get(j).getDeveloperName() != developer.getDeveloperName()) {
                     System.out.println(DeveloperManagement.getDevelopersArr().get(j).getDeveloperName() + " index of: " + j);
                 }
             }
             System.out.println("Enter index of developer you want:");
             int m = input.nextInt();
-            DeveloperManagement.getDevelopersArr().get(m).getDeveloperGames().add(developer.getDeveloperGames().get(n));
-            developer.getDeveloperGames().get(n).getDevelopersOfGame().add(DeveloperManagement.getDevelopersArr().get(m));
+            DeveloperManagement.getDevelopersArr().get(m).getDeveloperGames().add(GameManagement.getGamesArr().get(n));
+            GameManagement.getGamesArr().get(n).getDevelopersOfGame().add(DeveloperManagement.getDevelopersArr().get(m));
+            System.out.println("\nadded developer!\n");
             start(DeveloperManagement.getDevelopersArr().indexOf(developer));
         }
     }
@@ -220,11 +223,13 @@ public class DeveloperMenu {
         System.out.println("\nEnter index of the game you want:");
         Scanner input = new Scanner(System.in);
         int report = input.nextInt();
-        List<Developer> sortedList = GameManagement.getGamesArr().get(report).getDevelopersOfGame().stream().sorted(Comparator.comparingInt(Developer::getScheduleEventSize)).toList();
+        List<Developer> sortedList = new ArrayList<>(GameManagement.getGamesArr().get(report).getDevelopersOfGame().stream().sorted(Comparator.comparingInt(Developer::getScheduleEventSize)).toList());
+        Collections.reverse(sortedList);
         System.out.println("Enter ExpiryTime by minute:");
         int expiry = input.nextInt();
         InboxGames inboxGames = new InboxGames(GameManagement.getGamesArr().get(report), expiry, TimeUnit.MINUTES.convert(System.nanoTime(), TimeUnit.NANOSECONDS));
         sortedList.get(0).getInbox().add(inboxGames);
+        System.out.println("reported successfully!");
         games();
     }
 
@@ -270,7 +275,7 @@ public class DeveloperMenu {
         game.getDevelopersOfGame().add(developer);
         GameManagement.getGamesArr().add(game);
         developer.getDeveloperGames().add(game);
-        System.out.println("\nYour game has been succsessfully created!\n");
+        System.out.println("\nYour game has been successfully created!\n");
         games();
     }
 
@@ -402,7 +407,7 @@ public class DeveloperMenu {
         for (int i = 0; i < developer.getInbox().size(); i++) {
             System.out.println(i + "." + "\033[0;91m" + developer.getInbox().get(i).getGame().getTitle() + "\033[0m");
         }
-        System.out.println("1.accept or reject a request:");
+        System.out.println("1.accept or reject a request");
         System.out.println("2.back");
         Scanner input = new Scanner(System.in);
         int n = input.nextInt();
@@ -423,7 +428,8 @@ public class DeveloperMenu {
             for (int j = 0; j < DeveloperManagement.getDevelopersArr().get(i).getInbox().size(); j++) {
                 int def = (int) (TimeUnit.MINUTES.convert(System.nanoTime(), TimeUnit.NANOSECONDS) - DeveloperManagement.getDevelopersArr().get(i).getInbox().get(j).getStartTime()) - DeveloperManagement.getDevelopersArr().get(i).getInbox().get(j).getExpiryTime();
                 if (def >= 0) {
-                    List<Developer> sortedList = DeveloperManagement.getDevelopersArr().get(i).getInbox().get(j).getGame().getDevelopersOfGame().stream().sorted(Comparator.comparingInt(Developer::getScheduleEventSize)).toList();
+                    List<Developer> sortedList = new ArrayList<>(DeveloperManagement.getDevelopersArr().get(i).getInbox().get(j).getGame().getDevelopersOfGame().stream().sorted(Comparator.comparingInt(Developer::getScheduleEventSize)).toList());
+                    Collections.reverse(sortedList);
                     int step = def / DeveloperManagement.getDevelopersArr().get(i).getInbox().get(j).getExpiryTime();
                     if (sortedList.size() >= sortedList.indexOf(DeveloperManagement.getDevelopersArr().get(i)) + step) {
                         DeveloperManagement.getDevelopersArr().get(i).getInbox().get(j).setStartTime((TimeUnit.MINUTES.convert(System.nanoTime(), TimeUnit.NANOSECONDS)));

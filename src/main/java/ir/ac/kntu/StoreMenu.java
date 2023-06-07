@@ -15,7 +15,7 @@ public class StoreMenu {
         System.out.println("\033[1;94m" + "welcome to store" + "\033[0m");
         System.out.println("1.Show all games and accessories");
         System.out.println("2.Search game and accessories");
-        System.out.println("3.Filter games by price");
+        System.out.println("3.Filter games and accessories by price");
         System.out.println("4.See Best Sellers");
         System.out.println("5.back");
         Scanner input = new Scanner(System.in);
@@ -40,16 +40,16 @@ public class StoreMenu {
         }
     }
 
-    public void bestSellers(){
+    public void bestSellers() {
         List<Game> sortedList = GameManagement.getGamesArr().stream().sorted(Comparator.comparingInt(Game::getNumberBought)).toList();
         List<Accessories> sortedListTwo = AccessoriesManagement.getAccessoriesArr().stream().sorted(Comparator.comparingInt(Accessories::getNumberBought)).toList();
-        System.out.println("\033[1;93m"+"Best seller games"+"\033[0m");
-        for (int i=0;i<sortedList.size();i++){
-            System.out.println("Title: "+sortedList.get(i).getTitle()+ "sold "+ sortedList.get(i).getNumberBought()+ " times");
+        System.out.println("\033[1;93m" + "Best seller games" + "\033[0m");
+        for (int i = 0; i < sortedList.size(); i++) {
+            System.out.println("Title: " + sortedList.get(i).getTitle() + "sold " + sortedList.get(i).getNumberBought() + " times");
         }
-        System.out.println("\033[1;93m"+"Best seller Accessories"+"\033[0m");
-        for (int i=0;i<sortedListTwo.size();i++){
-            System.out.println("Title: "+sortedListTwo.get(i).getTitle()+"sold "+ sortedListTwo.get(i).getNumberBought()+ " times");
+        System.out.println("\033[1;93m" + "Best seller Accessories" + "\033[0m");
+        for (int i = 0; i < sortedListTwo.size(); i++) {
+            System.out.println("Title: " + sortedListTwo.get(i).getTitle() + "sold " + sortedListTwo.get(i).getNumberBought() + " times");
         }
         start(indexOfUser);
     }
@@ -109,49 +109,51 @@ public class StoreMenu {
                 break;
         }
     }
-public void sumItems(int count){
-    System.out.println("Enter Item Category");
-    System.out.println("1.Game");
-    System.out.println("2.Accessory");
-    System.out.println("3.back");
-    Scanner input=new Scanner(System.in);
-    int d = input.nextInt();
-    switch (d){
-        case 1:
-            System.out.println("Enter index of game");
-            int t = input.nextInt();
-            count+=GameManagement.getGamesArr().get(t).getPrice();
-            System.out.println(count);
-            System.out.println("1.continue");
-            System.out.println("2.back");
-            int k= input.nextInt();
-            if(k==1){
-                sumItems(count);
-            } else {
-                searchGameAndAcc();
-            }
-            break;
-        case 2:
-            System.out.println("Enter index of accessory");
-            int o = input.nextInt();
-            count+=AccessoriesManagement.getAccessoriesArr().get(o).getPrice();
-            System.out.println(count);
-            System.out.println("1.continue");
-            System.out.println("2.back");
-            int u= input.nextInt();
-            if(u==1){
-                sumItems(count);
-            } else {
-                searchGameAndAcc();
-            }
-            break;
-        case 3:
-            searchGameAndAcc();
-            break;
-        default:
-            break;
+
+    public void sumItems(int count) {
+        System.out.println("Enter Item Category");
+        System.out.println("1.Game");
+        System.out.println("2.Accessory");
+        System.out.println("3.back");
+        Scanner input = new Scanner(System.in);
+        int d = input.nextInt();
+        switch (d) {
+            case 1:
+                System.out.println("Enter index of game");
+                int t = input.nextInt();
+                count += GameManagement.getGamesArr().get(t).getPrice();
+                System.out.println(count);
+                System.out.println("1.continue");
+                System.out.println("2.back");
+                int k = input.nextInt();
+                if (k == 1) {
+                    sumItems(count);
+                } else {
+                    showGamesAndAcc();
+                }
+                break;
+            case 2:
+                System.out.println("Enter index of accessory");
+                int o = input.nextInt();
+                count += AccessoriesManagement.getAccessoriesArr().get(o).getPrice();
+                System.out.println(count);
+                System.out.println("1.continue");
+                System.out.println("2.back");
+                int u = input.nextInt();
+                if (u == 1) {
+                    sumItems(count);
+                } else {
+                    showGamesAndAcc();
+                }
+                break;
+            case 3:
+                showGamesAndAcc();
+                break;
+            default:
+                break;
+        }
     }
-}
+
     public void showAccessory(int i) {
         Accessories acc = AccessoriesManagement.getAccessoriesArr().get(i);
         if (acc.getFps() == null) {
@@ -170,15 +172,15 @@ public void sumItems(int count){
         switch (in) {
             case 1:
                 if (UserManagement.getUsersArr().get(indexOfUser).getWallet() >= acc.getPrice()) {
-                    if(acc.getNumberOfAccessory()>0){
-                        if(UserManagement.getUsersArr().get(indexOfUser).getAccessoriesOfUser().contains(acc)){
-                            acc.setNumberBought(acc.getNumberBought()+1);
-                            acc.setNumberOfAccessory(acc.getNumberOfAccessory()-1);
+                    if (acc.getNumberOfAccessory() > 0) {
+                        if (UserManagement.getUsersArr().get(indexOfUser).getAccessoriesOfUser().contains(acc)) {
+                            acc.setNumberBought(acc.getNumberBought() + 1);
+                            acc.setNumberOfAccessory(acc.getNumberOfAccessory() - 1);
                             UserManagement.getUsersArr().get(indexOfUser).setWallet(UserManagement.getUsersArr().get(indexOfUser).getWallet() - acc.getPrice());
                             System.out.println("\n" + "You bought the accessory again!" + "\n");
-                        }else {
-                            acc.setNumberBought(acc.getNumberBought()+1);
-                            acc.setNumberOfAccessory(acc.getNumberOfAccessory()-1);
+                        } else {
+                            acc.setNumberBought(acc.getNumberBought() + 1);
+                            acc.setNumberOfAccessory(acc.getNumberOfAccessory() - 1);
                             UserManagement.getUsersArr().get(indexOfUser).getAccessoriesOfUser().add(acc);
                             acc.getCommunity().getUserList().add(UserManagement.getUsersArr().get(indexOfUser));
                             UserManagement.getUsersArr().get(indexOfUser).setWallet(UserManagement.getUsersArr().get(indexOfUser).getWallet() - acc.getPrice());
@@ -210,19 +212,19 @@ public void sumItems(int count){
             System.out.println("\n" + GameManagement.getGamesArr().get(i).getCommunity().getComments() + "\n");
         }
         if (!UserManagement.getUsersArr().get(indexOfUser).getGamesOfUser().contains(GameManagement.getGamesArr().get(i))) {
-            int afterDiscountPercent=(100- levelScore(i))/100;
+            int afterDiscountPercent = (100 - levelScore(i)) / 100;
             System.out.println("2.Back");
             Scanner input = new Scanner(System.in);
             int in = input.nextInt();
             switch (in) {
                 case 1:
-                    if (UserManagement.getUsersArr().get(indexOfUser).getWallet() >=afterDiscountPercent*GameManagement.getGamesArr().get(i).getPrice()) {
+                    if (UserManagement.getUsersArr().get(indexOfUser).getWallet() >= afterDiscountPercent * GameManagement.getGamesArr().get(i).getPrice()) {
                         UserManagement.getUsersArr().get(indexOfUser).getGamesOfUser().add(GameManagement.getGamesArr().get(i));
                         GameManagement.getGamesArr().get(i).getCommunity().getUserList().add(UserManagement.getUsersArr().get(indexOfUser));
                         UserManagement.getUsersArr().get(indexOfUser).setWallet(
                                 UserManagement.getUsersArr().get(indexOfUser).getWallet()
-                                        -afterDiscountPercent*GameManagement.getGamesArr().get(i).getPrice());
-                        GameManagement.getGamesArr().get(i).setNumberBought(GameManagement.getGamesArr().get(i).getNumberBought()+1);
+                                        - afterDiscountPercent * GameManagement.getGamesArr().get(i).getPrice());
+                        GameManagement.getGamesArr().get(i).setNumberBought(GameManagement.getGamesArr().get(i).getNumberBought() + 1);
                         System.out.println("\n" + "You bought the game successfully!" + "\n");
                     } else {
                         System.out.println("\033[1;91m" + "Not enough money in wallet" + "\033[0m");
@@ -238,20 +240,20 @@ public void sumItems(int count){
         start(indexOfUser);
     }
 
-    public int levelScore(int i){
-        if(GameManagement.getGamesArr().get(i).getLevel()==1){
+    public int levelScore(int i) {
+        if (GameManagement.getGamesArr().get(i).getLevel() == 1) {
             System.out.println("1." + "\033[1;92m" + "Buy the game with 0% discount" + "\033[0m");
             return 0;
         }
-        if (GameManagement.getGamesArr().get(i).getLevel()==2 && UserManagement.getUsersArr().get(indexOfUser).getScore()>=20){
+        if (GameManagement.getGamesArr().get(i).getLevel() == 2 && UserManagement.getUsersArr().get(indexOfUser).getScore() >= 20) {
             System.out.println("1." + "\033[1;92m" + "Buy the game with 10% discount" + "\033[0m");
             return 10;
         }
-        if (GameManagement.getGamesArr().get(i).getLevel()==3 && UserManagement.getUsersArr().get(indexOfUser).getScore()>=50){
+        if (GameManagement.getGamesArr().get(i).getLevel() == 3 && UserManagement.getUsersArr().get(indexOfUser).getScore() >= 50) {
             System.out.println("1." + "\033[1;92m" + "Buy the game with 20% discount" + "\033[0m");
             return 20;
         }
-        if (GameManagement.getGamesArr().get(i).getLevel()==4 && UserManagement.getUsersArr().get(indexOfUser).getScore()>=100){
+        if (GameManagement.getGamesArr().get(i).getLevel() == 4 && UserManagement.getUsersArr().get(indexOfUser).getScore() >= 100) {
             System.out.println("1." + "\033[1;92m" + "Buy the game with 30% discount" + "\033[0m");
             return 30;
         }
@@ -265,7 +267,7 @@ public void sumItems(int count){
         System.out.println("1.Games");
         System.out.println("2.Accessories");
         int t = input.nextInt();
-        switch (t){
+        switch (t) {
             case 1:
                 gameSearchResult();
                 break;
@@ -277,36 +279,87 @@ public void sumItems(int count){
         }
         start(indexOfUser);
     }
-public void gameSearchResult(){
-    Scanner input = new Scanner(System.in);
-    System.out.println("\n" + "You can type ### and enter to comeback\n");
-    System.out.println("Enter name of game:");
-    String name = input.nextLine();
-    if (name.equals("###")) {
-        start(indexOfUser);
-    }
-    int count = 0;
-    for (int i = 0; i < GameManagement.getGamesArr().size(); i++) {
-        if (GameManagement.getGamesArr().get(i).getTitle().startsWith(name)) {
-            System.out.println("name of game: " + GameManagement.getGamesArr().get(i).getTitle() +
-                    " genre: " + GameManagement.getGamesArr().get(i).getGenre() +
-                    " info: " + GameManagement.getGamesArr().get(i).getInfo() + " index of game is: " +
-                    "\033[1;93m" + i + "\033[0m");
-            count++;
+
+    public void gameSearchResult() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("\n" + "You can type ### and enter to comeback\n");
+        System.out.println("Enter name of game:");
+        String name = input.nextLine();
+        if (name.equals("###")) {
+            start(indexOfUser);
         }
+        int count = 0;
+        for (int i = 0; i < GameManagement.getGamesArr().size(); i++) {
+            if (GameManagement.getGamesArr().get(i).getTitle().startsWith(name)) {
+                System.out.println("name of game: " + GameManagement.getGamesArr().get(i).getTitle() +
+                        " genre: " + GameManagement.getGamesArr().get(i).getGenre() +
+                        " info: " + GameManagement.getGamesArr().get(i).getInfo() + " index of game is: " +
+                        "\033[1;93m" + i + "\033[0m");
+                count++;
+            }
+        }
+
+        if (count == 0) {
+            System.out.println("there was no such a game!");
+            searchGameAndAcc();
+        } else {
+            System.out.println("\033[1;96m" + "Enter the index of the game you want to see:" + "\033[0m");
+            int des = input.nextInt();
+            showGame(des);
+        }
+
     }
 
-    if (count == 0) {
-        System.out.println("there was no such a game!");
-        searchGameAndAcc();
-    } else {
-        System.out.println("\033[1;96m" + "Enter the index of the game you want to see:" + "\033[0m");
-        int des = input.nextInt();
-        showGame(des);
-    }
-
-}
-    public void accessorySearchResult(){
+    public void accessorySearchResult() {
+        int categoryChecker = 0;
+        Scanner input1 = new Scanner(System.in);
+        System.out.println("1.search among all accessories");
+        System.out.println("2.search by category");
+        System.out.println("3.back");
+        int y = input1.nextInt();
+        switch (y) {
+            case 1:
+                categoryChecker = 0;
+                break;
+            case 2:
+                System.out.println("1.search among game monitors");
+                System.out.println("2.search among game controllers");
+                System.out.println("3.back");
+                int r = input1.nextInt();
+                switch (r) {
+                    case 1:
+                        categoryChecker = 1;
+                        break;
+                    case 2:
+                        System.out.println("1.wired");
+                        System.out.println("2.wireless");
+                        System.out.println("3.back");
+                        int k = input1.nextInt();
+                        switch (k) {
+                            case 1:
+                                categoryChecker = 2;
+                                break;
+                            case 2:
+                                categoryChecker = 3;
+                                break;
+                            case 3:
+                                accessorySearchResult();
+                                break;
+                        }
+                        break;
+                    case 3:
+                        accessorySearchResult();
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 3:
+                start(indexOfUser);
+                break;
+            default:
+                break;
+        }
         Scanner input = new Scanner(System.in);
         System.out.println("\n" + "You can type ### and enter to comeback\n");
         System.out.println("Enter name of accessory:");
@@ -315,12 +368,19 @@ public void gameSearchResult(){
             start(indexOfUser);
         }
         int count = 0;
-        for (int i = 0; i < AccessoriesManagement.getAccessoriesArr().size(); i++) {
-            if (AccessoriesManagement.getAccessoriesArr().get(i).getTitle().startsWith(name)) {
-                System.out.println("name of accessory: " + AccessoriesManagement.getAccessoriesArr().get(i).getTitle() + " index of accessory is: " +
-                        "\033[1;93m" + i + "\033[0m");
-                count++;
-            }
+        switch (categoryChecker) {
+            case 0:
+                count = categoryCheckerOne(name);
+                break;
+            case 1:
+                count = categoryCheckerTwo(name);
+                break;
+            case 2:
+                count = categoryCheckerThree(name);
+                break;
+            case 3:
+                count = categoryCheckerFour(name);
+                break;
         }
 
         if (count == 0) {
@@ -333,6 +393,63 @@ public void gameSearchResult(){
         }
 
     }
+
+    public int categoryCheckerOne(String name) {
+        int count = 0;
+        for (int i = 0; i < AccessoriesManagement.getAccessoriesArr().size(); i++) {
+            if (AccessoriesManagement.getAccessoriesArr().get(i).getTitle().startsWith(name)) {
+                System.out.println("name of accessory: " + AccessoriesManagement.getAccessoriesArr().get(i).getTitle() + " index of accessory is: " +
+                        "\033[1;93m" + i + "\033[0m");
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int categoryCheckerTwo(String name) {
+        int count = 0;
+        for (int i = 0; i < AccessoriesManagement.getAccessoriesArr().size(); i++) {
+            if (AccessoriesManagement.getAccessoriesArr().get(i).getTitle().startsWith(name)) {
+                if (AccessoriesManagement.getAccessoriesArr().get(i).getSize() != null) {
+                    System.out.println("name of accessory: " + AccessoriesManagement.getAccessoriesArr().get(i).getTitle() + " index of accessory is: " +
+                            "\033[1;93m" + i + "\033[0m");
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    public int categoryCheckerThree(String name) {
+        int count = 0;
+        for (int i = 0; i < AccessoriesManagement.getAccessoriesArr().size(); i++) {
+            if (AccessoriesManagement.getAccessoriesArr().get(i).getTitle().startsWith(name)) {
+                if(AccessoriesManagement.getAccessoriesArr().get(i).getSystemConnection()==SystemConnection.WIRED)
+                {
+                    System.out.println("name of accessory: " + AccessoriesManagement.getAccessoriesArr().get(i).getTitle() + " index of accessory is: " +
+                            "\033[1;93m" + i + "\033[0m");
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    public int categoryCheckerFour(String name) {
+        int count = 0;
+        for (int i = 0; i < AccessoriesManagement.getAccessoriesArr().size(); i++) {
+            if (AccessoriesManagement.getAccessoriesArr().get(i).getTitle().startsWith(name)) {
+                if(AccessoriesManagement.getAccessoriesArr().get(i).getSystemConnection()==SystemConnection.WIRELESS)
+                {
+                    System.out.println("name of accessory: " + AccessoriesManagement.getAccessoriesArr().get(i).getTitle() + " index of accessory is: " +
+                            "\033[1;93m" + i + "\033[0m");
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
     public void filterPrice() {
         System.out.println("\033[0;101m" + "Filter by price menu" + "\033[0m");
         Scanner input = new Scanner(System.in);
@@ -365,7 +482,7 @@ public void gameSearchResult(){
             System.out.println("1.see game");
             System.out.println("2.see accessory");
             int f = input.nextInt();
-            if(f==1){
+            if (f == 1) {
                 System.out.println("\033[1;96m" + "Enter the index of the game you want to see:" + "\033[0m");
                 int des = input.nextInt();
                 showGame(des);

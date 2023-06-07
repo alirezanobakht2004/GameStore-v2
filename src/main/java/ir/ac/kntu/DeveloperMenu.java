@@ -9,8 +9,7 @@ public class DeveloperMenu {
 
     public void start(int i) {
         try {
-            developer = DeveloperManagement.getDevelopersArr().get(i);
-            beforeStart(developer);
+            initialize(i);
             Scanner input = new Scanner(System.in);
             int n = input.nextInt();
             switch (n) {
@@ -42,17 +41,26 @@ public class DeveloperMenu {
                             }
                         }
                     } else {
-                        Sign sign = new Sign();
-                        sign.sign();
+                        objMaker();
                     }
                     break;
                 default:
                     break;
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("\nwrong entry!");
             start(DeveloperManagement.getDevelopersArr().indexOf(developer));
         }
+    }
+
+    public void initialize(int i) {
+        developer = DeveloperManagement.getDevelopersArr().get(i);
+        beforeStart(developer);
+    }
+
+    public void objMaker() {
+        Sign sign = new Sign();
+        sign.sign();
     }
 
     public void beforeStart(Developer developer) {

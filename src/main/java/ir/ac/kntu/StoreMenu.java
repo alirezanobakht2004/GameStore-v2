@@ -35,11 +35,10 @@ public class StoreMenu {
                 default:
                     break;
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("\nwrong entry!");
             start(indexOfUser);
         }
-
     }
 
     public void bestSellers() {
@@ -225,7 +224,7 @@ public class StoreMenu {
             System.out.println("\n" + GameManagement.getGamesArr().get(i).getCommunity().getComments() + "\n");
         }
         if (!UserManagement.getUsersArr().get(indexOfUser).getGamesOfUser().contains(GameManagement.getGamesArr().get(i))) {
-            float afterDiscountPercent =  (100 - levelScore(i)) / (float)100;
+            float afterDiscountPercent = (100 - levelScore(i)) / (float) 100;
             System.out.println("2.Back");
             Scanner input = new Scanner(System.in);
             int in = input.nextInt();
@@ -270,16 +269,15 @@ public class StoreMenu {
             System.out.println("1." + "\033[1;92m" + "Buy the game with 30% discount" + "\033[0m");
             return 30;
         }
-        System.out.println("\033[1;91m"+"\n not enough score to buy the game!\n"+ "\033[0m");
+        System.out.println("\033[1;91m" + "\n not enough score to buy the game!\n" + "\033[0m");
         return 0;
     }
 
     public void searchGameAndAcc() {
         Scanner input = new Scanner(System.in);
-        System.out.println("\033[46m" + "Search game and accessory menu" + "\033[0m");
-        System.out.println("Enter what do you want to search?");
-        System.out.println("1.Games");
-        System.out.println("2.Accessories");
+        for (String s : Arrays.asList("\033[46m" + "Search game and accessory menu" + "\033[0m", "Enter what do you want to search?", "1.Games", "2.Accessories")) {
+            System.out.println(s);
+        }
         int t = input.nextInt();
         switch (t) {
             case 1:
@@ -470,18 +468,13 @@ public class StoreMenu {
         int high = input.nextInt();
         for (int i = 0; i < GameManagement.getGamesArr().size(); i++) {
             if (GameManagement.getGamesArr().get(i).getPrice() <= high && GameManagement.getGamesArr().get(i).getPrice() >= low) {
-                System.out.println("name of game: " + GameManagement.getGamesArr().get(i).getTitle() +
-                        " genre: " + GameManagement.getGamesArr().get(i).getGenre() +
-                        " info: " + GameManagement.getGamesArr().get(i).getInfo() + " index of game is: " +
-                        "\033[1;93m" + i + "\033[0m");
+                System.out.println("name of game: " + GameManagement.getGamesArr().get(i).getTitle() + " genre: " + GameManagement.getGamesArr().get(i).getGenre() + " info: " + GameManagement.getGamesArr().get(i).getInfo() + " index of game is: " + "\033[1;93m" + i + "\033[0m");
                 count++;
             }
         }
         for (int i = 0; i < AccessoriesManagement.getAccessoriesArr().size(); i++) {
             if (AccessoriesManagement.getAccessoriesArr().get(i).getPrice() <= high && AccessoriesManagement.getAccessoriesArr().get(i).getPrice() >= low) {
-                System.out.println("name of accessory: " + AccessoriesManagement.getAccessoriesArr().get(i).getTitle() +
-                        " index of accessory is: " +
-                        "\033[1;93m" + i + "\033[0m");
+                System.out.println("name of accessory: " + AccessoriesManagement.getAccessoriesArr().get(i).getTitle() + " index of accessory is: " + "\033[1;93m" + i + "\033[0m");
                 count++;
             }
         }
@@ -489,8 +482,7 @@ public class StoreMenu {
             System.out.println("there was no such a game or accessory!");
             start(indexOfUser);
         } else {
-            System.out.println("1.see game");
-            System.out.println("2.see accessory");
+            System.out.println("1.see game\n2.see accessory");
             int f = input.nextInt();
             if (f == 1) {
                 System.out.println("\033[1;96m" + "Enter the index of the game you want to see:" + "\033[0m");
